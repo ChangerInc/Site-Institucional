@@ -40,10 +40,10 @@ class CadastroUsuario extends Component {
 
         return (
             <div>
-                <h1>Cadastro de Usuário</h1>
+                <h2>Cadastro de Usuário</h2>
                 <form onSubmit={this.handleSubmit}>
                     <div>
-                        <label>Nome:</label>
+                        <label>Nome: </label>
                         <input
                             type="text"
                             name="nome"
@@ -53,7 +53,7 @@ class CadastroUsuario extends Component {
                         />
                     </div>
                     <div>
-                        <label>Email:</label>
+                        <label>Email: </label>
                         <input
                             type="email"
                             name="email"
@@ -63,7 +63,7 @@ class CadastroUsuario extends Component {
                         />
                     </div>
                     <div>
-                        <label>Senha:</label>
+                        <label>Senha: </label>
                         <input
                             type="password"
                             name="senha"

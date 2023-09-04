@@ -23,10 +23,10 @@ class ListarUsuario extends Component {
     render() {
         return (
             <div>
-                <h1>Lista de Usuários</h1>
+                <h2>Lista de Usuários</h2>
                 <ul>
                     {this.state.usuarios.map(usuario => (
-                        <li key={usuario.email}>{usuario.nome} | {usuario.email}</li>
+                        <li key={usuario.id}>{usuario.nome} | {usuario.email}</li>
                     ))}
                 </ul>
             </div>

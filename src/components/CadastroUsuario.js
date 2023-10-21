@@ -28,7 +28,8 @@ class CadastroUsuario extends Component {
         };
 
         try {
-            const response = await axios.post('http://localhost:8080/usuario/', novoUsuario);
+            const response = await axios.post('http://localhost:8080/usuario/', 
+            state);
             console.log('Usuário cadastrado com sucesso:', response.data);
         } catch (error) {
             console.error('Erro ao cadastrar usuário:', error);

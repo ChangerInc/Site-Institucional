@@ -48,4 +48,3 @@ Na CHANGER, nossa missão é capacitar nossos clientes a trabalhar de forma mais
 ## Feedback
 
 Se você tiver algum feedback, por favor nos deixe saber por meio de changer.ouvidoria@gmail.com
-

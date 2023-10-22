@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import './style/header.css';
+import '../styles/navbar.css';
 
 function CadastroUsuario() {
   const [data, setData] = useState({});
@@ -12,7 +12,7 @@ function CadastroUsuario() {
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+    setFormData({ [name]: value });
   };
 
   const handleSubmit = async (e) => {
@@ -80,4 +80,4 @@ function CadastroUsuario() {
   
 }
 
-export default CadastroUsuario;
+export default CadastroUsuario

@@ -1,20 +1,16 @@
-import { useState } from 'react'
-import ArquivoUpload from './components/ArquivoUpload.jsx'
-import CadastroUsuario from './components/CadastroUsuario.jsx'
-import ListarUsuario from './components/ListarUsuario.jsx'
-import Header from './components/Header.jsx'
-import Teste from './components/teste.jsx'
+import { useState } from 'react';
+import { Outlet } from 'react-router-dom';
 
 function App() {
   const [count, setCount] = useState(0)
 
   return (
     <>
-    <div >
-      <Header />
-      <CadastroUsuario />
-    
-    </div>
+      <div className='app'>
+        <div className='container'>
+          <Outlet />
+        </div>
+      </div>
     </>
   )
 }

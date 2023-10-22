@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './style/ArquivoUpload.css'
+import '../styles/ArquivoUpload.css'
 
 function ArquivoUpload() {
   const [file, setFile] = useState(null);

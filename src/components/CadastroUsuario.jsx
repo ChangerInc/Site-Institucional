@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import './style/header.css';
 
 function CadastroUsuario() {
   const [data, setData] = useState({});
@@ -33,12 +34,17 @@ function CadastroUsuario() {
   };
 
   return (
-    <div>
-      <h1>Cadastro de Usuário</h1>
-      <form onSubmit={handleSubmit}>
+    <div className='container'>
+    <div className='container-login'>
+      <div>
+      <p className='texto-bemvindo'>Bem vindo ao CHANGER.</p>
+      <p className='texto-conta'>Já tem conta? Faça login</p>
+      </div>
+    
+      <form onSubmit={handleSubmit} className='formulario'>
         <div>
           <label htmlFor="nome">Nome: </label>
-          <input
+          <input className='input-container' 
             type="text"
             id="nome"
             name="nome"
@@ -48,7 +54,7 @@ function CadastroUsuario() {
         </div>
         <div>
           <label htmlFor="email">Email: </label>
-          <input
+          <input className='input-container'
             type="email"
             id="email"
             name="email"
@@ -58,7 +64,7 @@ function CadastroUsuario() {
         </div>
         <div>
           <label htmlFor="senha">Senha: </label>
-          <input
+          <input className='input-container'
             type="password"
             id="senha"
             name="senha"
@@ -69,7 +75,9 @@ function CadastroUsuario() {
         <button type="submit">Enviar</button>
       </form>
     </div>
+    </div>
   );
+  
 }
 
 export default CadastroUsuario;

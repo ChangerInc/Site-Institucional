@@ -1,0 +1,99 @@
+#root{
+  margin: 0 auto;
+  padding: 0 auto;
+}
+
+:root{
+  font-family: 'Montserrat', sans-serif;
+  --azul-principal: #145DA0;
+ 
+}
+body{
+  background-image: url(/src/assets/Logo/background.svg);
+  background-repeat: no-repeat;
+  background-size: 100%;
+}
+
+img {
+    width: 200px; /* Defina o tamanho desejado para o logotipo */
+    margin-right: 10px; /* Adicione margem à direita para separar o logotipo das opções de navegação */
+  }
+
+.cabecalho{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 20px;  
+  font-weight: 500;
+}
+
+
+.menu{
+  display: flex;
+  justify-content: space-between;
+  width: 30%;
+  text-decoration: none;
+}
+
+.menu li{
+  display: flex;
+  justify-content: space-between;
+  width: 30%;
+  text-decoration: none;
+}
+
+.container-menu{
+  display: flex;
+  justify-content: flex-end;
+  width: 90%;
+  text-decoration: none;
+}
+
+
+/*LOGIN */
+.container{
+  display: flex;
+  justify-content: center;
+  margin-top: 50px;
+}
+
+.container-login{
+  width: 533px;
+  height: 702px;
+  flex-direction: column;
+  box-sizing: border-box;
+  padding: 2%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  box-shadow: 10px 12px 39px 19px rgba(0, 0, 0, 0.25);
+}
+
+.input-container {
+  width: 100%;
+  display: flex;
+  margin-top: 2%;
+  align-items: center;
+  justify-content: space-around;
+
+}
+
+.formulario{
+  height: 250px;
+  
+}
+
+input{
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: none;
+  font-size: 17px;
+  border-bottom: 2px solid rgba(0,0,0, 0.12);
+
+}
+
+/* opa */

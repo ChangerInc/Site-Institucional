@@ -34,17 +34,16 @@ function CadastroUsuario() {
   };
 
   return (
-    <div className='container'>
-    <div className='container-login'>
-      <div>
-      <p className='texto-bemvindo'>Bem vindo ao CHANGER.</p>
-      <p className='texto-conta'>Já tem conta? Faça login</p>
+    <div className='container-cadastro'>
+      <div className='container-texto'>
+      <span className='bem-vindo'>Bem vindo ao <span className='changer-texto'>CHANGER</span><span className='texto-azul'>.</span></span>
+      <span className='faca-login'>Já tem conta? <span className='texto-azul'>Faça login</span></span>
       </div>
     
       <form onSubmit={handleSubmit} className='formulario'>
         <div>
-          <label htmlFor="nome">Nome: </label>
-          <input className='input-container' 
+          <label htmlFor="nome">Nome </label>
+          <input
             type="text"
             id="nome"
             name="nome"
@@ -53,8 +52,8 @@ function CadastroUsuario() {
           />
         </div>
         <div>
-          <label htmlFor="email">Email: </label>
-          <input className='input-container'
+          <label htmlFor="email">Email </label>
+          <input
             type="email"
             id="email"
             name="email"
@@ -63,8 +62,8 @@ function CadastroUsuario() {
           />
         </div>
         <div>
-          <label htmlFor="senha">Senha: </label>
-          <input className='input-container'
+          <label htmlFor="senha">Senha </label>
+          <input
             type="password"
             id="senha"
             name="senha"
@@ -72,9 +71,18 @@ function CadastroUsuario() {
             onChange={handleInputChange}
           />
         </div>
-        <button type="submit">Enviar</button>
+        <div>
+          <label htmlFor="confirmar-senha">Confirmar senha </label>
+          <input
+            type="password"
+            id="confirmar_senha"
+            name="confirmar-senha"
+            value={formData.confirmarSenha}
+            onChange={handleInputChange}
+          />
+        </div>
+        <button type="submit">Cadastrar</button>
       </form>
-    </div>
     </div>
   );
   

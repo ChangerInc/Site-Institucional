@@ -1,6 +1,7 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import changerLogo from '../assets/Logo/changer_black.png'
 
 const Header = () => {
 
@@ -9,7 +10,7 @@ const Header = () => {
   return (
     <nav className="navbar">
           <img className='logo' src={changerLogo} alt="Logo" />
-          <ul className='menu'>
+          <ul>
           <li>
             <Link to="/">Home</Link>
           </li>

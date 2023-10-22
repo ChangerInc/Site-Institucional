@@ -1,99 +1,132 @@
-#root{
-  margin: 0 auto;
-  padding: 0 auto;
-}
-
-:root{
+:root {
   font-family: 'Montserrat', sans-serif;
   --azul-principal: #145DA0;
- 
-}
-body{
-  background-image: url(/src/assets/Logo/background.svg);
-  background-repeat: no-repeat;
-  background-size: 100%;
 }
 
 img {
-    width: 200px; /* Defina o tamanho desejado para o logotipo */
-    margin-right: 10px; /* Adicione margem à direita para separar o logotipo das opções de navegação */
-  }
+  width: 250px;
+  /* Defina o tamanho desejado para o logotipo */
+  margin-right: 10px;
+  /* Adicione margem à direita para separar o logotipo das opções de navegação */
+}
 
-.cabecalho{
+.navbar {
   display: flex;
   align-items: center;
-  justify-content: center;
-  width: 100%;
-  height: 100px;
+  justify-content: space-between;
+  padding: 3rem 5rem;
   font-family: 'Montserrat', sans-serif;
-  font-size: 20px;  
-  font-weight: 500;
+  font-size: 20px;
+  font-weight: 530;
 }
 
-
-.menu{
+.navbar ul {
   display: flex;
   justify-content: space-between;
-  width: 30%;
+  gap: 2rem;
+  list-style: none;
   text-decoration: none;
 }
 
-.menu li{
-  display: flex;
-  justify-content: space-between;
-  width: 30%;
+a {
+  font-size: 1.5rem;
   text-decoration: none;
+  color: #000000;
+  transition: 0.3s;
 }
 
-.container-menu{
-  display: flex;
-  justify-content: flex-end;
-  width: 90%;
-  text-decoration: none;
+a:hover {
+  border-bottom: solid 3px #505CFD;
 }
-
 
 /*LOGIN */
-.container{
-  display: flex;
-  justify-content: center;
-  margin-top: 50px;
-}
 
-.container-login{
-  width: 533px;
-  height: 702px;
+
+.container-cadastro {
+  width: 500px;
+  height: 650px;
   flex-direction: column;
   box-sizing: border-box;
-  padding: 2%;
+  padding: 2.5rem 2.5rem;
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  justify-content: space-between;
   box-shadow: 10px 12px 39px 19px rgba(0, 0, 0, 0.25);
 }
 
-.input-container {
+.container-texto {
   width: 100%;
   display: flex;
-  margin-top: 2%;
-  align-items: center;
+  flex-direction: column;
+}
+
+.bem-vindo {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #868686;
+  line-height: normal;
+}
+
+.faca-login {
+  font-family: 'Montserrat', sans-serif;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  font-size: 1rem;
+}
+
+.changer-texto {
+  font-weight: 600;
+  color: #000000;
+}
+
+.texto-azul {
+  font-weight: 600;
+  color: #5B98BA;
+}
+
+.formulario {
+  flex-direction: column;
+  display: flex;
   justify-content: space-around;
-
-}
-
-.formulario{
-  height: 250px;
-  
-}
-
-input{
-  display: block;
+  align-items: center;
   width: 100%;
-  height: 100%;
-  border: none;
-  font-size: 17px;
-  border-bottom: 2px solid rgba(0,0,0, 0.12);
-
+  height: 500px;
 }
 
-/* opa */
+.formulario div {
+  color: #383838;
+  flex-direction: column;
+  width: 100%;
+  font-size: 1.2rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  display: flex;
+  align-items: start;
+  gap: 1.2rem;
+}
+
+input {
+  width: 100%;
+  border: none;
+  font-size: 1.5rem;
+  border-bottom: 2px solid #868686;
+}
+
+input:focus {
+  outline: none;
+}
+
+button {
+  color: #FFF;
+  background-color: #5B98BA;
+  font-size: 1.2rem;
+  width: 140px;
+  height: 57px;
+  flex-shrink: 0;
+  border: none;
+  border-radius: 4rem;
+  align-self: end;
+}

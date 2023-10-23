@@ -7,12 +7,13 @@ function CadastroUsuario() {
   const [formData, setFormData] = useState({
     nome: '',
     email: '',
-    senha: ''
+    senha: '',
+    confirmar: ''
   });
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setFormData({ [name]: value });
+    setFormData(prevState => ({ ...prevState, [name]: value }));
   };
 
   const handleSubmit = async (e) => {
@@ -36,10 +37,10 @@ function CadastroUsuario() {
   return (
     <div className='container-cadastro'>
       <div className='container-texto'>
-      <span className='bem-vindo'>Bem vindo ao <span className='changer-texto'>CHANGER</span><span className='texto-azul'>.</span></span>
-      <span className='faca-login'>Já tem conta? <span className='texto-azul'>Faça login</span></span>
+        <h2 className='texto-cinza'>Bem vindo ao <span className='texto-preto'>CHANGER</span><span className='texto-azul'>.</span></h2>
+        <h3>Já tem conta? <span className='texto-azul'>Faça login</span></h3>
       </div>
-    
+
       <form onSubmit={handleSubmit} className='formulario'>
         <div>
           <label htmlFor="nome">Nome </label>
@@ -72,12 +73,12 @@ function CadastroUsuario() {
           />
         </div>
         <div>
-          <label htmlFor="confirmar-senha">Confirmar senha </label>
+          <label htmlFor="confirmar">Confirmar senha </label>
           <input
             type="password"
-            id="confirmar_senha"
-            name="confirmar-senha"
-            value={formData.confirmarSenha}
+            id="confirmar"
+            name="confirmar"
+            value={formData.confirmar}
             onChange={handleInputChange}
           />
         </div>
@@ -85,7 +86,7 @@ function CadastroUsuario() {
       </form>
     </div>
   );
-  
+
 }
 
 export default CadastroUsuario

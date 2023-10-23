@@ -20,7 +20,7 @@ function CadastroUsuario() {
     e.preventDefault();
 
     try {
-      const response = await axios.post('http://localhost:8080/usuario/',
+      const response = api.post('http://localhost:8080/usuario/',
         formData);
 
       if (response.status === 201) {

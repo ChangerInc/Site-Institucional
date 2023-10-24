@@ -28,13 +28,13 @@ img {
 }
 
 .linkBox {
-  /* font-size: 1.5rem; */
+  /* classe pra transitar entre login e cadastro */
   text-decoration: none;
   color: var(--azul-texto);
-  /* transition: 0.3s; */
 }
 
 .linkNav {
+  /* classe para os links na navbar */
   font-size: 1rem;
   text-decoration: none;
   color: #000000;

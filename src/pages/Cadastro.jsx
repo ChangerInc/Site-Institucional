@@ -39,7 +39,7 @@ function CadastroUsuario() {
     <div className='container-box'>
       <div className='container-texto'>
         <h2 className='texto-cinza'>Bem vindo ao <span className='texto-preto'>CHANGER</span><span className='texto-azul'>.</span></h2>
-        <h3>Já tem conta? <span className='texto-azul'>Faça login</span></h3>
+        <h3>Já tem conta? <span className='texto-azul'><Link className="linkBox" to="/Login">Faça login</Link></span></h3>
       </div>
 
       <form onSubmit={handleSubmit} className='formulario'>

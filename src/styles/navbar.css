@@ -1,11 +1,13 @@
 :root {
-  font-family: 'Montserrat', sans-serif;
   --azul-principal: #145DA0;
-  --azul-texto: #5B98BA;
+  --azul-claro: #5B98BA;
+  --roxo: #505CFD;
+  --cinza-claro: #868686;
+  --cinza-escuro: #383838;
 }
 
 img {
-  width: 250px;
+  width: 200px;
   /* Defina o tamanho desejado para o logotipo */
   margin-right: 10px;
   /* Adicione margem à direita para separar o logotipo das opções de navegação */
@@ -13,17 +15,13 @@ img {
 
 .navbar {
   display: flex;
-  align-items: center;
   justify-content: space-between;
-  padding: 3rem 5rem;
-  font-family: 'Montserrat', sans-serif;
-  font-size: 20px;
-  font-weight: 530;
+  align-items: center;
+  padding: 1.5rem 2rem;
 }
 
 .navbar ul {
   display: flex;
-  justify-content: space-between;
   gap: 2rem;
   list-style: none;
   text-decoration: none;
@@ -37,28 +35,27 @@ img {
 }
 
 .linkNav {
-  font-size: 1.5rem;
+  font-size: 1rem;
   text-decoration: none;
   color: #000000;
   transition: 0.3s;
 }
 
 .linkNav:hover {
-  border-bottom: solid 3px #505CFD;
+  border-bottom: solid 1px var(--roxo);
 }
 
-/*LOGIN */
-
+/* CADASTRO */
 
 .container-box {
-  width: 500px;
-  height: 650px;
+  width: 420px;
+  height: 520px;
+  gap: 1rem;
+  display: flex;
   flex-direction: column;
+  align-items: center;
   box-sizing: border-box;
   padding: 2.5rem 2.5rem;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
   box-shadow: 10px 12px 39px 19px rgba(0, 0, 0, 0.25);
 }
 
@@ -68,30 +65,28 @@ img {
   flex-direction: column;
 }
 
-.bem-vindo {
-  font-family: 'Montserrat', sans-serif;
-  font-size: 1.5rem;
-  font-weight: 600;
-  color: #868686;
-  line-height: normal;
+.container-texto h2 {
+  font-size: 1.2rem;
 }
 
-.faca-login {
-  font-family: 'Montserrat', sans-serif;
-  font-style: normal;
-  font-weight: 600;
-  line-height: normal;
+.container-texto h3 {
   font-size: 1rem;
 }
 
-.changer-texto {
+.texto-cinza {
   font-weight: 600;
-  color: #000000;
+  color: var(--cinza-claro);
+  line-height: normal;
+}
+
+.texto-preto {
+  font-weight: 750;
+  color: #000;
 }
 
 .texto-azul {
   font-weight: 600;
-  color: var(--azul-texto);
+  color: var(--azul-claro);
 }
 
 .formulario {
@@ -104,23 +99,23 @@ img {
 }
 
 .formulario div {
-  color: #383838;
-  flex-direction: column;
-  width: 100%;
-  font-size: 1.2rem;
-  font-style: normal;
-  font-weight: 400;
-  line-height: normal;
+  color: var(--cinza-escuro);
   display: flex;
   align-items: start;
-  gap: 1.2rem;
+  flex-direction: column;
+  width: 100%;
+  gap: 0.4rem;
+  font-size: 1rem;
+  font-weight: 400;
+  font-style: normal;
+  line-height: normal;
 }
 
 input {
   width: 100%;
   border: none;
-  font-size: 1.5rem;
-  border-bottom: 2px solid #868686;
+  font-size: 1rem;
+  border-bottom: 2px solid var(--cinza-claro);
 }
 
 input:focus {
@@ -129,12 +124,18 @@ input:focus {
 
 button {
   color: #FFF;
-  background-color: #5B98BA;
+  background-color: var(--azul-claro);
   font-size: 1.2rem;
   width: 140px;
-  height: 57px;
+  height: 50px;
   flex-shrink: 0;
   border: none;
-  border-radius: 4rem;
+  border-radius: 5rem;
   align-self: end;
+  transition: .3s;
+}
+
+button:hover {
+  background-color: var(--azul-principal);
+  cursor: pointer;
 }

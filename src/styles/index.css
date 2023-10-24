@@ -10,4 +10,5 @@ body {
   background-image: url(/src/assets/Logo/background.svg);
   background-repeat: no-repeat;
   background-size: 100%;
+  overflow-x: hidden;
 }

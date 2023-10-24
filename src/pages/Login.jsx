@@ -1,42 +1,44 @@
-import React, { useState } from 'react';
-import axios from 'axios';
-import { Link } from 'react-router-dom';
-import '../styles/navbar.css';
+import api from "../api";
+import { useState } from 'react';
+import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
+import sptechLogo from '../assets/images/sptech_logo.png';
+import { injectStyle } from "react-toastify/dist/inject-style";
 
-const Login = () => {
-  const [data, setData] = useState({});
-  const [formData, setFormData] = useState({
-    email: '',
-    senha: ''
-  });
+function Login() {
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-  };
+  injectStyle();
 
-  const handleSubmit = async (e) => {
+  const navigate = useNavigate();
+
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+
+  const handleSubmit = (e) => {
     e.preventDefault();
 
-    try {
-      const response = await axios.post('http://localhost:8080/usuario/login',
-        formData);
-
-      if (response.status === 200) {
-        console.log('Logado com sucesso!');
-        console.log(data);
-        setData(response.data);
-        console.log(formData);
-        console.log(data);
-
-        sessionStorage.setItem("id", response.data.id);
-        sessionStorage.setItem("nome", response.data.nome);
-      } else {
-        throw new Error('Erro na requisição.');
+    api.post('/login', {
+      email: username,
+      senha: password
+    }, {
+      headers: {
+        'Content-Type': 'application/json'
       }
-    } catch (error) {
-      console.error(error);
-    }
+    })
+      .then(response => {
+        if (response.status === 200 && response.data?.token) {
+          sessionStorage.setItem('authToken', response.data.token);
+          sessionStorage.setItem('usuario', response.data.nome);
+
+          toast.success('Login realizado com sucesso!');
+          navigate('/user');
+        } else {
+          throw new Error('Ops! Ocorreu um erro interno.');
+        }
+      })
+      .catch(error => {
+        toast.error(error.message);
+      });
   };
 
   return (

@@ -8,19 +8,20 @@ function CadastroUsuario() {
   const [formData, setFormData] = useState({
     nome: '',
     email: '',
-    senha: ''
+    senha: '',
+    confirmar: ''
   });
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+    setFormData(prevState => ({ ...prevState, [name]: value }));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
-      const response = await axios.post('http://localhost:8080/usuario/',
+      const response = api.post('http://localhost:8080/usuario/',
         formData);
 
       if (response.status === 201) {
@@ -37,8 +38,8 @@ function CadastroUsuario() {
   return (
     <div className='container-box'>
       <div className='container-texto'>
-        <span className='bem-vindo'>Bem vindo ao <span className='changer-texto'>CHANGER</span><span className='texto-azul'>.</span></span>
-        <span className='faca-login'>Já tem conta? <span className='texto-azul'><Link className="linkBox" to="/Login">Faça login</Link></span></span>
+        <h2 className='texto-cinza'>Bem vindo ao <span className='texto-preto'>CHANGER</span><span className='texto-azul'>.</span></h2>
+        <h3>Já tem conta? <span className='texto-azul'>Faça login</span></h3>
       </div>
 
       <form onSubmit={handleSubmit} className='formulario'>
@@ -73,12 +74,12 @@ function CadastroUsuario() {
           />
         </div>
         <div>
-          <label htmlFor="confirmar-senha">Confirmar senha </label>
+          <label htmlFor="confirmar">Confirmar senha </label>
           <input
             type="password"
-            id="confirmar_senha"
-            name="confirmar-senha"
-            value={formData.confirmarSenha}
+            id="confirmar"
+            name="confirmar"
+            value={formData.confirmar}
             onChange={handleInputChange}
           />
         </div>

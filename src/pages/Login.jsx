@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import axios from 'axios';
 import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import api from '../api';
 import '../styles/navbar.css';
 
 const Login = () => {
@@ -9,6 +10,8 @@ const Login = () => {
     email: '',
     senha: ''
   });
+
+  const navigate = useNavigate();
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -19,18 +22,17 @@ const Login = () => {
     e.preventDefault();
 
     try {
-      const response = await axios.post('http://localhost:8080/usuario/login',
+      const response = await api.post('/login',
         formData);
 
       if (response.status === 200) {
-        console.log('Logado com sucesso!');
-        console.log(data);
         setData(response.data);
-        console.log(formData);
-        console.log(data);
-
         sessionStorage.setItem("id", response.data.id);
         sessionStorage.setItem("nome", response.data.nome);
+        console.log('Logado com sucesso!');
+        console.log(response.data);
+        
+        navigate("/user");
       } else {
         throw new Error('Erro na requisição.');
       }
@@ -43,7 +45,7 @@ const Login = () => {
     <div className='container-box'>
       <div className='container-texto'>
       <h2 className='texto-cinza'>Bem vindo ao <span className='texto-preto'>CHANGER</span><span className='texto-azul'>.</span></h2>
-        <h3>Já tem conta? <span className='texto-azul'><Link className="linkBox" to="/Cadastro">Cadastre-se</Link></span></h3>
+        <h3>Não tem conta? <span className='texto-azul'><Link className="linkBox" to="/Cadastro">Cadastre-se</Link></span></h3>
       </div>
 
       <form onSubmit={handleSubmit} className='formulario'>

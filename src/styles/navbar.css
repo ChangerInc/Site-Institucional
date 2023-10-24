@@ -105,6 +105,7 @@ img {
   flex-direction: column;
   width: 100%;
   gap: 0.4rem;
+  column-gap: .5rem;
   font-size: 1rem;
   font-weight: 400;
   font-style: normal;
@@ -138,4 +139,13 @@ button {
 button:hover {
   background-color: var(--azul-principal);
   cursor: pointer;
+}
+
+/* USER PAGE */
+.user-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 1rem;
+  width: 600px;
 }

@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
-import axios from 'axios';
 import { Link } from 'react-router-dom';
 import '../styles/navbar.css';
+import api from '../api'
 
 function CadastroUsuario() {
   const [data, setData] = useState({});
   const [formData, setFormData] = useState({
     nome: '',
     email: '',
-    senha: '',
+    senha: '', 
     confirmar: ''
   });
 
@@ -21,7 +21,7 @@ function CadastroUsuario() {
     e.preventDefault();
 
     try {
-      const response = api.post('http://localhost:8080/usuario/',
+      const response = await api.post('/',
         formData);
 
       if (response.status === 201) {

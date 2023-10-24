@@ -12,16 +12,16 @@ const Header = () => {
           <img className='logo' src={changerLogo} alt="Logo" />
           <ul>
           <li>
-            <Link to="/">Home</Link>
+            <Link className="linkNav" to="/">Home</Link>
           </li>
           <li>
-            <Link to="/converter">Converter</Link>
+            <Link className="linkNav" to="/converter">Converter</Link>
           </li>
           <li>
-            <Link to="/login">Login</Link>
+            <Link className="linkNav" to="/login">Login</Link>
           </li>
           <li>
-            <Link to="/cadastro">Cadastro</Link>
+            <Link className="linkNav" to="/cadastro">Cadastro</Link>
           </li>
         </ul>
       </nav>

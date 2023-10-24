@@ -1,6 +1,7 @@
 :root {
   font-family: 'Montserrat', sans-serif;
   --azul-principal: #145DA0;
+  --azul-texto: #5B98BA;
 }
 
 img {
@@ -28,21 +29,28 @@ img {
   text-decoration: none;
 }
 
-a {
+.linkBox {
+  /* font-size: 1.5rem; */
+  text-decoration: none;
+  color: var(--azul-texto);
+  /* transition: 0.3s; */
+}
+
+.linkNav {
   font-size: 1.5rem;
   text-decoration: none;
   color: #000000;
   transition: 0.3s;
 }
 
-a:hover {
+.linkNav:hover {
   border-bottom: solid 3px #505CFD;
 }
 
 /*LOGIN */
 
 
-.container-cadastro {
+.container-box {
   width: 500px;
   height: 650px;
   flex-direction: column;
@@ -83,7 +91,7 @@ a:hover {
 
 .texto-azul {
   font-weight: 600;
-  color: #5B98BA;
+  color: var(--azul-texto);
 }
 
 .formulario {

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 import '../styles/navbar.css';
 
 function CadastroUsuario() {
@@ -12,7 +13,7 @@ function CadastroUsuario() {
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setFormData({ [name]: value });
+    setFormData({ ...formData, [name]: value });
   };
 
   const handleSubmit = async (e) => {
@@ -34,12 +35,12 @@ function CadastroUsuario() {
   };
 
   return (
-    <div className='container-cadastro'>
+    <div className='container-box'>
       <div className='container-texto'>
-      <span className='bem-vindo'>Bem vindo ao <span className='changer-texto'>CHANGER</span><span className='texto-azul'>.</span></span>
-      <span className='faca-login'>Já tem conta? <span className='texto-azul'>Faça login</span></span>
+        <span className='bem-vindo'>Bem vindo ao <span className='changer-texto'>CHANGER</span><span className='texto-azul'>.</span></span>
+        <span className='faca-login'>Já tem conta? <span className='texto-azul'><Link className="linkBox" to="/Login">Faça login</Link></span></span>
       </div>
-    
+
       <form onSubmit={handleSubmit} className='formulario'>
         <div>
           <label htmlFor="nome">Nome </label>
@@ -85,7 +86,7 @@ function CadastroUsuario() {
       </form>
     </div>
   );
-  
+
 }
 
 export default CadastroUsuario

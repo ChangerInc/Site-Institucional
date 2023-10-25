@@ -149,3 +149,14 @@ button:hover {
   gap: 1rem;
   width: 600px;
 }
+
+.container {
+  display: flex;
+  align-items: center;
+  height: 80vh;
+}
+
+.entrar {
+  text-decoration: none;
+  color: white;
+}

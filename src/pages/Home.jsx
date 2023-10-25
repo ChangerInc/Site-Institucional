@@ -1,18 +1,16 @@
 import React from 'react'
-import axios from 'axios';
+import { Link } from 'react-router-dom';
 import '../styles/navbar.css';
 
 function Home() {
   return (
-    <>
-      <div className='container-box'>
-        <div className='container-texto'>
-          <span className='bem-vindo'>
-            Olá, "user". Boas-vindas ao <span className='changer-texto'>CHANGER</span>
-            <span className='texto-azul'>.</span></span>
-        </div>
+    <div className="user-container">
+      <div className="texto-container">
+        <h1>Bem-vindo, usuario</h1>
+        <p>Obrigado pela preferência ao sistema da CHANGER.</p>
       </div>
-    </>
+      <Link className='entrar' to="/Login"><button type="submit">Login</button></Link>
+    </div>
   )
 }
 

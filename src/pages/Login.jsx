@@ -22,15 +22,14 @@ const Login = () => {
     e.preventDefault();
 
     try {
-      const response = await api.post('/login',
+      const response = await api.post('login',
         formData);
 
       if (response.status === 200) {
         setData(response.data);
         sessionStorage.setItem("id", response.data.id);
+        sessionStorage.setItem("token ", response.data.token);
         sessionStorage.setItem("nome", response.data.nome);
-        console.log('Logado com sucesso!');
-        console.log(response.data);
         
         navigate("/user");
       } else {

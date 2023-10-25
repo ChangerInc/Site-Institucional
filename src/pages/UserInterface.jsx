@@ -11,6 +11,7 @@ const UserInterface = () => {
   const handleLogout = () => {
     sessionStorage.removeItem('id');
     sessionStorage.removeItem('nome');
+    sessionStorage.removeItem('token');
     navigate('/login');
   };
 

@@ -1,9 +1,9 @@
 import React from 'react'
-import ArquivoUpload from '../components/ArquivoUpload';
+import ArquivoBox from '../components/ArquivoBox';
 
 const Converter = () => {
   return (
-    <ArquivoUpload />
+    <ArquivoBox />
   )
 }
 

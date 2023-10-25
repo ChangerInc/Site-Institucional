@@ -13,6 +13,8 @@
     "@react-navigation/native": "^6.1.9",
     "@react-navigation/native-stack": "^6.9.15",
     "axios": "^1.5.1",
+    "file-saver": "^2.0.5",
+    "js-file-download": "^0.4.12",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.17.0",

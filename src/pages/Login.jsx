@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
-import api from '../api';
+import { usuario } from '../api.js'
 import '../styles/navbar.css';
 
 const Login = () => {
@@ -22,7 +22,7 @@ const Login = () => {
     e.preventDefault();
 
     try {
-      const response = await api.post('login',
+      const response = await usuario.post('login',
         formData);
 
       if (response.status === 200) {

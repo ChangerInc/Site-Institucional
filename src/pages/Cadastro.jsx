@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import '../styles/navbar.css';
-import api from '../api'
+import { usuario } from '../api.js'
 
 function CadastroUsuario() {
   const [data, setData] = useState({});
@@ -21,7 +21,7 @@ function CadastroUsuario() {
     e.preventDefault();
 
     try {
-      const response = await api.post('/',
+      const response = await usuario.post('/',
         formData);
 
       if (response.status === 201) {

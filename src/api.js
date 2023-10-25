@@ -1,7 +1,11 @@
 import axios from "axios";
 
-const api = axios.create({
+const usuario = axios.create({
   baseURL: "http://localhost:8080/usuario"
 });
 
-export default api;
+const vertopal = axios.create({
+  baseURL: "http://localhost:8080/vertopal"
+});
+
+export { usuario, vertopal };

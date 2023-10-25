@@ -1,53 +1,33 @@
-import React, { useState } from 'react';
-import '../styles/ArquivoUpload.css'
+import React, { useState } from "react";
+import { vertopal } from "../api";
 
 function ArquivoUpload() {
   const [file, setFile] = useState(null);
 
-  const handleFileChange = (e) => {
-    const selectedFile = e.target.files[0];
-    setFile(selectedFile);
+  const handleFileChange = (event) => {
+    setFile(event.target.files[0]);
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    const token = "r.WVA7-b28g3E_rJFGc_grmsismKnqgF4xG0YCqaaoMPDCRCoHZmpyKyqwuGUETgkGrY9duG0hXB.i8u6mB5koD4KnFN4VjzyHsrqDEn7ia_2uJQf-5UCl8IsKQ";
-
-    // Aqui você pode enviar o arquivo para a API
+  const handleFileUpload = async () => {
     if (file) {
       const formData = new FormData();
-      formData.append('file', file);
-
+      formData.append("file", file);
       try {
-        const response = await fetch('https://api.vertopal.com/v1/upload/file', {
-            headers: {
-                'Authorization': `Bearer ${token}`,
-                'Content-Type': 'application/json', // Exemplo de cabeçalho adicional, se necessário
-                // Outros cabeçalhos, se necessário
-              },
-          method: 'POST',
-          body: formData,
-        });
-
-        if (response.ok) {
-          console.log('Arquivo enviado com sucesso');
-          // Lógica adicional após o envio bem-sucedido
-        } else {
-          console.error('Erro ao enviar o arquivo');
-        }
+        const response = await vertopal.post("/enviar",
+          formData
+        );
+        console.log(response.data);
       } catch (error) {
-        console.error('Erro ao enviar o arquivo:', error);
+        console.error(error);
       }
     }
   };
 
   return (
-    <div class = "objetoEnviar">
-      <form onSubmit={handleSubmit}>
-        <input type="file" onChange={handleFileChange} />
-        <button type="submit">Enviar</button>
-      </form>
+    <div className="App">
+      <h1>Upload de arquivo com React e Spring Boot</h1>
+      <input type="file" onChange={handleFileChange} />
+      <button onClick={handleFileUpload}>Enviar</button>
     </div>
   );
 }

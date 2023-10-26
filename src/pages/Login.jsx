@@ -27,7 +27,6 @@ const Login = () => {
 
       if (response.status === 200) {
         setData(response.data);
-        sessionStorage.setItem("id", response.data.id);
         sessionStorage.setItem("token ", response.data.token);
         sessionStorage.setItem("nome", response.data.nome);
         

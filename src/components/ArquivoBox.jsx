@@ -2,12 +2,12 @@ import React, { useState } from "react";
 import { vertopal } from "../api";
 import { saveAs } from "file-saver";
 import '../styles/arquivo-box.css'
-import fileDownload from "js-file-download";
+import { json } from "react-router-dom";
 
 function ArquivoBox() {
   const [file, setFile] = useState(null);
-  const [extensao, setExtensao] = useState('');
   const [fileName, setFileName] = useState('');
+  const [extensao, setExtensao] = useState('');
   const formData = new FormData();
 
   const handleFileChange = (event) => {
@@ -37,33 +37,33 @@ function ArquivoBox() {
   const handleFileConversion = async () => {
     formData.append("extensao", extensao);
     try {
-      const response = await vertopal.post("/converter", 
-      formData
+      const response = await vertopal.post("/converter",
+        formData
       );
       console.log(response.data);
     }
     catch (error) {
       console.error(error);
     }
+    finally {
+      handleUrl();
+    }
   }
 
-  const handleFileName = async () => {
-    vertopal.get('/recuperar-nome')
-            .then(response => {
-                setFileName(response.data);
-                console.log(response.data);
-                handleFileDownload(response.data)
-            })
-            .catch(error => {
-                console.error('Erro ao buscar nome do arquivo da API:', error);
-            });
-  }
-
-  const handleFileDownload = async (fileName) => {
+  const handleUrl = async () => {
     try {
-      const response = await vertopal.get("/baixar", { responseType: "blob" });
-      saveAs(response.data, fileName);
-      console.log(fileName);  
+      const response = await vertopal.get("/url");
+      setFileName(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  const handleFileDownload = async () => {
+    try {
+      const response = await vertopal.get("/baixar", { responseType : "blob" } );
+      saveAs(response.data, `${fileName}`);
+      console.log(response.data);
     } catch (error) {
       console.error(error);
     }
@@ -71,7 +71,7 @@ function ArquivoBox() {
 
   return (
     <div className="App">
-      <h1>Upload de arquivo com React e Spring Boot</h1>
+      <h1>CHANGER.</h1>
       <input type="file" onChange={handleFileChange} />
       <select value={extensao} onChange={handleSelectChange}>
         <option value="pdf">pdf</option>

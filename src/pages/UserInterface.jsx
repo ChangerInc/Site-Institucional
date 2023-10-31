@@ -3,15 +3,10 @@ import { useNavigate } from 'react-router-dom';
 import '../styles/navbar.css'
 
 const UserInterface = () => {
-
   const navigate = useNavigate();
-  const id = sessionStorage?.getItem('id');
   const username = sessionStorage?.getItem('nome');
 
   const handleLogout = () => {
-    // sessionStorage.removeItem('id');
-    // sessionStorage.removeItem('nome');
-    // sessionStorage.removeItem('token');
     sessionStorage.clear();
     navigate('/login');
   };

@@ -61,7 +61,7 @@ function ArquivoBox() {
 
   const handleFileDownload = async () => {
     try {
-      const response = await vertopal.get("/baixar", { responseType : "blob" } );
+      const response = await vertopal.get("/baixar", { responseType: "blob" });
       saveAs(response.data, `${fileName}`);
       console.log(response.data);
     } catch (error) {
@@ -70,18 +70,25 @@ function ArquivoBox() {
   };
 
   return (
-    <div className="App">
-      <h1>CHANGER.</h1>
-      <input type="file" onChange={handleFileChange} />
-      <select value={extensao} onChange={handleSelectChange}>
-        <option value="pdf">pdf</option>
-        <option value="png">png</option>
-        <option value="docx">docx</option>
-        <option value="jpeg">jpeg</option>
-        <option value="txt">txt</option>
-      </select>
-      <button onClick={handleFileConversion}>Converter</button>
-      <button onClick={handleFileDownload}>Baixar</button>
+    <div className="caixa_de_conversao">
+      <div className="container_input_e_select">
+        <div className="div_imitando_input">
+          <input type="file" onChange={handleFileChange} />
+        </div>
+        <select value={extensao} onChange={handleSelectChange}>
+          <option value="0" selected></option>
+          <option value="pdf" >pdf</option>
+          <option value="png">png</option>
+          <option value="docx">docx</option>
+          <option value="jpeg">jpeg</option>
+          <option value="txt">txt</option>
+        </select>
+      </div>
+      <span className="texto_box_informacao">
+        Solte os arquivos aqui. 100 MB tamanho máximo do ficheiro ou <a href="">Registrar-se</a>.
+      </span>
+      {/*       <button onClick={handleFileConversion}>Converter</button>
+      <button onClick={handleFileDownload}>Baixar</button> */}
     </div>
   );
 }

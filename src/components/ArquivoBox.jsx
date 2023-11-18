@@ -70,13 +70,13 @@ function ArquivoBox() {
   };
 
   return (
-    
+
     <div className="caixa_de_conversao">
       <div className="container_input_e_select">
         <label for="file_upload" class="custom-file-upload-label">
           <b class="bold_selecionar_arquivo">Selecionar Arquivo</b>
         </label>
-          <input id="file_upload" type="file" onChange={handleFileChange} />
+        <input id="file_upload" type="file" onChange={handleFileChange} />
         <select value={extensao} onChange={handleSelectChange}>
           <option value="0" selected></option>
           <option value="pdf" >pdf</option>

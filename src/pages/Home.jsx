@@ -60,7 +60,7 @@ function Home() {
             <div className="boxCard">
               <div className='contain'>
                 <div className='boxImage'>
-                  <img src="src/components/image/lamp.png" alt="" />
+                  <img src="/src/assets/lampada.png" alt="" />
                 </div>
                 <div className="boxText">
                   <h2>NOSSO SERVIÇO</h2>
@@ -71,7 +71,7 @@ function Home() {
             <div className="boxCard">
               <div className='contain'>
                 <div className='boxImage'>
-                  <img src="src/components/image/gearUp.png" alt="" />
+                  <img src="/src/assets/engrenagem.png" alt="" />
                 </div>
                 <div className="boxText">
                   <h2>EXPERIÊNCIA </h2>
@@ -82,7 +82,7 @@ function Home() {
             <div className="boxCard">
               <div className='contain'>
                 <div className='boxImage'>
-                  <img src="src/components/image/hands.png" alt="" />
+                  <img src="/src/assets/compartilhamento.png" alt="" />
                 </div>
                 <div className="boxText">
                   <h2>COMPARTILHAMENTO</h2>
@@ -93,7 +93,7 @@ function Home() {
             <div className="boxCard">
               <div className='contain'>
                 <div className='boxImage'>
-                  <img src="src/components/image/agile.png" alt="" />
+                  <img src="/src/assets/timer.png" alt="" />
                 </div>
                 <div className="boxText">
                   <h2>FACILIDADE</h2>

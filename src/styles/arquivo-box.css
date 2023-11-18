@@ -3,7 +3,7 @@
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    width: 100%;
+    width: calc(70% - 6px);
     height: 25vh;
     gap: 2rem;
     border: 3px #5B98BA dashed;
@@ -15,9 +15,10 @@
 }
 
 .texto_box_informacao {
-    color: #383838;
+    text-decoration: none;
+    color: #FFF;
     text-align: center;
-    font-size: 24px;
+    font-size: 1rem;
     font-style: normal;
     font-weight: 400;
     line-height: normal;
@@ -25,17 +26,16 @@
 
 .texto_box_informacao a{
     text-decoration: none;
+    font-weight: 600;
     color: #5B98BA;
 }
 
 .custom-file-upload-label {
     color: white;
     display: flex;
-    padding: 6px 12px;
     background-color: #5B98BA;
     width: 500px;
-    height: 30px;
-    height: auto;
+    height: 75px;
     cursor: pointer;
     justify-content: center;
     align-items: center;
@@ -58,13 +58,14 @@
     appearance: none;
     -webkit-appearance: none;
     -moz-appearance: none;
-    font-size: 24px;
-    padding: 2rem;
+
+    width: 120px;
+    height: 75px;
+    font-size: 1rem;
     background-image: url(../assets/SetaCombo.png); 
     background-repeat: no-repeat;
-    background-size: 120%;
-    background-position-x: center;
-    background-position-y: -20px;
+    background-size: 100%;
+    background-position: center;
 }
 
 .container_input_e_select select:focus {

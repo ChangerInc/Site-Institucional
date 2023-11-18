@@ -149,21 +149,17 @@ h1 {
 .reasons{
     height: 70vh;
     width: 100%;
-    box-sizing: border-box;
-    padding: 2%;   
     display: flex;
-    align-items: center;
-    justify-content: center;
-    background-image: url('../image/c229de345542339cddb38174d5bda9d6.png');
+    align-items: end;
+    justify-content: end;
+    background-image: url('/src/assets/imagemVantagens.png');
     background-repeat: no-repeat;
-    background-position: 80%;
+    background-position-x: right;
 }
 
 .containerReasons{
     height: 70vh;
-    width: 80%;
-    box-sizing: border-box;
-    padding: 2%;
+    width: 85%;
 }
 
 .box{
@@ -175,16 +171,19 @@ h1 {
     flex-wrap: wrap;
 }
 
-.containerReasonsText{
-    box-sizing: border-box;
-    padding-left: 2%;
+.containerReasonsText h3, p{
+    font-size: 1rem;
+}
 
+.containerReasonsText h2{
+    font-size: 2rem;
 }
 
 .contain{
     width: 80%;
     display: flex;
     align-items: center;
+    gap: 20px;
 }
 .boxCard{
     display: flex;
@@ -196,14 +195,17 @@ h1 {
 }
 
 .boxImage{
-    height: 80%;
-    width: 30%;
-    margin-right: 4%;
-
+    height: 90px;
+    width: 90px;
 }
 
  .boxImage img {
-    height: 80px;
-    box-sizing: border-box;
-    
+    width: 90px;
+    height: 90px;
+}
+
+.boxText h2{
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 900;
 }

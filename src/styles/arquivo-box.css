@@ -28,16 +28,30 @@
     color: #5B98BA;
 }
 
-.container_input_e_select input {
+.custom-file-upload-label {
     color: white;
-    padding: 2rem;
+    display: flex;
+    padding: 6px 12px;
     background-color: #5B98BA;
-    width: 200px;
+    width: 500px;
     height: 30px;
+    height: auto;
+    cursor: pointer;
+    justify-content: center;
+    align-items: center;
 }
 
-.div_imitando_input {
-    
+.custom-file-upload-label:hover {
+    color: #5B98BA;
+    background-color: #f8f8f8;
+}
+
+.bold_selecionar_arquivo {
+    font-size: 20px;
+}
+
+#file_upload{
+    display: none;
 }
 
 .container_input_e_select select {

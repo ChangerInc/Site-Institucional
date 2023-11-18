@@ -9,10 +9,7 @@ function App() {
   return (
     <>
       <div className='app'>
-        <Navbar />
-        <div className='container'>
           <Outlet />
-        </div>
       </div>
     </>
   )

@@ -8,15 +8,13 @@
 
 img {
   width: 200px;
-  /* Defina o tamanho desejado para o logotipo */
-  margin-right: 10px;
-  /* Adicione margem à direita para separar o logotipo das opções de navegação */
 }
 
 .navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  width: calc(100% - 4rem);
   padding: 1.5rem 2rem;
 }
 

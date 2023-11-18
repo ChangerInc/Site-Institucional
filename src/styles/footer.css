@@ -1,0 +1,23 @@
+.footer{
+    background-color: #5B98BA;
+    height: 40vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.footerList{
+    list-style: none;
+    font-size: 18px;
+}
+
+.footerList h2 {
+    margin-bottom: 5%;
+}
+
+.containerFooter{
+    display: flex;
+    width: 80%;
+    align-items: center;
+    justify-content: space-evenly;
+}

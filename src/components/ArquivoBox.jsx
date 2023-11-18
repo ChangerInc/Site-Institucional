@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { vertopal } from "../api";
 import { saveAs } from "file-saver";
 import '../styles/arquivo-box.css'
-import { json } from "react-router-dom";
 
 function ArquivoBox() {
   const [file, setFile] = useState(null);
@@ -73,10 +72,16 @@ function ArquivoBox() {
     
     <div className="caixa_de_conversao">
       <div className="container_input_e_select">
+<<<<<<< Updated upstream
         <label for="file_upload" class="custom-file-upload-label">
           <b class="bold_selecionar_arquivo">Selecionar Arquivo</b>
         </label>
           <input id="file_upload" type="file" onChange={handleFileChange} />
+=======
+        <div className="div_imitando_input">
+          <input  type="file" onChange={handleFileChange} />
+        </div>
+>>>>>>> Stashed changes
         <select value={extensao} onChange={handleSelectChange}>
           <option value="0" selected></option>
           <option value="pdf" >pdf</option>

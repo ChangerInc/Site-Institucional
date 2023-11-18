@@ -1,8 +1,12 @@
 import React from 'react'
+import CardCirculo from '../components/CardCirculo';
+import '../styles/circulos.css';
 
 const Grupos = () => {
   return (
-    <div>Grupos</div>
+    <div className='containerCards'>
+      <CardCirculo />
+    </div>
   )
 }
 

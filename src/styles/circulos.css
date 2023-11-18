@@ -1,0 +1,7 @@
+.containerCards{
+    width: 80%;
+    height: 100%;
+    display: flex;
+    background-color: aqua;
+    flex-wrap: wrap;
+}

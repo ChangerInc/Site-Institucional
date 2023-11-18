@@ -1,35 +1,33 @@
 .caixa_de_conversao {
     display: flex;
     align-items: center;
-    justify-content: space-evenly;
+    justify-content: center;
     flex-direction: column;
-
-    width: calc(70% - 6px);
+    width: 100%;
     height: 25vh;
-
+    gap: 2rem;
     border: 3px #5B98BA dashed;
 }
 
 .container_input_e_select {
     display: flex;
+    width: 40%;
 }
 
 .texto_box_informacao {
-    text-decoration: none;
-    color: #000;
+    color: #383838;
     text-align: center;
-    font-size: 1rem;
+    font-size: 24px;
     font-style: normal;
     font-weight: 400;
     line-height: normal;
 }
 
-.texto_box_informacao a {
+.texto_box_informacao a{
     text-decoration: none;
     color: #5B98BA;
 }
 
-<<<<<<< Updated upstream
 .custom-file-upload-label {
     color: white;
     display: flex;
@@ -55,32 +53,18 @@
 #file_upload{
     display: none;
 }
-=======
-.container_input_e_select input[type="file"] {
-    color: white;
-    background-color: #5B98BA;
-    width: 250px;
-    height: 60px;
-    border: none;
-    cursor: pointer;
-}
-
-.div_imitando_input {}
->>>>>>> Stashed changes
 
 .container_input_e_select select {
     appearance: none;
     -webkit-appearance: none;
     -moz-appearance: none;
-    
-    width: 60px;
-    height: 60px;
-
-    background-image: url(../assets/SetaCombo.png);
+    font-size: 24px;
+    padding: 2rem;
+    background-image: url(../assets/SetaCombo.png); 
     background-repeat: no-repeat;
-    background-size: 100%;
+    background-size: 120%;
     background-position-x: center;
-    background-position-y: center;
+    background-position-y: -20px;
 }
 
 .container_input_e_select select:focus {

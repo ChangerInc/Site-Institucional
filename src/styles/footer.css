@@ -1,5 +1,6 @@
 .footer{
     background-color: #5B98BA;
+    color: white;
     height: 40vh;
     display: flex;
     align-items: center;
@@ -13,11 +14,18 @@
 
 .footerList h2 {
     margin-bottom: 5%;
+    color: white;
 }
 
 .containerFooter{
+    
     display: flex;
     width: 80%;
     align-items: center;
     justify-content: space-evenly;
+}
+
+.whiteText{
+   color: white;
+   padding-bottom: 15%;
 }

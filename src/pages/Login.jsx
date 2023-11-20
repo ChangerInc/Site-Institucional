@@ -67,7 +67,23 @@ const Login = () => {
             onChange={handleInputChange}
           />
         </div>
+        <div class="wrapper">
+    <a href="#demo-modal">Esqueci minha senha.</a>
+</div>
+
+<div id="demo-modal" class="modal">
+    <div class="modal__content">
+        <h3>Esqueceu sua senha de acesso?</h3>
+        <p>
+            Informe o e-mail cadastrado:
+        </p>
+        <input type="email" />
+
+        <a href="#" class="modal__close">&times;</a>
+    </div>
+</div>
         <button type="submit">Login</button>
+        
       </form>
     </div>
   );

@@ -49,12 +49,13 @@ function Home() {
           </div>
         </div>
       </div>
+
       <div className='reasons'>
         <div className="containerReasons">
           <div className='containerReasonsText'>
             <h3>NOSSO SERVIÇO</h3>
             <h2>Motivos para nos escolher</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+            <p>Quatro motivos para você realizar conversão no nosso site.</p>
           </div>
           <div className="box">
             <div className="boxCard">
@@ -64,7 +65,7 @@ function Home() {
                 </div>
                 <div className="boxText">
                   <h2>NOSSO SERVIÇO</h2>
-                  <p>Lorem </p>
+                  <p>Os arquivos são convertidos com rapidez e precisão, e o processo é muito simples. </p>
                 </div>
               </div>
             </div>
@@ -75,7 +76,7 @@ function Home() {
                 </div>
                 <div className="boxText">
                   <h2>EXPERIÊNCIA </h2>
-                  <p>Lorem </p>
+                  <p>A interface é intuitiva e fácil de navegar, e os resultados da conversão são muito bons. </p>
                 </div>
               </div>
             </div>
@@ -86,7 +87,7 @@ function Home() {
                 </div>
                 <div className="boxText">
                   <h2>COMPARTILHAMENTO</h2>
-                  <p>Lorem </p>
+                  <p>A opção de baixar o arquivo convertido para o seu computador, ou de enviá-lo para outra pessoa por e-mail.</p>
                 </div>
               </div>
             </div>
@@ -97,10 +98,77 @@ function Home() {
                 </div>
                 <div className="boxText">
                   <h2>FACILIDADE</h2>
-                  <p>Lorem </p>
+                  <p>Nosso ponto forte. Sendo muito fácil de usar, até para quem não tem experiência em conversão de arquivos. </p>
                 </div>
               </div>
             </div>
+          </div>
+        </div>
+      </div>
+      <div class="background">
+        <div class="container">
+          <div class="panel pricing-table">
+
+            <div class="pricing-plan">
+
+              <h2 class="pricing-header">Personal</h2>
+              <ul class="pricing-features">
+                <li class="pricing-features-item">80MB de armazenamento
+                </li>
+                <li class="pricing-features-item">Não pode criar grupos
+                </li>
+                <li class="pricing-features-item">Não pode participar de circulos
+
+                </li>
+                <li class="pricing-features-item">Criptografia de arquivos
+                </li>
+              </ul>
+              <span class="pricing-price">Free</span>
+              <a href="#/" class="pricing-button">Sign up</a>
+            </div>
+
+            <div class="pricing-plan">
+
+              <h2 class="pricing-header">Pro</h2>
+              <ul class="pricing-features">
+                <li class="pricing-features-item">100MB de armazenamento
+                </li>
+                <li class="pricing-features-item">Criação de circulos
+                </li>
+                <li class="pricing-features-item">Participação de circulos
+
+                </li>
+                <li class="pricing-features-item">Compartilhamento de arquivo
+                </li>
+                <li class="pricing-features-item">Criptografia de arquivos
+
+                </li>
+
+              </ul>
+              <span class="pricing-price">2 a 3 pessoas R$10,00</span>
+              <a href="#/" class="pricing-button is-featured">GRUPOS</a>
+            </div>
+
+            <div class="pricing-plan">
+
+              <h2 class="pricing-header">Premium</h2>
+              <ul class="pricing-features">
+                <li class="pricing-features-item">210MB de armazenamento
+                </li>
+                <li class="pricing-features-item">Criação de circulos
+                </li>
+                <li class="pricing-features-item">Participação de circulos
+                </li>
+                <li class="pricing-features-item">Compartilhamento de arquivo
+                </li>
+                <li class="pricing-features-item">Criptografia de arquivos
+                </li>
+                <li class="pricing-features-item">Histórico de arquivos</li>
+              </ul>
+              <span class="pricing-price">31 a 100 pessoas R$8,00</span>
+              <a href="#/" class="pricing-button">EMRPESAS</a>
+            </div>
+
           </div>
         </div>
       </div>

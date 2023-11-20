@@ -1,36 +1,37 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import '../styles/navbar.css';
-import { usuario } from '../api.js'
+import { usuario } from '../api.js';
 import Navbar from '../components/Header';
 import Footer from '../components/Footer';
 import '../styles/navbar.css';
 import '../styles/cadastro.css';
 
 function CadastroUsuario() {
-  const [data, setData] = useState({});
+  const navigate = useNavigate();
+
   const [formData, setFormData] = useState({
     nome: '',
     email: '',
-    senha: '', 
-    confirmar: ''
+    senha: '',
+    confirmar: '',
   });
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setFormData(prevState => ({ ...prevState, [name]: value }));
+    setFormData((prevState) => ({ ...prevState, [name]: value }));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
-      const response = await usuario.post('/',
-        formData);
+      const response = await usuario.post('/', formData);
 
       if (response.status === 201) {
         console.log('Cadastrado com sucesso!');
-        setData(response.data);
+        // Redirecionar para a página de login
+        navigate('/Login');
       } else {
         throw new Error('Erro na requisição.');
       }
@@ -38,7 +39,7 @@ function CadastroUsuario() {
       console.error(error);
     }
   };
-
+  
   return (
     <>
     <Navbar/>

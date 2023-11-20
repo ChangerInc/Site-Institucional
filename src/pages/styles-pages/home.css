@@ -221,7 +221,6 @@ h1 {
     padding-top: 4%;
     padding-bottom: 5%;
     width: 70%;
-
   }
   
   .panel {
@@ -231,6 +230,7 @@ h1 {
     position: relative;
     width: 100%;
     z-index: 10;
+    
     
   }
   
@@ -244,6 +244,7 @@ h1 {
   @media (min-width: 900px) {
     .pricing-table {
       flex-direction: row;
+      
     }
   }
   
@@ -259,10 +260,12 @@ h1 {
       border-right: 1px solid #e1f1ff;
       flex-basis: 100%;
       padding: 25px 50px;
+      
     }
   
     .pricing-plan:last-child {
       border-right: none;
+      
     }
   }
   
@@ -278,6 +281,7 @@ h1 {
     font-weight: 600;
     letter-spacing: 1px;
     margin: 50px 0 25px;
+    
   }
   
   .pricing-features-item {
@@ -289,6 +293,7 @@ h1 {
   
   .pricing-features-item:last-child {
     border-bottom: 1px solid #e1f1ff;
+    
   }
   
   .pricing-price {
@@ -296,6 +301,7 @@ h1 {
     display: block;
     font-size: 32px;
     font-weight: 700;
+    margin-top: 8%;
   }
   
   .pricing-button {
@@ -307,6 +313,7 @@ h1 {
     padding: 15px 35px;
     text-decoration: none;
     transition: all 150ms ease-in-out;
+
   }
   
   .pricing-button:hover,

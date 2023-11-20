@@ -2,7 +2,10 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { usuario } from '../api.js'
+import Navbar from '../components/Header';
+import Footer from '../components/Footer';
 import '../styles/navbar.css';
+import '../styles/login.css';
 
 const Login = () => {
   const [data, setData] = useState({});
@@ -40,6 +43,9 @@ const Login = () => {
   };
 
   return (
+    <>
+    <Navbar/>
+    <div className='container-login'>
     <div className='container-box'>
       <div className='container-texto'>
       <h2 className='texto-cinza'>Bem vindo ao <span className='texto-preto'>CHANGER</span><span className='texto-azul'>.</span></h2>
@@ -67,25 +73,29 @@ const Login = () => {
             onChange={handleInputChange}
           />
         </div>
-        <div class="wrapper">
-    <a href="#demo-modal">Esqueci minha senha.</a>
+        <div class="wrapper_login">
+    <a href="#demo-modal_login">Esqueci a senha</a>
 </div>
 
-<div id="demo-modal" class="modal">
-    <div class="modal__content">
-        <h3>Esqueceu sua senha de acesso?</h3>
-        <p>
-            Informe o e-mail cadastrado:
-        </p>
-        <input type="email" />
+<div id="demo-modal_login" class="modal_login">
+    <div class="modal__content_login">
+        <h3>Esqueceu a senha de acesso?</h3>
 
-        <a href="#" class="modal__close">&times;</a>
+        <p>
+            <input type="email" placeholder='Insira o e-mail cadastrado.' />
+        </p>
+
+        <a href="#" class="modal__close_login">&times;</a>
     </div>
 </div>
         <button type="submit">Login</button>
         
       </form>
     </div>
+    </div>
+
+    <Footer/>
+    </>
   );
 }
 

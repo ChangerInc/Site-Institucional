@@ -124,7 +124,7 @@ function Home() {
                 </li>
               </ul>
               <span class="pricing-price">Free</span>
-              <a href="#/" class="pricing-button">Sign up</a>
+              <a href="#/" class="pricing-button">ENTRE</a>
             </div>
 
             <div class="pricing-plan">
@@ -135,12 +135,15 @@ function Home() {
                 </li>
                 <li class="pricing-features-item">Criação de circulos
                 </li>
-                <li class="pricing-features-item">Participação de circulos
+                <li class="pricing-features-item">Participação de circulos (Limitado)
 
                 </li>
                 <li class="pricing-features-item">Compartilhamento de arquivo
                 </li>
                 <li class="pricing-features-item">Criptografia de arquivos
+
+                </li>
+                <li class="pricing-features-item">Até 3 grupos 
 
                 </li>
 
@@ -157,7 +160,7 @@ function Home() {
                 </li>
                 <li class="pricing-features-item">Criação de circulos
                 </li>
-                <li class="pricing-features-item">Participação de circulos
+                <li class="pricing-features-item">Participação de circulos (sem limite) 
                 </li>
                 <li class="pricing-features-item">Compartilhamento de arquivo
                 </li>

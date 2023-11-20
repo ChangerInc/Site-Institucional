@@ -2,6 +2,10 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import '../styles/navbar.css';
 import { usuario } from '../api.js'
+import Navbar from '../components/Header';
+import Footer from '../components/Footer';
+import '../styles/navbar.css';
+import '../styles/cadastro.css';
 
 function CadastroUsuario() {
   const [data, setData] = useState({});
@@ -36,6 +40,9 @@ function CadastroUsuario() {
   };
 
   return (
+    <>
+    <Navbar/>
+    <div className='container-cad'>
     <div className='container-box'>
       <div className='container-texto'>
         <h2 className='texto-cinza'>Bem vindo ao <span className='texto-preto'>CHANGER</span><span className='texto-azul'>.</span></h2>
@@ -86,6 +93,9 @@ function CadastroUsuario() {
         <button type="submit">Cadastrar</button>
       </form>
     </div>
+    </div>
+    <Footer/>
+    </>
   );
 
 }

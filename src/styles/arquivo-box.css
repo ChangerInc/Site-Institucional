@@ -59,9 +59,13 @@
     -webkit-appearance: none;
     -moz-appearance: none;
 
+    display: flex;
+    text-align: center;
+
     width: 120px;
     height: 75px;
     font-size: 1rem;
+
     background-image: url(../assets/SetaCombo.png); 
     background-repeat: no-repeat;
     background-size: 100%;

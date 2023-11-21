@@ -105,71 +105,71 @@ function Home() {
           </div>
         </div>
       </div>
-      <div class="background">
-        <div class="container">
-          <div class="panel pricing-table">
+      <div className="background">
+        <div className="container">
+          <div className="panel pricing-table">
 
-            <div class="pricing-plan">
+            <div className="pricing-plan">
 
-              <h2 class="pricing-header">Personal</h2>
-              <ul class="pricing-features">
-                <li class="pricing-features-item">80MB de armazenamento
+              <h2 className="pricing-header">Personal</h2>
+              <ul className="pricing-features">
+                <li className="pricing-features-item">80MB de armazenamento
                 </li>
-                <li class="pricing-features-item">Não pode criar grupos
+                <li className="pricing-features-item">Não pode criar grupos
                 </li>
-                <li class="pricing-features-item">Não pode participar de circulos
+                <li className="pricing-features-item">Não pode participar de circulos
 
                 </li>
-                <li class="pricing-features-item">Criptografia de arquivos
+                <li className="pricing-features-item">Criptografia de arquivos
                 </li>
               </ul>
-              <span class="pricing-price">Free</span>
-              <a href="#/" class="pricing-button">ENTRE</a>
+              <span className="pricing-price">Free</span>
+              <a href="#/" className="pricing-button">ENTRE</a>
             </div>
 
-            <div class="pricing-plan">
+            <div className="pricing-plan">
 
-              <h2 class="pricing-header">Pro</h2>
-              <ul class="pricing-features">
-                <li class="pricing-features-item">100MB de armazenamento
+              <h2 className="pricing-header">Pro</h2>
+              <ul className="pricing-features">
+                <li className="pricing-features-item">100MB de armazenamento
                 </li>
-                <li class="pricing-features-item">Criação de circulos
+                <li className="pricing-features-item">Criação de circulos
                 </li>
-                <li class="pricing-features-item">Participação de circulos (Limitado)
-
-                </li>
-                <li class="pricing-features-item">Compartilhamento de arquivo
-                </li>
-                <li class="pricing-features-item">Criptografia de arquivos
+                <li className="pricing-features-item">Participação de circulos (Limitado)
 
                 </li>
-                <li class="pricing-features-item">Até 3 grupos 
+                <li className="pricing-features-item">Compartilhamento de arquivo
+                </li>
+                <li className="pricing-features-item">Criptografia de arquivos
+
+                </li>
+                <li className="pricing-features-item">Até 3 grupos 
 
                 </li>
 
               </ul>
-              <span class="pricing-price">2 a 3 pessoas R$10,00</span>
-              <a href="#/" class="pricing-button is-featured">GRUPOS</a>
+              <span className="pricing-price">2 a 3 pessoas R$10,00</span>
+              <a href="#/" className="pricing-button is-featured">GRUPOS</a>
             </div>
 
-            <div class="pricing-plan">
+            <div className="pricing-plan">
 
-              <h2 class="pricing-header">Premium</h2>
-              <ul class="pricing-features">
-                <li class="pricing-features-item">210MB de armazenamento
+              <h2 className="pricing-header">Premium</h2>
+              <ul className="pricing-features">
+                <li className="pricing-features-item">210MB de armazenamento
                 </li>
-                <li class="pricing-features-item">Criação de circulos
+                <li className="pricing-features-item">Criação de circulos
                 </li>
-                <li class="pricing-features-item">Participação de circulos (sem limite) 
+                <li className="pricing-features-item">Participação de circulos (sem limite) 
                 </li>
-                <li class="pricing-features-item">Compartilhamento de arquivo
+                <li className="pricing-features-item">Compartilhamento de arquivo
                 </li>
-                <li class="pricing-features-item">Criptografia de arquivos
+                <li className="pricing-features-item">Criptografia de arquivos
                 </li>
-                <li class="pricing-features-item">Histórico de arquivos</li>
+                <li className="pricing-features-item">Histórico de arquivos</li>
               </ul>
-              <span class="pricing-price">31 a 100 pessoas R$8,00</span>
-              <a href="#/" class="pricing-button">EMRPESAS</a>
+              <span className="pricing-price">31 a 100 pessoas R$8,00</span>
+              <a href="#/" className="pricing-button">EMRPESAS</a>
             </div>
 
           </div>

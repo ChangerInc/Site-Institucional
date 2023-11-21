@@ -4,8 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { usuario } from '../api.js'
 import Navbar from '../components/Header';
 import Footer from '../components/Footer';
-import '../styles/navbar.css';
-import '../styles/login.css';
+import './styles-pages/login.css';
 
 const Login = () => {
   const [data, setData] = useState({});
@@ -32,7 +31,7 @@ const Login = () => {
         setData(response.data);
         sessionStorage.setItem("token", response.data.token);
         sessionStorage.setItem("nome", response.data.nome);
-        
+
         navigate("/user");
       } else {
         throw new Error('Erro na requisição.');
@@ -44,57 +43,56 @@ const Login = () => {
 
   return (
     <>
-    <Navbar/>
-    <div className='container-login'>
-    <div className='container-box'>
-      <div className='container-texto'>
-      <h2 className='texto-cinza'>Bem vindo ao <span className='texto-preto'>CHANGER</span><span className='texto-azul'>.</span></h2>
-        <h3>Não tem conta? <span className='texto-azul'><Link className="linkBox" to="/Cadastro">Cadastre-se</Link></span></h3>
+      <Navbar />
+      <div className="container-login">
+        <div className='container-box'>
+          <div className='container-texto'>
+            <h2 className='texto-cinza'>Bem vindo ao <span className='texto-preto'>CHANGER</span><span className='texto-azul'>.</span></h2>
+            <h3>Não tem conta? <span className='texto-azul'><Link className="linkBox" to="/Cadastro">Cadastre-se</Link></span></h3>
+          </div>
+
+          <form onSubmit={handleSubmit} className='formulario'>
+            <div>
+              <label htmlFor="email">Email </label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                value={formData.email}
+                onChange={handleInputChange}
+              />
+            </div>
+            <div>
+              <label htmlFor="senha">Senha </label>
+              <input
+                type="password"
+                id="senha"
+                name="senha"
+                value={formData.senha}
+                onChange={handleInputChange}
+              />
+            </div>
+            <div className="wrapper_login">
+              <a href="#demo-modal_login">Esqueci a senha</a>
+            </div>
+
+            <div id="demo-modal_login" className="modal_login">
+              <div className="modal__content_login">
+                <h3>Esqueceu a senha de acesso?</h3>
+
+                <p>
+                  <input type="email" placeholder='Insira o e-mail cadastrado.' />
+                </p>
+
+                <a href="#" className="modal__close_login">&times;</a>
+              </div>
+            </div>
+            <button type="submit">Login</button>
+
+          </form>
+        </div>
       </div>
-
-      <form onSubmit={handleSubmit} className='formulario'>
-        <div>
-          <label htmlFor="email">Email </label>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            value={formData.email}
-            onChange={handleInputChange}
-          />
-        </div>
-        <div>
-          <label htmlFor="senha">Senha </label>
-          <input
-            type="password"
-            id="senha"
-            name="senha"
-            value={formData.senha}
-            onChange={handleInputChange}
-          />
-        </div>
-        <div className="wrapper_login">
-    <a href="#demo-modal_login">Esqueci a senha</a>
-</div>
-
-<div id="demo-modal_login" className="modal_login">
-    <div className="modal__content_login">
-        <h3>Esqueceu a senha de acesso?</h3>
-
-        <p>
-            <input type="email" placeholder='Insira o e-mail cadastrado.' />
-        </p>
-
-        <a href="#" className="modal__close_login">&times;</a>
-    </div>
-</div>
-        <button type="submit">Login</button>
-        
-      </form>
-    </div>
-    </div>
-
-    <Footer/>
+      <Footer />
     </>
   );
 }

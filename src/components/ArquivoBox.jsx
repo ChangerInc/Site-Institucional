@@ -2,7 +2,8 @@
 import React, { useState } from "react";
 import { vertopal } from "../api";
 import { saveAs } from "file-saver";
-import '../styles/arquivo-box.css'
+import { Link } from 'react-router-dom';
+import './styles/arquivo-box.css'
 
 function ArquivoBox() {
   const formData = new FormData();
@@ -21,9 +22,7 @@ function ArquivoBox() {
 
   const handleSelectChange = (event) => {
     setExtensao(event.target.value);
-    if (file) {
-      setIsSelectVisible(false);
-    }
+    setIsSelectVisible(false);
   }
 
   const handleFileUpload = async (file) => {
@@ -92,10 +91,10 @@ function ArquivoBox() {
 
     <div className="caixa_de_conversao">
       <div className="container_input_e_select">
-        {isSelectVisible && !file && (
+        {(isSelectVisible || !file) && (
           <>
-            <label for="file_upload" class="custom-file-upload-label">
-              <b class="bold_selecionar_arquivo">{file == null ? "Selecionar Arquivo" : <span>{fileName}</span>}</b>
+            <label htmlFor="file_upload" className="custom-file-upload-label">
+              <b className="bold_selecionar_arquivo">{file == null ? "Selecionar Arquivo" : <span>{fileName}</span>}</b>
             </label>
             <input id="file_upload" type="file" onChange={handleFileChange} />
             <select id="select_extensao"
@@ -104,12 +103,12 @@ function ArquivoBox() {
               style={{
                 backgroundImage: extensao ? 'none' : 'url("/src/assets/SetaCombo.png")',
               }}>
-              <option value="" selected></option>
-              <option value="pdf" >pdf</option>
-              <option value="png">png</option>
-              <option value="docx">docx</option>
-              <option value="jpeg">jpeg</option>
-              <option value="txt">txt</option>
+              <option defaultValue={0}></option>
+              <option value="pdf" >PDF</option>
+              <option value="png">PNG</option>
+              <option value="docx">DOCX</option>
+              <option value="jpeg">JPEG</option>
+              <option value="txt">TXT</option>
             </select>
           </>
         )}
@@ -118,12 +117,12 @@ function ArquivoBox() {
             <button onClick={handleClick}>
               {isConverted ? "Download" : "Converter"}
             </button>
-            <button onClick={() => setIsSelectVisible(true)}>Alterar extensão<br /><span>Atual: {extensao}</span></button>
+            <button onClick={() => setIsSelectVisible(true)}>Alterar extensão<span>Atual: {extensao}</span></button>
           </>
         )}
       </div>
       <span className="texto_box_informacao">
-        Solte os arquivos aqui. 100 MB tamanho máximo do ficheiro ou <a href="">Registrar-se</a>.
+        Solte os arquivos aqui. 100 MB tamanho máximo do ficheiro ou <Link href="" to="/cadastro">Registrar-se</Link>.
       </span>
     </div>
   );

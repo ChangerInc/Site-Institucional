@@ -2,6 +2,7 @@ import React from 'react'
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import changerLogo from '../assets/Logo/changer_black.png'
+import "./styles/navbar.css"
 
 const Header = () => {
 

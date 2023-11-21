@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from 'react-router-dom';
-import '../styles/footer.css'
+import './styles/footer.css'
 
 const Footer = () => {
 

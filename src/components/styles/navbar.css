@@ -1,0 +1,44 @@
+:root {
+  --azul-principal: #145DA0;
+  --azul-claro: #5B98BA;
+  --roxo: #505CFD;
+  --cinza-claro: #868686;
+  --cinza-escuro: #383838;
+}
+
+img {
+  width: 200px;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: calc(100% - 4rem);
+  padding: 1.5rem 2rem;
+}
+
+.navbar ul {
+  display: flex;
+  gap: 2rem;
+  list-style: none;
+  text-decoration: none;
+}
+
+.linkBox {
+  /* classe pra transitar entre login e cadastro */
+  text-decoration: none;
+  color: var(--azul-texto);
+}
+
+.linkNav {
+  /* classe para os links na navbar */
+  font-size: 1rem;
+  text-decoration: none;
+  color: #000000;
+  transition: 0.3s;
+}
+
+.linkNav:hover {
+  border-bottom: solid 1px var(--roxo);
+}

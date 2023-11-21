@@ -20,22 +20,26 @@
     text-align: center;
     font-size: 1rem;
     font-style: normal;
-    font-weight: 400;
+    font-weight: 900;
     line-height: normal;
 }
 
 .texto_box_informacao a{
     text-decoration: none;
-    font-weight: 600;
+    font-weight: bolder;
     color: #5B98BA;
+}
+
+.texto_box_informacao a:hover{
+    border-bottom: 2px solid #5B98BA;
 }
 
 .custom-file-upload-label {
     color: white;
     display: flex;
     background-color: #5B98BA;
-    width: 500px;
-    height: 75px;
+    width: 290px;
+    height: 60px;
     cursor: pointer;
     justify-content: center;
     align-items: center;
@@ -62,8 +66,8 @@
     display: flex;
     text-align: center;
 
-    width: 120px;
-    height: 75px;
+    width: 70px;
+    height: 60px;
     font-size: 1rem;
 
     background-image: url(../assets/SetaCombo.png); 
@@ -76,6 +80,15 @@
     outline: none;
 }
 
+.container_input_e_select button {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+    width: 180px;
+    padding: 0;
+    border-radius: 0%;
 
-
-
+    font-size: 1rem;
+}

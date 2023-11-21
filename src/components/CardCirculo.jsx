@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import '../styles/cardCirculo.css';
+import './styles/cardCirculo.css';
 
 class CardCirculo extends Component {
     constructor() {

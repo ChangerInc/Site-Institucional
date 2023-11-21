@@ -32,7 +32,7 @@ const Footer = () => {
                     <div className="footerText">
                         <h1 className='whiteText'>CHANGER</h1>
                         <ul className='footerList whiteText'>
-                            <li><img src="src/components/image/icons.png" alt="" /></li>
+                            <li>{/*<img src="src/components/image/icons.png" alt="" />*/}</li>
                             <li>SPTECH</li>
                             <li> @2023 Change</li>
                         </ul>

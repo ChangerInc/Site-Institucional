@@ -24,9 +24,9 @@ function Home() {
           <div className='image'></div>
           <div className='text'>
             <p>SOBRE NÓS</p>
-            <h2>O que <span className='blueSpan'>fazemos</span></h2>
+            <h2>O que <span className='blueSpan'>fazemos</span>?</h2>
             <p className='completeText'>
-              Uma empresa especializada na gestão e conversão de extensões de arquivos por meio de nossa Aplicação Web.
+              Como empresa especializada na gestão e conversão de extensões de arquivos por meio de nossa Aplicação Web.
               Nossa ênfase está em armazenar seus arquivos e adaptá-los às extensões desejadas.
               Oferecemos diversos benefícios que estão adjuntos a um plano mensal, semestral ou anual.
               No qual, ocorre uma variação de valor, e funcionalidades da ferramenta.
@@ -59,52 +59,38 @@ function Home() {
           </div>
           <div className="box">
             <div className="boxCard">
-              <div className='contain'>
-                <div className='boxImage'>
-                  <img src="/src/assets/lampada.png" alt="" />
-                </div>
-                <div className="boxText">
-                  <h2>NOSSO SERVIÇO</h2>
-                  <p>Os arquivos são convertidos com rapidez e precisão, e o processo é muito simples. </p>
-                </div>
+              <img src="/src/assets/lampada.png" alt="" />
+              <div className="boxText">
+                <h2>NOSSO SERVIÇO</h2>
+                <p>Os arquivos são convertidos com rapidez e precisão, e o processo é muito simples. </p>
               </div>
             </div>
             <div className="boxCard">
-              <div className='contain'>
-                <div className='boxImage'>
-                  <img src="/src/assets/engrenagem.png" alt="" />
-                </div>
-                <div className="boxText">
-                  <h2>EXPERIÊNCIA </h2>
-                  <p>A interface é intuitiva e fácil de navegar, e os resultados da conversão são muito bons. </p>
-                </div>
+              <img src="/src/assets/engrenagem.png" alt="" />
+              <div className="boxText">
+                <h2>EXPERIÊNCIA </h2>
+                <p>A interface é intuitiva e fácil de navegar, e os resultados da conversão são muito bons. </p>
               </div>
             </div>
             <div className="boxCard">
-              <div className='contain'>
-                <div className='boxImage'>
-                  <img src="/src/assets/compartilhamento.png" alt="" />
-                </div>
-                <div className="boxText">
-                  <h2>COMPARTILHAMENTO</h2>
-                  <p>A opção de baixar o arquivo convertido para o seu computador, ou de enviá-lo para outra pessoa por e-mail.</p>
-                </div>
+              <img src="/src/assets/compartilhamento.png" alt="" />
+              <div className="boxText">
+                <h2>COMPARTILHAMENTO</h2>
+                <p>A opção de baixar o arquivo convertido para o seu computador, ou de enviá-lo para outra pessoa por e-mail.</p>
               </div>
             </div>
             <div className="boxCard">
-              <div className='contain'>
-                <div className='boxImage'>
                   <img src="/src/assets/timer.png" alt="" />
-                </div>
                 <div className="boxText">
                   <h2>FACILIDADE</h2>
                   <p>Nosso ponto forte. Sendo muito fácil de usar, até para quem não tem experiência em conversão de arquivos. </p>
                 </div>
-              </div>
             </div>
           </div>
         </div>
       </div>
+
+
       <div className="background">
         <div className="container">
           <div className="panel pricing-table">
@@ -143,7 +129,7 @@ function Home() {
                 <li className="pricing-features-item">Criptografia de arquivos
 
                 </li>
-                <li className="pricing-features-item">Até 3 grupos 
+                <li className="pricing-features-item">Até 3 grupos
 
                 </li>
 
@@ -160,7 +146,7 @@ function Home() {
                 </li>
                 <li className="pricing-features-item">Criação de circulos
                 </li>
-                <li className="pricing-features-item">Participação de circulos (sem limite) 
+                <li className="pricing-features-item">Participação de circulos (sem limite)
                 </li>
                 <li className="pricing-features-item">Compartilhamento de arquivo
                 </li>

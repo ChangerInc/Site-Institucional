@@ -1,52 +1,112 @@
-.card{
+.card {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 230px; height: 230px;
+    width: 200px;
+    height: 200px;
+    padding: 10px;
     border-radius: 12px;
-    background: #F8F8F8;  
-    box-shadow: 3px 11px 22px 10px rgba(0, 0, 0, 0.25);
+    background: #F8F8F8;
+    box-shadow: 3px 3px 3px 3px rgba(0, 0, 0, 0.25);
 }
-.card:hover{
-    transition: 0.5s;
-    transform: scale(1.01);
+
+.card {
+    cursor: pointer;
 }
-.containerConteudoCard{
+
+.containerConteudoCard {
     display: flex;
     flex-direction: column;
-    width: 230px; height: 230px;
+    width: 200px;
+    height: 200px;
 }
-.tituloDoCirculo{
+
+.containerTituloDeleteGrupo {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.tituloDoCirculo {
+    margin: 0;
+    font-size: 1.2rem;
+    justify-self: center;
+}
+
+.deleteImage {
+    margin: 0;
+    width: 20px;
+    height: 20px;
     align-self: center;
-    font-size: 22px;
-    padding: 10px;
+    background-image: url(/src/assets/excluir.png);
+    background-repeat: no-repeat;
+    background-size: 100%;
+}
+
+.deleteImage:hover {
+    cursor: pointer;
+    background-image: url(/src/assets/excluir-hover.png);
+    background-size: 100%;
+    transition: 0.3s;
+}
+
+.fileImage {
+    margin: 0;
+    padding: 0;
+    width: 45px;
+    height: 45px;
+
+    justify-content: center;
+    align-self: center;
+
+    background-color: #145DA0;
+    background-image: url(/src/assets/upload-de-arquivo.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 80%;
+
+    border-radius: 50%;
+}
+
+.fileImage:hover {
+    cursor: pointer;
+    background-color: #FFF;
+    background-image: url(/src/assets/upload-de-arquivo-hover.png);
+    background-size: 80%;
+    transition: 0.3s;
 }
 
 .membrosCirculo {
     display: flex;
+    justify-content: center;
     align-items: center;
     height: 70%;
 }
 
-.listaOrnedadaMembros{
+.listaOrnedadaMembros {
     list-style: none;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     gap: 10px;
-    flex-wrap: wrap;
 }
-.listaOrnedadaMembros li{
+
+.listaOrnedadaMembros li {
     display: flex;
+    justify-content: center;
+    font-size: 1rem;
+    align-items: center;
     gap: 20px;
 }
-.listaOrnedadaMembros img{
+
+.listaOrnedadaMembros img {
     margin: 0;
     width: 30px;
     height: 30px;
     border-radius: 50%;
 }
-.listaOrnedadaMembros img:hover{
+
+.listaOrnedadaMembros img:hover {
     transition: 0.1s;
     transform: scale(1.20);
 }
@@ -57,12 +117,4 @@
     align-items: center;
     width: 50px;
     font-size: 3rem;
-}
-
-.containerConteudoCard button img {
-    width: 35px;
-}
-
-.containerConteudoCard button:hover {
-    background-color: #FFF;
 }

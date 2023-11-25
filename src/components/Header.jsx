@@ -32,6 +32,11 @@ const Header = () => {
         {isLoggedIn ? (
           <>
             <li>
+              <Link className="linkNav" to="/user">
+                Histórico
+              </Link>
+            </li>
+            <li>
               <Link className="linkNav" to="/grupo">
                 Circulos
               </Link>

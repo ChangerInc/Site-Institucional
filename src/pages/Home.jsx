@@ -1,5 +1,5 @@
 import React from 'react'
-import Header from '../components/Header'
+import Header from '../components/Header-white'
 import ArquivoBox from '../components/ArquivoBox'
 import Footer from '../components/Footer'
 import { Link } from 'react-router-dom';
@@ -13,7 +13,7 @@ function Home() {
         <div className="container-conversao">
           <div className="texto-container">
             <h1 className='white-text'>Transforme seus arquivos <br />
-              com a facilidade de um <span>click.</span></h1>
+              com a facilidade de um <span className='spanclick'>click.</span></h1>
           </div>
           <i className='white-text'>Para compartilhar seus arquivos crie sua conta</i>
           <ArquivoBox />
@@ -109,8 +109,8 @@ function Home() {
                 <li className="pricing-features-item">Criptografia de arquivos
                 </li>
               </ul>
-              <span className="pricing-price">Free</span>
-              <a href="#/" className="pricing-button">ENTRE</a>
+              <span className="pricing-price-free">Free</span>
+              <a href="#/" className="pricing-button-free">ENTRE</a>
             </div>
 
             <div className="pricing-plan">

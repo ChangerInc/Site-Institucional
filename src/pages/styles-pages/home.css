@@ -19,7 +19,7 @@
   gap: 1.5rem;
 }
 
-span {
+.spanclick {
   text-decoration: #5B98BA underline;
 }
 
@@ -310,6 +310,27 @@ p {
   text-decoration: none;
   transition: all 150ms ease-in-out;
 
+}
+
+.pricing-price-free {
+  color: #016FF9;
+  display: block;
+  font-size: 32px;
+  font-weight: 700;
+  margin-top: 38%;
+  justify-self: end;
+}
+
+.pricing-button-free {
+  border: 1px solid #9dd1ff;
+  border-radius: 10px;
+  color: #5B98BA;
+  display: inline-block;
+  margin: 25px 0;
+  padding: 15px 35px;
+  text-decoration: none;
+  transition: all 150ms ease-in-out;
+  margin-top: 18%;
 }
 
 .pricing-button:hover,

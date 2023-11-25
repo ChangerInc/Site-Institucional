@@ -23,24 +23,23 @@ class CardCirculo extends Component {
     render() {
 
         return (
-            <div className='container'>
-            {this.state.circulos.map(circulo => (
-            <div className="card">
-                <div className="containerConteudoCard">
-                    <b className="tituloDoCirculo">{circulo.tituloGrupo}</b>
-                    <div className="conteudoCard">
-                        <div className="membrosCirculo">
-                            <ul className='listaOrnedadaMembros'>
-                                {circulo.membros.map(membro => (
-                                    <li><img src={membro.fotoPerfil} alt="" /> {membro.nome}</li>
-                                ))}
-                            </ul>
+            <>
+                {this.state.circulos.map(circulo => (
+                    <div className="card">
+                        <div className="containerConteudoCard">
+                            <b className="tituloDoCirculo">{circulo.tituloGrupo}</b>
+                            <div className="membrosCirculo">
+                                <ul className='listaOrnedadaMembros'>
+                                    {circulo.membros.map(membro => (
+                                        <li><img src={membro.fotoPerfil} alt="" /> {membro.nome}</li>
+                                    ))}
+                                </ul>
+                            </div>
+                            <button className="addFile"><img src="/src/assets/upload-de-arquivo.png" alt="" /></button>
                         </div>
                     </div>
-                </div>
-            </div>
-        ))}
-        </div>
+                ))}
+            </>
         )
     };
 }

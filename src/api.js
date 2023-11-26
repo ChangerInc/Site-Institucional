@@ -8,4 +8,9 @@ const vertopal = axios.create({
   baseURL: "http://localhost:8080/vertopal"
 });
 
-export { usuario, vertopal };
+const grupoApi = axios.create({
+  baseURL: "http://localhost:8080/circulo"
+});
+
+
+export { usuario, vertopal, grupoApi };

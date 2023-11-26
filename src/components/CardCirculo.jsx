@@ -3,6 +3,7 @@ import { circulo } from "../api";
 import './styles/cardCirculo.css';
 
 function CardCirculo(props) {
+    const [idCirculo, setIdCirculo] = useState(props.idCirculo);
     const [titulo, setTitulo] = useState(props.tituloGrupo);
     const [membros, setMembros] = useState(props.membros);
 

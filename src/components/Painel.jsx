@@ -6,40 +6,36 @@ import './styles/painel.css'
 const Painel = () => {
     const [searchTerm, setSearchTerm] = useState('');
     const [isValid, setIsValid] = useState(true);
+    const [search, setSearch] = useState(false);
     const [error, setError] = useState('');
+    const [allCircle, setAllCircle] = useState([]);
     const [searchResults, setSearchResults] = useState([]);
     const id = sessionStorage?.getItem('id');
 
     const handleSearchChange = (event) => {
-        const inputValue = event.target.value;
+        setSearchTerm(event.target.value);
+    };
 
-        // Validar comprimento mínimo
-        if (inputValue.length < 3) {
+    const validation = () => {
+        if (searchTerm === '') {
             setIsValid(false);
             setError('O termo de pesquisa deve ter no mínimo 3 caracteres.');
         }
-        if (!/^[a-zA-Z\s]+$/.test(inputValue)) {
-            // Validar caracteres permitidos (apenas letras e espaços)
-            setIsValid(false);
-            setError('O termo de pesquisa deve conter apenas letras e espaços.');
-        }
-        setIsValid(true);
-        setError('');
-        setSearchTerm(inputValue);
-    };
+    }
 
     useEffect(() => {
-        componentDidMount();
+        allCircles();
     }, []);
 
-    function componentDidMount() {
-        circulo.get('https://6514aa50dc3282a6a3cd5f65.mockapi.io/cards')
+    function allCircles() {
+        circulo.get(`/todos/${id}`)
             .then(response => {
                 if (Object.keys(response.data).length === 0) {
                     console.log('Lista está vazia');
                 }
                 else {
-                    setSearchResults(response.data);
+                    setAllCircle(response.data);
+                    console.log(response.data);
                 }
             })
             .catch(error => {
@@ -48,18 +44,42 @@ const Painel = () => {
     }
 
     const pesquisarCirculo = () => {
-        circulo
-            .get(`/pesquisar/${searchTerm}/${id}`)
-            .then((response) => {
+        if (isValid) {
+            setSearchResults([])
+            setSearch(true);
+            circulo
+                .get(`/pesquisar/${searchTerm}/${id}`)
+                .then((response) => {
+                    if (Object.keys(response.data).length === 0) {
+                        console.log('Lista de busca está vazia');
+                        setSearch(false)
+                        setSearchResults(response.data)
+                    }
+                    else {
+                        setSearchResults(response.data)
+                        console.log(response.data);
+                    }
+                })
+                .catch((error) => {
+                    console.error(error);
+                });
+        } else {
+            console.log('Você não informou nenhum dado de busca')
+        }
+    }
+
+    function createCircle() {
+        circulo.get(`/todos/${id}`)
+            .then(response => {
                 if (Object.keys(response.data).length === 0) {
-                    console.log('Lista está vazia');
+                    console.log(response.data);
                 }
                 else {
-                    setSearchResults(response.data)
+                    setAllCircle(response.data);
                 }
             })
-            .catch((error) => {
-                console.error(error);
+            .catch(error => {
+                console.error('Erro ao buscar dados da API:', error);
             });
     }
 
@@ -77,12 +97,27 @@ const Painel = () => {
                 <div className="btnCreateCircle"></div>
             </div>
             <div className="cards">
-                {searchResults?.map((circulo) => (
-                    <CardCirculo
-                        tituloGrupo={circulo.tituloGrupo}
-                        membros={circulo.membros}
-                    />
-                ))}
+                {(!search && isValid) ? (
+                    <>
+                        {allCircle?.map((circulo) => (
+                            <CardCirculo
+                                idCirculo={circulo.id}
+                                tituloGrupo={circulo.nomeCirculo}
+                                membros={circulo.membros}
+                            />
+                        ))}
+                    </>
+                ) : (
+                    <>
+                        { }
+                        {searchResults?.map((circulo) => (
+                            <CardCirculo
+                                tituloGrupo={circulo.nome}
+                                membros={circulo.membros}
+                            />
+                        ))}
+                    </>
+                )}
             </div>
         </>
     )

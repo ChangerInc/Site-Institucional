@@ -20,7 +20,7 @@ const UserInterface = () => {
   useEffect(() => {
     const fetchHistorico = async () => {
       try {
-        const response = await axios.get(`http://localhost:8080/historicoconversao/usuario`);
+        const response = await axios.get(`http://localhost:8080/historico-conversao/usuario`);
         console.log(response.data);
         setHistorico(response.data);
       } catch (error) {

@@ -2,7 +2,6 @@ import React from 'react'
 import Header from '../components/Header-white'
 import ArquivoBox from '../components/ArquivoBox'
 import Footer from '../components/Footer'
-import { Link } from 'react-router-dom';
 import '../pages/styles-pages/home.css';
 
 function Home() {

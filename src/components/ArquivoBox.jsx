@@ -32,7 +32,11 @@ function ArquivoBox() {
     if (uploadedFile) {
       const formData = new FormData();
       formData.append("file", uploadedFile);
+      if (sessionStorage.getItem("id") != null) {
+        formData.append("user", sessionStorage.getItem("id"));
+      }
 
+      console.log(sessionStorage.getItem("id"))
       vertopal
         .post("/enviar", formData)
         .then((response) => {

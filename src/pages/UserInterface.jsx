@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import Footer from '../components/Footer'
 import Header from '../components/Header'
 import './styles-pages/user-interface.css'
-import icon from "../assets/lampada.png"
+import { format } from 'date-fns';
 
 const UserInterface = () => {
   const navigate = useNavigate();
@@ -20,7 +20,7 @@ const UserInterface = () => {
   useEffect(() => {
     const fetchHistorico = async () => {
       try {
-        const response = await axios.get(`http://localhost:8080/historico-conversao/usuario`);
+        const response = await axios.get(`http://localhost:8080/historico-conversao/usuario/${id}`);
         console.log(response.data);
         setHistorico(response.data);
       } catch (error) {
@@ -30,6 +30,17 @@ const UserInterface = () => {
 
     fetchHistorico();
   }, []);
+
+  // function importAllImages(r) {
+  //   let images = {};
+  //   r.keys().forEach(key => (images[key] = r(key)));
+  //   return images;
+  // }
+  
+  // const imagens = importAllImages(
+  //   require.context("../assets/icones/", false, /\.(png|jpe?g|svg)$/)
+  // );
+  
 
   return (
     <>
@@ -46,7 +57,7 @@ const UserInterface = () => {
         <div className="historico" key={index}>
           <img src={icon} />
           <p>{hist.nome}</p>
-          <p>15/11/2023 16:10</p>
+          <p>{format(new Date(hist.dataConversao), 'dd/MM/yy HH:mm')}</p>
         </div>
       ))}
       <Footer />

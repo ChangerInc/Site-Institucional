@@ -33,6 +33,7 @@ function ArquivoBox() {
       const formData = new FormData();
       formData.append("file", uploadedFile);
       if (sessionStorage.getItem("id") != null) {
+        sessionStorage.setItem("Funciona", true);
         formData.append("user", sessionStorage.getItem("id"));
       }
 

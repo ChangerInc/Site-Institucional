@@ -1,6 +1,12 @@
 .container-cadastro {
     display: flex;
     height: calc(100vh - 74px);
+
+    background-image: url(/src/assets/Logo/logincadback.png);
+    background-position-x: 130%;
+    background-position-y: 50%;
+    background-repeat: no-repeat;
+    background-size: 40%;
 }
 
 .container-box {
@@ -36,13 +42,19 @@
 }
 
 .texto-preto {
+    text-decoration: none;
     font-weight: 750;
     color: #000;
 }
 
 .texto-azul {
+    text-decoration: none;
     font-weight: 600;
     color: var(--azul-claro);
+}
+
+.linkBox:hover {
+    border-bottom: 2px solid var(--azul-claro);
 }
 
 .formulario {

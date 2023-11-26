@@ -10,7 +10,7 @@ img {
   width: 200px;
 }
 
-.navbar {
+.navbar-white {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -18,27 +18,28 @@ img {
   padding: 1.5rem 2rem;
 }
 
-.navbar ul {
+.navbar-white ul {
   display: flex;
   gap: 2rem;
   list-style: none;
   text-decoration: none;
 }
 
-.linkBox {
+.linkBox-white {
   /* classe pra transitar entre login e cadastro */
   text-decoration: none;
   color: var(--azul-texto);
 }
 
-.linkNav {
+.linkNav-white {
   /* classe para os links na navbar */
   font-size: 1rem;
   text-decoration: none;
-  color: #000000;
+  color: white;
   transition: 0.3s;
+  font-weight: bold;
 }
 
-.linkNav:hover {
+.linkNav-white:hover {
   border-bottom: solid 1px var(--azul-claro);
 }

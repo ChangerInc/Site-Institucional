@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
-import changerLogo from '../assets/Logo/changer_black.png'
-import "./styles/navbar.css"
+import changerLogo from '../assets/Logo/changer_white.png'
+import "./styles/navbar-white.css"
 
 const Header = () => {
 
@@ -20,29 +20,29 @@ const Header = () => {
   };
 
   return (
-    <nav className="navbar">
+    <nav className="navbar-white">
       <img className='logo' src={changerLogo} alt="Logo" />
-      <ul className="navList">
+      <ul className="navList-white">
         <li>
-          <Link className="linkNav" to="/">Home</Link>
+          <Link className="linkNav-white" to="/">Home</Link>
         </li>
         <li>
-          <Link className="linkNav" to="/converter">Converter</Link>
+          <Link className="linkNav-white" to="/converter">Converter</Link>
         </li>
         {isLoggedIn ? (
           <>
             <li>
-              <Link className="linkNav" to="/user">
+              <Link className="linkNav-white" to="/user">
                 Histórico
               </Link>
             </li>
             <li>
-              <Link className="linkNav" to="/grupo">
+              <Link className="linkNav-white" to="/grupo">
                 Circulos
               </Link>
             </li>
             <li>
-              <Link onClick={handleLogout} className="linkNav" to="/">
+              <Link onClick={handleLogout} className="linkNav-white" to="/">
                 Logout
               </Link>
             </li>
@@ -50,12 +50,12 @@ const Header = () => {
         ) : (
           <>
             <li>
-              <Link className="linkNav" to="/login">
+              <Link className="linkNav-white" to="/login">
                 Login
               </Link>
             </li>
             <li>
-              <Link className="linkNav" to="/cadastro">
+              <Link className="linkNav-white" to="/cadastro">
                 Cadastro
               </Link>
             </li>

@@ -1,0 +1,32 @@
+.containerPainel {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 400px;
+    height: 10vh;
+    padding: 10px;
+}
+
+.containerPainel input {
+    width: 150px;
+    height: 30px;
+    background-image: url(/src/assets/pesquisa-de-lupa.png);
+    background-position: right;
+    background-size: 15%;
+    background-repeat: no-repeat;
+}
+
+.btnCreateCircle {
+    width: 40px;
+    height: 40px;
+    background-image: url(/src/assets/adicionar-circulo.png);
+    background-position: center;
+    background-size: 80%;
+    background-repeat: no-repeat;
+    border-radius: 50%;
+}
+
+.btnCreateCircle:hover {
+    cursor: pointer;
+    background-image: url(/src/assets/adicionar-circulo-hover.png);
+}

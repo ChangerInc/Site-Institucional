@@ -1,7 +1,6 @@
 .container-login {
   display: flex;
   height: calc(100vh - 74px);
-  background-image: url(/src/assets/Logo/logincadback.png);
   background-position-x: 130%;
   background-position-y: 50%;
   background-repeat: no-repeat;

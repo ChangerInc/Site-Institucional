@@ -9,10 +9,9 @@ const Grupos = () => {
   return (
     <>
       <Navbar />
-      <Painel />
       <div className="containerCirculo">
         <div className='containerCards'>
-          <CardCirculo />
+          <Painel />
         </div>
       </div>
       <Footer />

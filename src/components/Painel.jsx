@@ -1,31 +1,61 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { circulo } from "../api.js";
-import { useNavigate } from 'react-router-dom';
+import CardCirculo from "./CardCirculo";
 import './styles/painel.css'
 
 const Painel = () => {
-    const navigate = useNavigate();
-    const [nomeCirculo, setNomeCirculo] = useState('');
+    const [searchTerm, setSearchTerm] = useState('');
+    const [isValid, setIsValid] = useState(true);
+    const [error, setError] = useState('');
+    const [searchResults, setSearchResults] = useState([]);
     const id = sessionStorage?.getItem('id');
-    const [circulosFiltro, setCirculosFiltro] = useState([{teste: 'Mateus'}]);
 
-    const handleSearchChange= (event) => {
-        setNomeCirculo(event.target.value);
-        console.log(event.target.value);
-      };
+    const handleSearchChange = (event) => {
+        const inputValue = event.target.value;
 
-    const pesquisarCirculo = (event) => {
-        const formData = new FormData();
-        formData.append("usuarioId", id);
+        // Validar comprimento mínimo
+        if (inputValue.length < 3) {
+            setIsValid(false);
+            setError('O termo de pesquisa deve ter no mínimo 3 caracteres.');
+        }
+        if (!/^[a-zA-Z\s]+$/.test(inputValue)) {
+            // Validar caracteres permitidos (apenas letras e espaços)
+            setIsValid(false);
+            setError('O termo de pesquisa deve conter apenas letras e espaços.');
+        }
+        setIsValid(true);
+        setError('');
+        setSearchTerm(inputValue);
+    };
 
+    useEffect(() => {
+        componentDidMount();
+    }, []);
+
+    function componentDidMount() {
+        circulo.get('https://6514aa50dc3282a6a3cd5f65.mockapi.io/cards')
+            .then(response => {
+                if (Object.keys(response.data).length === 0) {
+                    console.log('Lista está vazia');
+                }
+                else {
+                    setSearchResults(response.data);
+                }
+            })
+            .catch(error => {
+                console.error('Erro ao buscar dados da API:', error);
+            });
+    }
+
+    const pesquisarCirculo = () => {
         circulo
-            .get(`/pesquisar/${nomeCirculo}`, formData)
+            .get(`/pesquisar/${searchTerm}/${id}`)
             .then((response) => {
                 if (Object.keys(response.data).length === 0) {
                     console.log('Lista está vazia');
                 }
                 else {
-                    setCirculosFiltro(response.data)
+                    setSearchResults(response.data)
                 }
             })
             .catch((error) => {
@@ -36,9 +66,23 @@ const Painel = () => {
     return (
         <>
             <div className="containerPainel">
-                <input onChange={handleSearchChange} type="search" />
-                <div className="btnCreateCircle"></div>
+                <label htmlFor="searchInput">Pesquisar:</label>
+                <input
+                    type="search"
+                    id="searchInput"
+                    value={searchTerm}
+                    onChange={handleSearchChange}
+                />
                 <button onClick={pesquisarCirculo}>Pesquisar</button>
+                <div className="btnCreateCircle"></div>
+            </div>
+            <div className="cards">
+                {searchResults?.map((circulo) => (
+                    <CardCirculo
+                        tituloGrupo={circulo.tituloGrupo}
+                        membros={circulo.membros}
+                    />
+                ))}
             </div>
         </>
     )

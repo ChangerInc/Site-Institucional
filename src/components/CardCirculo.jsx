@@ -1,11 +1,64 @@
 import React, { useState, useEffect } from 'react';
-import { circulo } from "../api";
+import { usuario, circulo } from "../api";
 import './styles/cardCirculo.css';
 
 function CardCirculo(props) {
+    const [file, setFile] = useState(null);
+    const [fileName, setFileName] = useState('');
     const [idCirculo, setIdCirculo] = useState(props.idCirculo);
     const [titulo, setTitulo] = useState(props.tituloGrupo);
     const [membros, setMembros] = useState(props.membros);
+    const id = sessionStorage?.getItem('id');
+
+    // Modal Upload Files
+    const [modalUploadFile, setModalUploadFile] = useState(false)
+
+    const openModalUploadFile = () => {
+        setModalUploadFile(true)
+    }
+
+    const closeModalUploadFile = () => {
+        setModalUploadFile(false)
+    }
+
+    const handleFileChange = (event) => {
+        const selectedFile = event.target.files[0];
+        setFile(selectedFile);
+        setFileName(selectedFile.name);
+    };
+
+    function uploadFileModal() {
+        if (file) {
+            const formData = new FormData();
+            formData.append("file", file);
+
+            usuario
+                .post(`/upload/${id}`, formData)
+                .then((response) => {
+                    console.log(response.data);
+                })
+                .catch((error) => {
+                    console.error(error);
+                });
+        }
+    }
+
+    async function deleteCircle() {
+        const ids = {
+            idCirc: props.idCirculo,
+            idDono: props.idDono
+        };
+
+        circulo
+            .delete('/', { data: ids })
+            .then(response => {
+                console.log(response.data);
+                window.location.reload();
+            })
+            .catch(error => {
+                console.error('Erro ao buscar dados da API:', error);
+            })
+    }
 
     return (
         <>
@@ -13,7 +66,7 @@ function CardCirculo(props) {
                 <div className="containerConteudoCard">
                     <div className='containerTituloDeleteGrupo'>
                         <b className="tituloDoCirculo">{titulo}</b>
-                        <div className='deleteImage'></div>
+                        <div onClick={deleteCircle} className='deleteImage'></div>
                     </div>
                     <div className="membrosCirculo">
                         <ul className='listaOrnedadaMembros'>
@@ -22,9 +75,19 @@ function CardCirculo(props) {
                             ))}
                         </ul>
                     </div>
-                    <div className="fileImage"></div>
+                    <div onClick={openModalUploadFile} className="fileImage"></div>
                 </div>
             </div>
+            {modalUploadFile && (
+                <div className="modalUploadFile">
+                    <div onClick={closeModalUploadFile} className='imageCloseModalUpload'></div>
+                    <label htmlFor="file_upload_modal" className="custom-file-upload-label">
+                        <b className="bold_selecionar_arquivo">{file == null ? "Selecionar Arquivo" : <span>{fileName}</span>}</b>
+                    </label>
+                    <input id="file_upload_modal" type="file" onChange={handleFileChange} />
+                    <button id='buttonUploadModal' onClick={uploadFileModal}>Enviar Arquivo</button>
+                </div>
+            )}
         </>
     )
 }

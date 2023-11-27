@@ -1,7 +1,10 @@
 import React, { useState, useRef } from "react";
+import React, { useState, useRef } from "react";
 import { vertopal } from "../api";
 import { saveAs } from "file-saver";
 import { Link } from 'react-router-dom';
+import { Player } from '@lottiefiles/react-lottie-player';
+import './styles/arquivo-box.css';
 import { Player } from '@lottiefiles/react-lottie-player';
 import './styles/arquivo-box.css';
 
@@ -15,6 +18,10 @@ function ArquivoBox() {
   const lottieRef = useRef(null);
 
   const handleFileChange = (event) => {
+    const selectedFile = event.target.files[0];
+    setFile(selectedFile);
+    setFileName(selectedFile.name);
+    handleFileUpload(selectedFile);
     const selectedFile = event.target.files[0];
     setFile(selectedFile);
     setFileName(selectedFile.name);

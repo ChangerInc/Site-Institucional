@@ -16,6 +16,9 @@ const Grupos = () => {
       </div>
       <Footer />
 
+      </div>
+      <Footer />
+
     </>
   )
 }

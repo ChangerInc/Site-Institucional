@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import axios from "axios";
-import { useNavigate } from 'react-router-dom';
 import Footer from '../components/Footer'
 import Header from '../components/Header'
 import './styles-pages/user-interface.css'
@@ -52,23 +51,30 @@ const UserInterface = () => {
         })
         .catch((error) => {
           console.error(error);
+        })
+        .finally(() => {
+          setFileName("");
         });
     }
   };
 
-  useEffect(() => {
-    const fetchHistorico = async () => {
-      try {
-        const response = await axios.get(`http://localhost:8080/historico-conversao/usuario/${id}`);
-        console.log(response.data);
-        setHistorico(response.data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
+  const fetchHistorico = async () => {
+    try {
+      const response = await axios.get(`http://localhost:8080/historico-conversao/usuario/${id}`);
+      console.log(response.data);
+      setHistorico(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
+  useEffect(() => {
     fetchHistorico();
   }, []);
+  
+  useEffect(() => {
+    fetchHistorico();    
+  }, [historico]);
 
   const iconPaths = {
     avi: aviIcon,
@@ -108,7 +114,7 @@ const UserInterface = () => {
               <b>Nome</b>
             </div>
             <div>
-              <b>Data de criação:</b>
+              <b>Data de criação</b>
             </div>
             <div>
               <b>Extensão inicial</b>

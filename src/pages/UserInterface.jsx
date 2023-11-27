@@ -5,17 +5,25 @@ import Footer from '../components/Footer'
 import Header from '../components/Header'
 import './styles-pages/user-interface.css'
 import { format } from 'date-fns';
+import aviIcon from '../assets/icones/avi.png';
+import docxIcon from '../assets/icones/doc.png';
+import zipIcon from '../assets/icones/zip.png';
+import gifIcon from '../assets/icones/gif.png';
+import jpegIcon from '../assets/icones/jpeg.png';
+import mp3Icon from '../assets/icones/mp3.png';
+import pdfIcon from '../assets/icones/pdf.png';
+import pngIcon from '../assets/icones/png.png';
+import pptIcon from '../assets/icones/ppt.png';
+import psdIcon from '../assets/icones/psd.png';
+import svgIcon from '../assets/icones/svg.png';
+import txtIcon from '../assets/icones/txt.png';
+import xlsIcon from '../assets/icones/xls.png';
 
 const UserInterface = () => {
   const navigate = useNavigate();
   const username = sessionStorage?.getItem('nome');
   const id = sessionStorage?.getItem('id');
   const [historico, setHistorico] = useState([]);
-  
-  const handleLogout = () => {
-    sessionStorage.clear();
-    navigate('/login');
-  };
 
   useEffect(() => {
     const fetchHistorico = async () => {
@@ -31,35 +39,68 @@ const UserInterface = () => {
     fetchHistorico();
   }, []);
 
-  // function importAllImages(r) {
-  //   let images = {};
-  //   r.keys().forEach(key => (images[key] = r(key)));
-  //   return images;
-  // }
-  
-  // const imagens = importAllImages(
-  //   require.context("../assets/icones/", false, /\.(png|jpe?g|svg)$/)
-  // );
-  
+  const iconPaths = {
+    avi: aviIcon,
+    docx: docxIcon,
+    zip: zipIcon,
+    gif: gifIcon,
+    jpeg: jpegIcon,
+    mp3: mp3Icon,
+    pdf: pdfIcon,
+    png: pngIcon,
+    ppt: pptIcon,
+    psd: psdIcon,
+    svg: svgIcon,
+    txt: txtIcon,
+    xls: xlsIcon,
+  };
 
   return (
     <>
-    <Header />
+      <Header />
       <div className="user-container">
         <div className="texto-container">
           <h1>Bem-vindo, {username}</h1>
-          <div className='auxTexto'>            
+          <div className='auxTexto'>
             <p>Obrigado por entrar no sistema da</p><b>CHANGER</b><div className='ponto'>.</div>
           </div>
         </div>
       </div>
-      {historico.map((hist, index) => (
-        <div className="historico" key={index}>
-          <img src={icon} />
-          <p>{hist.nome}</p>
-          <p>{format(new Date(hist.dataConversao), 'dd/MM/yy HH:mm')}</p>
+      <div className="boxPai">
+        <div className="box">
+          <div className="historico cabecalho">
+            <div className="espacamento">
+              <b>Nome</b>
+            </div>
+            <div>
+              <b>Data de criação:</b>
+            </div>
+            <div>
+              <b>Extensão inicial</b>
+            </div>
+            <div>
+              <b>Extensão atual</b>
+            </div>
+          </div>
+          {historico.map((hist, index) => (
+            <div className="historico" key={index}>
+              <div className="espacamento">
+                <img src={iconPaths[hist.extensaoAtual]} alt={hist.extensaoAtual} />
+                <p>{hist.nome}</p>
+              </div>
+              <div>
+                <p>{format(new Date(hist.dataConversao), 'dd/MM/yy HH:mm')}</p>
+              </div>
+              <div>
+                <p>{hist.extensaoInicial}</p>
+              </div>
+              <div>
+                <p>{hist.extensaoAtual}</p>
+              </div>
+            </div>
+          ))}
         </div>
-      ))}
+      </div>
       <Footer />
     </>
   )

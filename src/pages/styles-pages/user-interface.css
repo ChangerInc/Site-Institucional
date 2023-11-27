@@ -22,17 +22,45 @@
   font-size: 16px;
 }
 
+.boxPai {
+  display: flex;
+  justify-content: center;
+}
+
+.box{
+  display: flex;
+  width: 60vw;
+  flex-direction: column;
+  /* margin: 0px 1000px; */
+  /* box-shadow: 10px 12px 39px 19px rgba(0, 0, 0, 0.25); */
+  border-left: solid 1px;
+  border-right: solid 1px;
+}
+
+.cabecalho {
+  border-top: solid 1px;  
+}
+
 .historico {
   display: flex;
   align-items: center;
-  margin-bottom: 20px;
+  padding: 20px 0px;
+  border-bottom: solid 1px;
+  width: 100%;
 }
 
 .historico img {
+  margin-right: 10px;
   width: 50px;
 }
 
-.historico p,
-img {
-  margin: 0px 32px;
+.historico div {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 300px;
+}
+
+.espacamento {
+  margin-left: 30px;
 }

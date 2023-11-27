@@ -49,10 +49,6 @@ button:hover {
   display: flex;
   width: 60vw;
   flex-direction: column;
-  /* margin: 0px 1000px; */
-  /* box-shadow: 10px 12px 39px 19px rgba(0, 0, 0, 0.25); */
-  border-left: solid 1px;
-  border-right: solid 1px;
 }
 
 .cabecalho {
@@ -81,4 +77,12 @@ button:hover {
 
 .espacamento {
   margin-left: 30px;
+}
+
+.msgSemArq {
+  margin: 20px 0px;
+}
+
+.msgSemArq b {
+  font-size: 20px;
 }

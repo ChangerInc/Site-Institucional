@@ -45,7 +45,7 @@ const UserInterface = () => {
         .then((response) => {
           const element = document.getElementById('arquivo-box');
           if (response.status === 200) {
-
+            
           }
           console.log(response.data);
         })
@@ -53,28 +53,29 @@ const UserInterface = () => {
           console.error(error);
         })
         .finally(() => {
-          setFileName("");
+          setFileName("Salvar arquivo");
         });
     }
   };
 
-  const fetchHistorico = async () => {
-    try {
-      const response = await axios.get(`http://localhost:8080/historico-conversao/usuario/${id}`);
-      console.log(response.data);
-      setHistorico(response.data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  useEffect(() => {
-    fetchHistorico();
-  }, []);
   
   useEffect(() => {
-    fetchHistorico();    
-  }, [historico]);
+    const fetchHistorico = async () => {
+      try {
+        const response = await axios.get(`http://localhost:8080/historico-conversao/usuario/${id}`);
+        if (response.status === 204) {
+          
+        } else {
+          
+        }
+        console.log(response.data);
+        setHistorico(response.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchHistorico();
+  }, []);
 
   const iconPaths = {
     avi: aviIcon,
@@ -123,23 +124,33 @@ const UserInterface = () => {
               <b>Extensão atual</b>
             </div>
           </div>
-          {historico.map((hist, index) => (
-            <div className="historico" key={index}>
-              <div className="espacamento">
-                <img src={iconPaths[hist.extensaoAtual]} alt={hist.extensaoAtual} />
-                <p>{hist.nome}</p>
+          {(historico.length == 0) ? (
+            <>
+              <div className='msgSemArq'>
+                <b>
+                Não há arquivos recentes, faça upload ou converta algum arquivo para vê-los aqui
+                </b>
               </div>
-              <div>
-                <p>{format(new Date(hist.dataConversao), 'dd/MM/yy HH:mm')}</p>
+            </>
+          ) : (
+            historico.map((hist, index) => (
+              <div className="historico" key={index}>
+                <div className="espacamento">
+                  <img src={iconPaths[hist.extensaoAtual]} alt={hist.extensaoAtual} />
+                  <p>{hist.nome}</p>
+                </div>
+                <div>
+                  <p>{format(new Date(hist.dataConversao), 'dd/MM/yy HH:mm')}</p>
+                </div>
+                <div>
+                  <p>{hist.extensaoInicial}</p>
+                </div>
+                <div>
+                  <p>{hist.extensaoAtual}</p>
+                </div>
               </div>
-              <div>
-                <p>{hist.extensaoInicial}</p>
-              </div>
-              <div>
-                <p>{hist.extensaoAtual}</p>
-              </div>
-            </div>
-          ))}
+            ))
+          )}
         </div>
       </div>
       <Footer />

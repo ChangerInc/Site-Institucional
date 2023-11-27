@@ -5,11 +5,24 @@ import './styles/cardCirculo.css';
 function CardCirculo(props) {
     const [file, setFile] = useState(null);
     const [fileName, setFileName] = useState('');
+    const [filesCircle, setFilesCircle] = useState([]);
     const [idCirculo, setIdCirculo] = useState(props.idCirculo);
     const [titulo, setTitulo] = useState(props.tituloGrupo);
     const [membros, setMembros] = useState(props.membros);
-    const id = sessionStorage?.getItem('id');
     const [deleted, setDeleted] = useState(false);
+    const id = sessionStorage?.getItem('id');
+
+    // Modal Upload Files
+    const [modalFilesCircle, setModalFilesCircle] = useState(false)
+
+    const openModalFilesCircle = () => {
+        setModalFilesCircle(true)
+        handleFilesCircle();
+    }
+
+    const closeModalFilesCircle = () => {
+        setModalFilesCircle(false)
+    }
 
     // Modal Upload Files
     const [modalUploadFile, setModalUploadFile] = useState(false)
@@ -37,10 +50,22 @@ function CardCirculo(props) {
                 .post(`/upload/${id}`, formData)
                 .then((response) => {
                     console.log(response.data);
+                    closeModalUploadFile();
                 })
                 .catch((error) => {
                     console.error(error);
                 });
+        }
+    }
+
+    async function handleFilesCircle() {
+        console.log(idCirculo);
+        try {
+            const response = await circulo.get(`/arquivos/${idCirculo}`);
+            console.log(response.data.nome);
+            setFilesCircle(response.data);
+        } catch (error) {
+            console.log(error);
         }
     }
 
@@ -67,7 +92,7 @@ function CardCirculo(props) {
 
     return (
         <>
-            <div className="card">
+            <div onClick={openModalFilesCircle} className="card">
                 <div className="containerConteudoCard">
                     <div className='containerTituloDeleteGrupo'>
                         <b className="tituloDoCirculo">{titulo}</b>
@@ -92,6 +117,17 @@ function CardCirculo(props) {
                     </label>
                     <input id="file_upload_modal" type="file" onChange={handleFileChange} />
                     <button id='buttonUploadModal' onClick={uploadFileModal}>Enviar Arquivo</button>
+                </div>
+            )}
+            {modalFilesCircle && (
+                <div className="modalFilesCircle">
+                    <h3>Arquivos de {titulo}</h3>
+                    <div onClick={closeModalFilesCircle} className='imageCloseModalUpload'></div>
+                    <ul>
+                        {filesCircle?.map(arquivo => (
+                            <li key={arquivo.idConversao}>{arquivo.nome} | {arquivo.tamanho} | {arquivo.dataConversao}</li>
+                        ))}
+                    </ul>
                 </div>
             )}
         </>

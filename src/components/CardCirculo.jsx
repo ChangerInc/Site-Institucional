@@ -9,6 +9,7 @@ function CardCirculo(props) {
     const [titulo, setTitulo] = useState(props.tituloGrupo);
     const [membros, setMembros] = useState(props.membros);
     const id = sessionStorage?.getItem('id');
+    const [deleted, setDeleted] = useState(false);
 
     // Modal Upload Files
     const [modalUploadFile, setModalUploadFile] = useState(false)
@@ -51,13 +52,17 @@ function CardCirculo(props) {
 
         circulo
             .delete('/', { data: ids })
-            .then(response => {
+            .then((response) => {
                 console.log(response.data);
-                window.location.reload();
+                setDeleted(true);
             })
             .catch(error => {
                 console.error('Erro ao buscar dados da API:', error);
             })
+    }
+
+    if (deleted) {
+        return null;
     }
 
     return (
@@ -80,6 +85,7 @@ function CardCirculo(props) {
             </div>
             {modalUploadFile && (
                 <div className="modalUploadFile">
+                    <h3>Adicionar Arquivo no Circulo</h3>
                     <div onClick={closeModalUploadFile} className='imageCloseModalUpload'></div>
                     <label htmlFor="file_upload_modal" className="custom-file-upload-label">
                         <b className="bold_selecionar_arquivo">{file == null ? "Selecionar Arquivo" : <span>{fileName}</span>}</b>

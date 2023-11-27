@@ -5,13 +5,13 @@ import './styles/painel.css'
 
 const Painel = () => {
     const [searchTerm, setSearchTerm] = useState('');
-    const [isValid, setIsValid] = useState(true);
     const [search, setSearch] = useState(false);
     const [error, setError] = useState('');
     const [allCircle, setAllCircle] = useState([]);
     const [searchResults, setSearchResults] = useState([]);
-    const id = sessionStorage?.getItem('id');
     const [nameCircle, setNameCircle] = useState('');
+    const [createdCircle, setCreatedCircle] = useState(null);
+    const id = sessionStorage?.getItem('id');
 
     // Modal criar circulo
     const [modalCreateCircle, setModalCreateCircle] = useState(false)
@@ -37,9 +37,11 @@ const Painel = () => {
             .then(response => {
                 if (Object.keys(response.data).length === 0) {
                     console.log('Lista está vazia');
+                    setError('Você não tem nenhum circulo')
                 }
                 else {
-                    setAllCircle(response.data);
+                    setAllCircle(response.data)
+                    setError('');
                     console.log(response.data);
                 }
             })
@@ -48,22 +50,23 @@ const Painel = () => {
             });
     }
 
+    useEffect(() => {
+        pesquisarCirculo();
+    }, [searchTerm]);
+
     const pesquisarCirculo = () => {
-        if (isValid) {
-            setSearchResults([])
+        if (searchTerm != '') {
+            setSearchResults([]);
             setSearch(true);
             circulo
                 .get(`/pesquisar/${searchTerm}/${id}`)
                 .then((response) => {
                     if (Object.keys(response.data).length === 0) {
-                        console.log('Lista de busca está vazia');
-                        setSearch(false)
-                        setSearchResults(response.data)
-                    } else if (Object.keys(response.status) === 404) {
-
+                        setError('Nenhum resultado encontrado')
                     }
                     else {
                         setSearchResults(response.data)
+                        setError('')
                         console.log(response.data);
                     }
                 })
@@ -71,11 +74,12 @@ const Painel = () => {
                     console.error(error);
                 });
         } else {
-            console.log('Você não informou nenhum dado de busca')
+            setSearch(false);
+            allCircles();
         }
     }
 
-    function createCircle() {
+    async function createCircle() {
         const objCirculo = {
             nomeCirculo: nameCircle,
             dono: {
@@ -85,53 +89,70 @@ const Painel = () => {
 
         circulo
             .post('/', objCirculo)
-            .then(response => {
+            .then((response) => {
+                closeModalCreateCircle();
                 console.log(response.data);
+                setError('')
             })
             .catch(error => {
                 console.error('Erro ao buscar dados da API:', error);
+            })
+            .finally(() => {
+                allCircles();
             });
     }
 
     return (
         <>
             <div className="containerPainel">
-                <label htmlFor="searchInput">Pesquisar:</label>
-                <input
-                    type="search"
-                    id="searchInput"
-                    value={searchTerm}
-                    onChange={handleSearchChange}
-                />
-                <button onClick={pesquisarCirculo}>Pesquisar</button>
-                <div onClick={openModalCreateCircle} className="btnCreateCircle"></div>
+                <div>
+                    <label htmlFor="searchInput">Pesquisar:</label>
+                    <input
+                        type="text"
+                        id="searchInput"
+                        value={searchTerm}
+                        onChange={handleSearchChange}
+                    />
+                    <div className="error">{error}</div>
+                </div>
             </div>
             <div className="cards">
-                {(!search && isValid) ? (
+                {!search ? (
                     <>
                         {allCircle?.map((circulo) => (
                             <CardCirculo
+                                key={circulo.id}
                                 idCirculo={circulo.id}
                                 idDono={circulo.dono.id}
                                 tituloGrupo={circulo.nomeCirculo}
                                 membros={circulo.membros}
                             />
                         ))}
+                        <div className="divCreateCircle">
+                            <div onClick={openModalCreateCircle} className="btnCreateCircle"></div>
+                            <span>Novo circulo</span>
+                        </div>
                     </>
                 ) : (
                     <>
                         {searchResults?.map((circulo) => (
                             <CardCirculo
+                                key={circulo.id}
                                 idCirculo={circulo.id}
                                 tituloGrupo={circulo.nome}
                                 membros={circulo.membros}
                             />
                         ))}
+                        <div className="divCreateCircle">
+                            <div onClick={openModalCreateCircle} className="btnCreateCircle"></div>
+                            <span>Novo circulo</span>
+                        </div>
                     </>
                 )}
                 {modalCreateCircle && (
                     <div className="modalCreateCircle">
                         <div onClick={closeModalCreateCircle} className='imageCloseModalUpload'></div>
+                        <h2>Novo circulo</h2>
                         <form onSubmit={createCircle} className='formulario'>
                             <div>
                                 <label htmlFor="nome_circulo">Nome do Circulo </label>
@@ -145,7 +166,7 @@ const Painel = () => {
                                     }}
                                 />
                             </div>
-                            <button type="submit">Criar Circulo</button>
+                            <button type="submit">Criar</button>
                         </form>
                     </div>
                 )}

@@ -47,7 +47,7 @@ button:hover {
 
 .box{
   display: flex;
-  width: 60vw;
+  width: 70vw;
   flex-direction: column;
 }
 
@@ -55,35 +55,13 @@ button:hover {
   border-top: solid 1px;  
 }
 
-.historico {
-  display: flex;
-  align-items: center;
-  padding: 20px 0px;
-  border-bottom: solid 1px;
-  width: 100%;
-}
-
-.historico img {
-  margin-right: 10px;
-  width: 50px;
-}
-
-.historico div {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  width: 300px;
-  margin-right: 10px;
-}
-
-.espacamento {
+.margem {
   margin-left: 30px;
 }
 
-.msgSemArq {
-  margin: 20px 0px;
-}
-
-.msgSemArq b {
-  font-size: 20px;
+.espacamento {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 235px;
 }

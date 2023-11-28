@@ -1,0 +1,52 @@
+.historico {
+    display: flex;
+    align-items: center;
+    padding: 20px 0px;
+    border-bottom: solid 1px;
+    width: 100%;
+}
+
+.historico img {
+    margin-right: 10px;
+    width: 50px;
+}
+
+.msgSemArq {
+    margin: 20px 0px;
+}
+
+.msgSemArq b {
+    font-size: 20px;
+}
+
+.deleteDownload {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 60px;
+    height: 35px;
+}
+
+.deleteImage,
+.downloadImage {
+    width: 24px;
+    height: 24px;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.deleteImage {
+    background-image: url('/src/assets/excluir.png');
+}
+
+.deleteImage:hover {
+    background-image: url('/src/assets/excluir-hover.png');
+    cursor: pointer;
+    transition: background-image 0.3s ease-in-out;
+}
+
+.downloadImage {
+    cursor: pointer;
+    background-image: url('/src/assets/baixar-seta.png');
+}

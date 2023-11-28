@@ -83,16 +83,16 @@ const UserInterface = () => {
       <div className="boxPai">
         <div className="box">
           <div className="historico cabecalho">
-            <div className="espacamento">
+            <div className="espacamento margem">
               <b>Nome</b>
             </div>
-            <div>
+            <div className="espacamento">
               <b>Data de criação</b>
             </div>
-            <div>
+            <div className="espacamento">
               <b>Extensão inicial</b>
             </div>
-            <div>
+            <div className="espacamento">
               <b>Extensão atual</b>
             </div>
           </div>
@@ -108,8 +108,8 @@ const UserInterface = () => {
             historicoArq.map(hist => (
               <Historico
                 nome = {hist.nome}
-                extensaoAtual = {hist.extensaoAtual}
                 dataConversao = {format(new Date(hist.dataConversao), 'dd/MM/yy HH:mm')}
+                extensaoAtual = {hist.extensaoAtual}
                 extensaoInicial = {hist.extensaoInicial}
               />
             ))

@@ -9,6 +9,7 @@
     border-radius: 12px;
     background: #F8F8F8;
     box-shadow: 3px 3px 3px 3px rgba(0, 0, 0, 0.25);
+    z-index: 1;
 }
 
 .card {
@@ -42,6 +43,7 @@
     background-image: url(/src/assets/excluir.png);
     background-repeat: no-repeat;
     background-size: 100%;
+    z-index: 2;
 }
 
 .deleteImage:hover {
@@ -193,6 +195,7 @@
 
 #buttonUploadModal {
     align-self: center;
+    z-index: 3;
 }
 
 /* Modal Files Circle */

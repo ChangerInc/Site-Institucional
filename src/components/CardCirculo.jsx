@@ -27,8 +27,9 @@ function CardCirculo(props) {
     // Modal Upload Files
     const [modalUploadFile, setModalUploadFile] = useState(false)
 
-    const openModalUploadFile = () => {
+    const openModalUploadFile = (event) => {
         setModalUploadFile(true)
+        event.stopPropagation();
     }
 
     const closeModalUploadFile = () => {
@@ -41,7 +42,7 @@ function CardCirculo(props) {
         setFileName(selectedFile.name);
     };
 
-    function uploadFileModal() {
+    async function uploadFileModal(event) {
         if (file) {
             const formData = new FormData();
             formData.append("file", file);
@@ -55,6 +56,7 @@ function CardCirculo(props) {
                 .catch((error) => {
                     console.error(error);
                 });
+                event.stopPropagation();
         }
     }
 
@@ -69,7 +71,7 @@ function CardCirculo(props) {
         }
     }
 
-    async function deleteCircle() {
+    async function deleteCircle(event) {
         const ids = {
             idCirc: props.idCirculo,
             idDono: props.idDono
@@ -83,7 +85,8 @@ function CardCirculo(props) {
             })
             .catch(error => {
                 console.error('Erro ao buscar dados da API:', error);
-            })
+            });
+            event.stopPropagation();
     }
 
     if (deleted) {

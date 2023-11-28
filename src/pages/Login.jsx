@@ -32,6 +32,7 @@ const Login = () => {
         sessionStorage.setItem("id", response.data.userId);
         sessionStorage.setItem("token", response.data.token);
         sessionStorage.setItem("nome", response.data.nome);
+        sessionStorage.setItem("foto", response.data.fotoPerfil);
 
         navigate("/user");
       } else {

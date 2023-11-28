@@ -5,7 +5,6 @@ import changerLogo from '../assets/Logo/changer_black.png'
 import "./styles/navbar.css"
 
 const Header = () => {
-
   const navigate = useNavigate();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 

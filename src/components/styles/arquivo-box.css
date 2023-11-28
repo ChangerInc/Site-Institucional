@@ -16,6 +16,7 @@
     height: 25vh;
     gap: 2rem;
     border: 3px #5B98BA dashed;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.205), rgba(0, 0, 0, 0.074));
 }
 
 .container_input_e_select {
@@ -38,6 +39,9 @@
     text-decoration: none;
     font-weight: bolder;
     color: #5B98BA;
+    background-color: #FFF;
+    border-radius: 15px;
+    padding: 1px 5px;
 }
 
 .texto_box_informacao a:hover {

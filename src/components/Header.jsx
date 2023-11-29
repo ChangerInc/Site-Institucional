@@ -3,10 +3,12 @@ import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import changerLogo from '../assets/Logo/changer_black.png'
 import "./styles/navbar.css"
+import ProfileModal from './ProfileModal';
 
 const Header = () => {
   const navigate = useNavigate();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isProfileModalOpen, setProfileModalOpen] = useState(false);
 
   useEffect(() => {
     const isAuthenticated = sessionStorage.getItem('id') != undefined;
@@ -17,6 +19,13 @@ const Header = () => {
     sessionStorage.clear();
     navigate('/login');
   };
+
+  const handleProfileClick = () => {
+    setProfileModalOpen(!isProfileModalOpen);
+  };
+
+  const profileOptions = ['Mudar foto', 'Alterar senha', 'Sair'];
+
 
   return (
     <nav className="navbar">
@@ -41,8 +50,13 @@ const Header = () => {
               </Link>
             </li>
             <li>
-              <Link onClick={handleLogout} className="linkNav" to="/">
-                Logout
+              <Link className="linkNav">
+                <img className='fotoNavbar' onClick={handleProfileClick} src={`data:image/png;base64,${sessionStorage.foto}`} alt="" />
+                <ProfileModal
+                  isOpen={isProfileModalOpen}
+                  onRequestClose={handleProfileClick}
+                  options={profileOptions}
+                />
               </Link>
             </li>
           </>

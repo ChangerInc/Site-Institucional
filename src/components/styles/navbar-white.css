@@ -16,6 +16,7 @@ img {
   align-items: center;
   width: calc(100% - 4rem);
   padding: 1.5rem 2rem;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.423), rgba(0, 0, 0, 0));
 }
 
 .navbar-white ul {
@@ -23,6 +24,7 @@ img {
   gap: 2rem;
   list-style: none;
   text-decoration: none;
+  align-items: center
 }
 
 .linkBox-white {

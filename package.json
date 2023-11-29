@@ -21,6 +21,7 @@
     "js-file-download": "^0.4.12",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-modal": "^3.16.1",
     "react-router-dom": "^6.17.0",
     "react-spinners": "^0.13.8",
     "react-toastify": "^9.1.3"

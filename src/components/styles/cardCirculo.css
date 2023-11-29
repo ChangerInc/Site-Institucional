@@ -152,10 +152,10 @@
 
 .modalUploadFile {
     position: fixed;
-    width: 300px;
-    height: 200px;
+    width: 65vw;
+    height: 70vh;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: center;
     gap: 20px;
     top: 50%;
@@ -170,6 +170,25 @@
     /* Certifique-se de que o z-index seja maior que outros elementos */
 }
 
+.conteudoEsquerdo {
+    width: 69%;
+    height: 70vh;
+}
+.conteudoDireito {
+    display: flex;
+    width: calc(30% - 1px);
+    height: 70vh;
+    flex-direction: column;
+    justify-content: center;
+    gap: 50px;
+    align-items: center;
+}
+.muro{
+    width: 1px;
+    height: 70vh;
+    background-color: #145DA0;
+    
+}
 /* Adicione estilos adicionais conforme necessário */
 .custom-file-upload-label {
     color: white;

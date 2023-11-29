@@ -131,6 +131,7 @@ img {
   justify-content: start;
   width: 90%;
   height: 100%;
+  background-color: overlay();
 }
 
 .container-modal-adicional h2{

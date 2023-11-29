@@ -49,4 +49,10 @@
 .downloadImage {
     cursor: pointer;
     background-image: url('/src/assets/baixar-seta.png');
+    transition: background-image 0.3s ease-in-out;
+}
+
+.downloadImage:hover {
+    cursor: pointer;
+    background-image: url('/src/assets/baixar-seta-hover.png');
 }

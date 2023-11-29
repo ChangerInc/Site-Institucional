@@ -24,6 +24,11 @@ const ProfileModal = ({ isOpen, onRequestClose, options }) => {
     const handleLogout = () => {
         sessionStorage.clear();
         navigate('/login');
+    };
+
+    const handleClick = (event) => {
+        event.stopPropagation();
+        // Seu código de manipulação de clique aqui
       };
 
     return (
@@ -46,24 +51,26 @@ const ProfileModal = ({ isOpen, onRequestClose, options }) => {
                 </div>
             </Modal>
 
-            <Modal
-                isOpen={additionalModalIsOpen}
-                onRequestClose={closeAdditionalModal}
-                contentLabel="Modal Adicional"
-                className="modal-adicional"
-                ariaHideApp={false}
-            >
-                <div className='container-modal-adicional'>
-                    <h2>{selectedOption}</h2>
-                    {selectedOption === options[2] && (
-                        handleLogout()
-                    )}
-                    {selectedOption !== options[2] && (
-                        <input type="file" className='inputDaFotoPerfil' />
-                    )}
-                    <button className='botaoModalMudarFoto' onClick={closeAdditionalModal}>Fechar Modal Adicional</button>
-                </div>
-            </Modal>
+            <div onClick={handleClick}>
+                <Modal
+                    isOpen={additionalModalIsOpen}
+                    onRequestClose={closeAdditionalModal}
+                    contentLabel="Modal Adicional"
+                    className="modal-adicional"
+                    ariaHideApp={false}
+                >
+                    <div className='container-modal-adicional'>
+                        <h2>{selectedOption}</h2>
+                        {selectedOption === options[2] && (
+                            handleLogout()
+                        )}
+                        {selectedOption !== options[2] && (
+                            <input type="file" className='inputDaFotoPerfil' />
+                        )}
+                        <button className='botaoModalMudarFoto' onClick={closeAdditionalModal}>Fechar Modal Adicional</button>
+                    </div>
+                </Modal>
+            </div>
 
         </>
     );

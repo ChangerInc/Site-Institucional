@@ -8,6 +8,7 @@ function CardCirculo(props) {
     const [file, setFile] = useState(null);
     const [newMemberEmail, setNewMemberEmail] = useState('');
     const [fileName, setFileName] = useState('');
+    const [filesUser, setFilesUser] = useState([]);
     const [filesCircle, setFilesCircle] = useState([]);
     const [idCirculo, setIdCirculo] = useState(props.idCirculo);
     const [idConversao, setIdConversao] = useState('');
@@ -19,6 +20,7 @@ function CardCirculo(props) {
 
     // Modal Upload Files
     const [modalFilesCircle, setModalFilesCircle] = useState(false)
+
 
     const openModalFilesCircle = () => {
         setModalFilesCircle(true)
@@ -34,6 +36,7 @@ function CardCirculo(props) {
 
     const openModalUploadFile = (event) => {
         setModalUploadFile(true)
+        handleFilesUser();
         event.stopPropagation();
     }
 
@@ -92,6 +95,18 @@ function CardCirculo(props) {
             .patch(`/publicar/${idCirculo}/${idConversaoTeste}`)
             .then((response) => {
                 console.log(response.data);
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+    }
+
+    async function handleFilesUser() {
+        circulo
+            .get(`/usuario/${id}`)
+            .then((response) => {
+                console.log(response.data);
+                setFilesUser(response.data);
             })
             .catch((error) => {
                 console.error(error);
@@ -247,15 +262,61 @@ function CardCirculo(props) {
                 </div>
             )}
             {modalUploadFile && (
-                <div className="modalUploadFile">
-                    <h3>Adicionar Arquivo no Circulo</h3>
-                    <div onClick={closeModalUploadFile} className='imageCloseModal'></div>
-                    <label htmlFor="file_upload_modal" className="custom-file-upload-label">
-                        <b className="bold_selecionar_arquivo">{file == null ? "Selecionar Arquivo" : <span>{fileName}</span>}</b>
-                    </label>
-                    <input id="file_upload_modal" type="file" onChange={handleFileChange} />
-                    <button id='buttonUploadModal' onClick={uploadNewFileInHistoric}>Enviar Arquivo</button>
-                </div>
+                <>
+                    <div className="modalUploadFile">
+                        <div className="conteudoEsquerdo">
+                            <div className="historico cabecalho">
+                                <div className="espacamento margem">
+                                    <b>Nome</b>
+                                </div>
+                                <div className="espacamento">
+                                    <b>Data de criação</b>
+                                </div>
+                                <div className="espacamento">
+                                    <b>Extensão inicial</b>
+                                </div>
+                                <div className="espacamento">
+                                    <b>Extensão atual</b>
+                                </div>
+                            </div>
+
+                            <ul>
+                                {(filesUser.length === 0) ? (
+                                    <>
+                                        <b>Esse circulo não possui nenhum arquivo!</b>
+                                    </>
+                                ) : (
+
+                                    filesUser?.map(arquivo => (
+                                        <>
+                                            <Historico
+                                                key={arquivo.idConversao}
+                                                nome={arquivo.nome}
+                                                extensaoAtual={arquivo.extensaoAtual}
+                                                dataConversao={format(new Date(arquivo.dataConversao), 'dd/MM/yy HH:mm')}
+                                                extensaoInicial={arquivo.extensaoInicial}
+                                            />
+                                        </>
+                                    ))
+                                )}
+                            </ul>
+                        </div>
+                        <div className="muro" ></div>
+                        <div className="conteudoDireito">
+                            <h3>Adicionar Arquivo no Circulo</h3>
+                            <img src="/src/assets/imagemFile.png" alt="" />
+                            <div onClick={closeModalUploadFile} className='imageCloseModal'></div>
+                            <label htmlFor="file_upload_modal" className="custom-file-upload-label">
+                                <b className="bold_selecionar_arquivo">{file == null ? "Selecionar Arquivo" : <span>{fileName}</span>}</b>
+                            </label>
+
+                            <input id="file_upload_modal" type="file" onChange={handleFileChange} />
+                            <button id='buttonUploadModal' onClick={uploadNewFileInHistoric}>Enviar Arquivo</button>
+                        </div>
+                    </div>
+
+
+                </>
             )}
             {modalFilesCircle && (
                 <div className="modalFilesCircle">

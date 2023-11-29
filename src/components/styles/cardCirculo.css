@@ -152,7 +152,7 @@
 
 .modalUploadFile {
     position: fixed;
-    width: 65vw;
+    width: 80vw;
     height: 70vh;
     display: flex;
     flex-direction: row;
@@ -165,7 +165,7 @@
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
-    z-index: 1000;
+    z-index: 4;
     text-align: center;
     /* Certifique-se de que o z-index seja maior que outros elementos */
 }

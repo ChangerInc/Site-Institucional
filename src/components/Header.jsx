@@ -24,7 +24,7 @@ const Header = () => {
     setProfileModalOpen(!isProfileModalOpen);
   };
 
-  const profileOptions = ['Mudar foto', 'Alterar senha', 'Sair'];
+  const profileOptions = ['Sair'];
 
 
   return (
@@ -51,7 +51,9 @@ const Header = () => {
             </li>
             <li>
               <Link className="linkNav">
-                <img className='fotoNavbar' onClick={handleProfileClick} src={`data:image/png;base64,${sessionStorage.foto}`} alt="" />
+                <div className="divFotoPerfil">
+                  <img className='fotoNavbar' onClick={handleProfileClick} src={`data:image/png;base64,${sessionStorage.foto}`} alt="" />
+                </div>
                 <ProfileModal
                   isOpen={isProfileModalOpen}
                   onRequestClose={handleProfileClick}

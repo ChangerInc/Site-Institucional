@@ -8,6 +8,7 @@ import aviIcon from '../assets/icones/avi.png';
 import docxIcon from '../assets/icones/doc.png';
 import zipIcon from '../assets/icones/zip.png';
 import gifIcon from '../assets/icones/gif.png';
+import jpgIcon from '../assets/icones/jpg.png';
 import jpegIcon from '../assets/icones/jpeg.png';
 import mp3Icon from '../assets/icones/mp3.png';
 import pdfIcon from '../assets/icones/pdf.png';
@@ -17,9 +18,13 @@ import psdIcon from '../assets/icones/psd.png';
 import svgIcon from '../assets/icones/svg.png';
 import txtIcon from '../assets/icones/txt.png';
 import xlsIcon from '../assets/icones/xls.png';
+import csvIcon from '../assets/icones/csv.png';
 
 const Historico = (props) => {
     const [showDownload, setShowDownload] = useState(false);
+    const [deleted, setDeleted] = useState(false);
+    const [idCirculo, setIdCirculo] = useState(props.idCirculo);
+
     const navigate = new useNavigate();
     const iconPaths = {
         avi: aviIcon,
@@ -27,6 +32,7 @@ const Historico = (props) => {
         zip: zipIcon,
         gif: gifIcon,
         jpeg: jpegIcon,
+        jpg: jpgIcon,
         mp3: mp3Icon,
         pdf: pdfIcon,
         png: pngIcon,
@@ -35,7 +41,22 @@ const Historico = (props) => {
         svg: svgIcon,
         txt: txtIcon,
         xls: xlsIcon,
+        csv: csvIcon
     };
+
+    async function limparFks() {
+        console.log(idCirculo)
+        historico
+            .delete(`/limpar/${idCirculo}/${props.idConversao}`)
+            .then((response) => {
+                console.log(response.data);
+                setDeleted(true)
+                deleteArquivo()
+            })
+            .catch(error => {
+                console.error('Erro ao apagar arquivo:', error);
+            });
+    }
 
     async function deleteArquivo() {
         console.log(props.idConversao);
@@ -43,9 +64,7 @@ const Historico = (props) => {
             .delete(`/excluir/${sessionStorage?.getItem("id")}/${props.idConversao}`)
             .then((response) => {
                 console.log(response.data);
-                if (response.ok) {
-                    navigate("/user");
-                }
+                setDeleted(true)
             })
             .catch(error => {
                 console.error('Erro ao apagar arquivo:', error);
@@ -54,6 +73,10 @@ const Historico = (props) => {
 
     const baixar = () => {
         setShowDownload(true);
+    }
+
+    if (deleted) {
+        return null;
     }
 
     return (

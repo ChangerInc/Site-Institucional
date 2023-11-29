@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { format, set } from 'date-fns';
-import { usuario, circulo, changer } from "../api";
+import { usuario, circulo, historico } from "../api";
 import Historico from './Historico';
 import './styles/cardCirculo.css';
 
@@ -102,10 +102,11 @@ function CardCirculo(props) {
     }
 
     async function handleFilesUser() {
-        circulo
+        historico
             .get(`/usuario/${id}`)
             .then((response) => {
                 console.log(response.data);
+                console.log(idCirculo);
                 setFilesUser(response.data);
             })
             .catch((error) => {
@@ -163,17 +164,22 @@ function CardCirculo(props) {
     }
 
     async function oNeymarNeymar(event) {
-        circulo
-            .delete(`/limpar/${idCirculo}`)
-            .then((response) => {
-                console.log(response.data);
-                setDeleted(true);
-                deleteCircle()
-            })
-            .catch(error => {
-                console.error('Erro ao buscar dados da API:', error);
-            });
-        event.stopPropagation();
+        if (membros.length != 0) {
+            circulo
+                .delete(`/limpar/${idCirculo}`)
+                .then((response) => {
+                    console.log(response.data);
+                    setDeleted(true);
+                    deleteCircle()
+                })
+                .catch(error => {
+                    console.error('Erro ao buscar dados da API:', error);
+                });
+            event.stopPropagation();
+        } else {
+            deleteCircle();
+            event.stopPropagation();
+        }
     }
 
     async function deleteCircle() {
@@ -279,32 +285,36 @@ function CardCirculo(props) {
                                     <b>Extensão atual</b>
                                 </div>
                             </div>
-
                             <ul>
                                 {(filesUser.length === 0) ? (
                                     <>
-                                        <b>Esse circulo não possui nenhum arquivo!</b>
+                                        <b>Você não possui nenhum arquivo no histórico</b>
                                     </>
                                 ) : (
 
                                     filesUser?.map(arquivo => (
                                         <>
-                                            <Historico
-                                                key={arquivo.idConversao}
-                                                nome={arquivo.nome}
-                                                extensaoAtual={arquivo.extensaoAtual}
-                                                dataConversao={format(new Date(arquivo.dataConversao), 'dd/MM/yy HH:mm')}
-                                                extensaoInicial={arquivo.extensaoInicial}
-                                            />
+                                            {idCirculo && (
+                                                <Historico
+                                                    key={arquivo.idConversao}
+                                                    idConversao={arquivo.idConversao}
+                                                    idCirculo={idCirculo}
+                                                    nome={arquivo.nome}
+                                                    extensaoAtual={arquivo.extensaoAtual}
+                                                    dataConversao={format(new Date(arquivo.dataConversao), 'dd/MM/yy HH:mm')}
+                                                    extensaoInicial={arquivo.extensaoInicial}
+                                                />
+                                            )}
                                         </>
                                     ))
                                 )}
                             </ul>
                         </div>
-                        <div className="muro" ></div>
+                        <div className="muro">
+
+                        </div>
                         <div className="conteudoDireito">
                             <h3>Adicionar Arquivo no Circulo</h3>
-                            <img src="/src/assets/imagemFile.png" alt="" />
                             <div onClick={closeModalUploadFile} className='imageCloseModal'></div>
                             <label htmlFor="file_upload_modal" className="custom-file-upload-label">
                                 <b className="bold_selecionar_arquivo">{file == null ? "Selecionar Arquivo" : <span>{fileName}</span>}</b>
@@ -325,16 +335,16 @@ function CardCirculo(props) {
                         <div onClick={closeModalFilesCircle} className='imageCloseModal'></div>
                     </div>
                     <div className="historico cabecalho">
-                        <div className="espacamento">
+                        <div className="espacamento margem">
                             <b>Nome</b>
                         </div>
-                        <div>
+                        <div className="espacamento">
                             <b>Data de criação</b>
                         </div>
-                        <div>
+                        <div className="espacamento">
                             <b>Extensão inicial</b>
                         </div>
-                        <div>
+                        <div className="espacamento">
                             <b>Extensão atual</b>
                         </div>
                     </div>
@@ -348,6 +358,7 @@ function CardCirculo(props) {
                                 filesCircle?.map(arquivo => (
                                     <Historico
                                         key={arquivo.idConversao}
+                                        idConversao={arquivo.idConversao}
                                         nome={arquivo.nome}
                                         extensaoAtual={arquivo.extensaoAtual}
                                         dataConversao={format(new Date(arquivo.dataConversao), 'dd/MM/yy HH:mm')}

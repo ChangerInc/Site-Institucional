@@ -12,7 +12,7 @@ const Header = () => {
     setProfileModalOpen(!isProfileModalOpen);
   };
 
-  const profileOptions = ['Mudar foto', 'Alterar senha', 'Sair'];
+  const profileOptions = ['Sair'];
 
   const navigate = useNavigate();
   const [isLoggedIn, setIsLoggedIn] = useState(false);

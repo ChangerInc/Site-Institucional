@@ -29,22 +29,12 @@ const Painel = () => {
         setSearchTerm(event.target.value);
     };
 
-    useEffect(() => {
-        allCircles();
-    }, []);
-
     function allCircles() {
         circulo.get(`/todos/${id}`)
             .then(response => {
-                if (Object.keys(response.data).length === 0) {
-                    console.log('Lista está vazia');
-                    setError('Você não tem nenhum circulo')
-                }
-                else {
-                    setAllCircle(response.data)
-                    setError('');
-                    console.log(response.data);
-                }
+                setAllCircle(response.data)
+                setError('');
+                console.log(response.data);
             })
             .catch(error => {
                 console.error('Erro ao buscar dados da API:', error);
@@ -93,10 +83,14 @@ const Painel = () => {
             .then((response) => {
                 closeModalCreateCircle();
                 console.log(response.data);
-                setError('')
+                setAllCircle('');
+                setError('');
             })
             .catch(error => {
                 console.error('Erro ao buscar dados da API:', error);
+            })
+            .finally(() => {
+                allCircles();
             });
     }
 

@@ -1,5 +1,8 @@
-import React from 'react'
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import "../components/styles/historico.css"
+import { historico, usuario } from "../api";
+import DownloadComponent from './Download';
 // PNGs das extensões
 import aviIcon from '../assets/icones/avi.png';
 import docxIcon from '../assets/icones/doc.png';
@@ -16,6 +19,8 @@ import txtIcon from '../assets/icones/txt.png';
 import xlsIcon from '../assets/icones/xls.png';
 
 const Historico = (props) => {
+    const [showDownload, setShowDownload] = useState(false);
+    const navigate = new useNavigate();
     const iconPaths = {
         avi: aviIcon,
         docx: docxIcon,
@@ -32,23 +37,24 @@ const Historico = (props) => {
         xls: xlsIcon,
     };
 
-    // async function deleteCircle(event) {
-    //     const ids = {
-    //         idCirc: props.idCirculo,
-    //         idDono: props.idDono
-    //     };
+    async function deleteArquivo() {
+        console.log(props.idConversao);
+        usuario
+            .delete(`/excluir/${sessionStorage?.getItem("id")}/${props.idConversao}`)
+            .then((response) => {
+                console.log(response.data);
+                if (response.ok) {
+                    navigate("/user");
+                }
+            })
+            .catch(error => {
+                console.error('Erro ao apagar arquivo:', error);
+            });
+    }
 
-    //     circulo
-    //         .delete('/', { data: ids })
-    //         .then((response) => {
-    //             console.log(response.data);
-    //             setDeleted(true);
-    //         })
-    //         .catch(error => {
-    //             console.error('Erro ao buscar dados da API:', error);
-    //         });
-    //     event.stopPropagation();
-    // }
+    const baixar = () => {
+        setShowDownload(true);
+    }
 
     return (
         <div className="historico">
@@ -66,8 +72,11 @@ const Historico = (props) => {
                 <p>{props.extensaoAtual}</p>
             </div>
             <div className="deleteDownload">
-                <div className="downloadImage" alt="Ícone de baixar arquivo" />
-                <div /*onClick={deleteCircle}*/ className='deleteImage' />
+                {/* <div onClick={baixar} className="downloadImage" alt="Ícone de baixar arquivo" /> */}
+                {/* Renderiza o DownloadComponent quando showDownload for true */}
+                {/* {showDownload && } */}
+                <DownloadComponent id={props.idConversao} nome={props.nome} />
+                <div onClick={deleteArquivo} className='deleteImage' />
             </div>
         </div>
     );

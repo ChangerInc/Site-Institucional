@@ -100,13 +100,15 @@ const UserInterface = () => {
             <>
               <div className='msgSemArq'>
                 <b>
-                Não há arquivos recentes, faça upload ou converta algum arquivo para vê-los aqui
+                  Não há arquivos recentes, faça upload ou converta algum arquivo para vê-los aqui
                 </b>
               </div>
             </>
           ) : (
-            historicoArq.map(hist => (
+            historicoArq.map((hist, index) => (
               <Historico
+                key = {index}
+                idConversao = {hist.idConversao}
                 nome = {hist.nome}
                 dataConversao = {format(new Date(hist.dataConversao), 'dd/MM/yy HH:mm')}
                 extensaoAtual = {hist.extensaoAtual}

@@ -33,6 +33,26 @@ img {
   color: var(--azul-texto);
 }
 
+.linkNav:hover {
+  cursor: pointer;
+}
+
+.divFotoPerfil {
+  width: 35px;
+  height: 35px;
+}
+
+.fotoNavbar {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background-color: #FFF;
+}
+
+.fotoNavbar:hover {
+  cursor: pointer;
+}
+
 .linkNav-white {
   /* classe para os links na navbar */
   font-size: 1rem;

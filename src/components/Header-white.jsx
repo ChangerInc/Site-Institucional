@@ -52,7 +52,9 @@ const Header = () => {
             </li>
             <li>
               <Link className="linkNav">
-                <img className='fotoNavbar' onClick={handleProfileClick} src={`data:image/png;base64,${sessionStorage.foto}`} alt="" />
+                <div className="divFotoPerfil">
+                  <img className='fotoNavbar' onClick={handleProfileClick} src={`data:image/png;base64,${sessionStorage.foto}`} alt="" />
+                </div>
                 <ProfileModal
                   isOpen={isProfileModalOpen}
                   onRequestClose={handleProfileClick}

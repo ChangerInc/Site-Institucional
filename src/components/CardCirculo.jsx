@@ -110,6 +110,24 @@ function CardCirculo(props) {
             });
     }
 
+    async function patchNameCircle() {
+        const newCircleName = {
+            idCirculo: idCirculo,
+            idDono: id
+        }
+        circulo
+            .patch(`/`, newCircleName)
+            .then((response) => {
+                console.log(response.data);
+                setFilesCircle(response.data);
+                window.location.reload();
+                closeModalMembers();
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+    }
+
     async function addUserInCircle() {
         const newMember = {
             idCirculo: idCirculo,

@@ -57,6 +57,7 @@ const Login = () => {
             <div>
               <label htmlFor="email">Email </label>
               <input
+                autoFocus
                 type="email"
                 id="email"
                 name="email"

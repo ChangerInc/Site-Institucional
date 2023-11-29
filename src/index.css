@@ -9,3 +9,12 @@ body {
   font-family: 'Montserrat', sans-serif;
   overflow-x: hidden;
 }
+
+body::-webkit-scrollbar {
+  width: 5px;
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: #145DA0;
+  border-radius: 20px;
+}

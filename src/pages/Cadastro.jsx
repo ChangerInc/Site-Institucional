@@ -52,6 +52,7 @@ function CadastroUsuario() {
             <div>
               <label htmlFor="nome">Nome </label>
               <input
+                autoFocus
                 type="text"
                 id="nome"
                 name="nome"

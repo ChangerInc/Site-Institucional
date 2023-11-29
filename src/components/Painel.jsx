@@ -22,6 +22,7 @@ const Painel = () => {
 
     const closeModalCreateCircle = () => {
         setModalCreateCircle(false)
+        setNameCircle('')
     }
 
     const handleSearchChange = (event) => {
@@ -148,12 +149,13 @@ const Painel = () => {
                 )}
                 {modalCreateCircle && (
                     <div className="modalCreateCircle">
-                        <div onClick={closeModalCreateCircle} className='imageCloseModalUpload'></div>
+                        <div onClick={closeModalCreateCircle} className='imageCloseModal'></div>
                         <h2>Novo circulo</h2>
                         <form onSubmit={createCircle} className='formulario'>
                             <div>
                                 <label htmlFor="nome_circulo">Nome do Circulo </label>
                                 <input
+                                    autoFocus
                                     type="text"
                                     id="nome_circulo"
                                     name="nome_circulo"

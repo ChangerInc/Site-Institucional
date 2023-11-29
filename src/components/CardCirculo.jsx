@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { format } from 'date-fns';
+import { format, set } from 'date-fns';
 import { usuario, circulo, changer } from "../api";
+import Historico from './Historico';
 import './styles/cardCirculo.css';
 
 function CardCirculo(props) {
@@ -12,6 +13,7 @@ function CardCirculo(props) {
     const [idConversao, setIdConversao] = useState('');
     const [titulo, setTitulo] = useState(props.tituloGrupo);
     const [membros, setMembros] = useState(props.membros);
+    const [addUser, setAddUser] = useState(false);
     const [deleted, setDeleted] = useState(false);
     const id = sessionStorage?.getItem('id');
 
@@ -60,7 +62,7 @@ function CardCirculo(props) {
 
     const handleUserEmail = (event) => {
         const userEmail = event.target.value;
-        setNewMemberEmail(selectedFile);
+        setNewMemberEmail(userEmail);
     };
 
     async function uploadNewFileInHistoric(event) {
@@ -73,6 +75,8 @@ function CardCirculo(props) {
                 .then((response) => {
                     console.log(response.data);
                     setIdConversao(response.data);
+                    setFile(null)
+                    setFileName('');
                     addFileInCircle(response.data);
                     closeModalUploadFile();
                 })
@@ -82,7 +86,6 @@ function CardCirculo(props) {
             event.stopPropagation();
         }
     }
-
 
     async function addFileInCircle(idConversaoTeste) {
         circulo
@@ -110,7 +113,7 @@ function CardCirculo(props) {
     async function addUserInCircle() {
         const newMember = {
             idCirculo: idCirculo,
-            email: userEmail,
+            email: newMemberEmail,
             idDono: id
         }
         circulo
@@ -118,13 +121,29 @@ function CardCirculo(props) {
             .then((response) => {
                 console.log(response.data);
                 setFilesCircle(response.data);
+                window.location.reload();
+                closeModalMembers();
             })
             .catch((error) => {
                 console.error(error);
             });
     }
 
-    async function deleteCircle(event) {
+    async function oNeymarNeymar(event) {
+        circulo
+            .delete(`/limpar/${idCirculo}`)
+            .then((response) => {
+                console.log(response.data);
+                setDeleted(true);
+                deleteCircle()
+            })
+            .catch(error => {
+                console.error('Erro ao buscar dados da API:', error);
+            });
+        event.stopPropagation();
+    }
+
+    async function deleteCircle() {
         const ids = {
             idCirc: props.idCirculo,
             idDono: props.idDono
@@ -139,7 +158,6 @@ function CardCirculo(props) {
             .catch(error => {
                 console.error('Erro ao buscar dados da API:', error);
             });
-        event.stopPropagation();
     }
 
     if (deleted) {
@@ -152,34 +170,68 @@ function CardCirculo(props) {
                 <div className="containerConteudoCard">
                     <div className='containerTituloDeleteGrupo'>
                         <b className="tituloDoCirculo">{titulo}</b>
-                        <div onClick={deleteCircle} className='deleteImage'></div>
+                        <div onClick={oNeymarNeymar} className='deleteImage'></div>
                     </div>
                     <div className="membrosCirculo">
                         <ul className='listaOrnedadaMembros'>
                             {props.membros?.map(membro => (
-                                <li key={membro.id}><img src={membro.fotoPerfil} alt="" />{membro.nome}</li>
+                                <li key={membro.id}>
+                                    {membro.fotoPerfil && (
+                                        <img className='imageMember'
+                                            src={`data:image/png;base64,${membro.fotoPerfil}`}
+                                            alt=""
+                                        />
+                                    )}
+                                    {membro.nome}</li>
                             ))}
                         </ul>
                     </div>
-                    <div onClick={openModalMembers} className="membersImage"></div>
-                    <div onClick={openModalUploadFile} className="fileImage"></div>
+                    <div className="btnsCircle">
+                        <div onClick={openModalMembers} className="membersImage"></div>
+                        <div onClick={openModalUploadFile} className="fileImage"></div>
+                    </div>
                 </div>
             </div>
             {modalMembers && (
                 <div className="modalMembers">
-                    <h3>Adicionar Arquivo no Circulo</h3>
-                    <div onClick={closeModalMembers} className='imageCloseModalUpload'></div>
-                    <label htmlFor="file_upload_modal" className="custom-file-upload-label">
-                        <b className="bold_selecionar_arquivo">{file == null ? "Selecionar Arquivo" : <span>{fileName}</span>}</b>
-                    </label>
-                    <input id="file_upload_modal" type="email" onChange={handleUserEmail} />
-                    <button id='buttonUploadModal' onClick={addUserInCircle}>Adicionar</button>
+                    <div onClick={closeModalMembers} className='imageCloseModal'></div>
+                    <div className="membersInCircle">
+                        <h3>Membros do circulo {props.tituloGrupo}</h3>
+                        <ul>
+                            {(props.membros.length === 0) ? (
+                                <>
+                                    <li>Esse circulo não possui nenhum membro</li>
+                                </>
+                            ) : (
+                                props.membros?.map(membro => (
+                                    <li key={membro.id}>
+                                        {membro.fotoPerfil && (
+                                            <img className='imageMember'
+                                                src={`data:image/png;base64,${membro.fotoPerfil}`}
+                                                alt=""
+                                            />
+                                        )}
+                                        <span>{membro.nome}</span></li>
+                                ))
+                            )}
+                        </ul>
+                    </div>
+                    <div className="addMembers">
+                        <h3>Adicionar novo membro</h3>
+                        <div className="inputAddMember">
+                            <label>
+                                <b>Email </b>
+                            </label>
+                            <input autoFocus type="email" onChange={handleUserEmail} />
+                        </div>
+                        <button id='buttonAddMembers' onClick={addUserInCircle}>Adicionar</button>
+                    </div>
                 </div>
             )}
             {modalUploadFile && (
                 <div className="modalUploadFile">
                     <h3>Adicionar Arquivo no Circulo</h3>
-                    <div onClick={closeModalUploadFile} className='imageCloseModalUpload'></div>
+                    <div onClick={closeModalUploadFile} className='imageCloseModal'></div>
                     <label htmlFor="file_upload_modal" className="custom-file-upload-label">
                         <b className="bold_selecionar_arquivo">{file == null ? "Selecionar Arquivo" : <span>{fileName}</span>}</b>
                     </label>
@@ -189,19 +241,43 @@ function CardCirculo(props) {
             )}
             {modalFilesCircle && (
                 <div className="modalFilesCircle">
-                    <h3>Arquivos de {titulo}</h3>
-                    <div onClick={closeModalFilesCircle} className='imageCloseModalUpload'></div>
-                    <ul>
-                        {(filesCircle.length === 0) ? (
-                            <>
-                                <li>Esse circulo não possui nenhum arquivo!</li>
-                            </>
-                        ) : (
-                            filesCircle?.map(arquivo => (
-                                <li key={arquivo.idConversao}>{arquivo.nome} | {arquivo.tamanho} | {format(new Date(arquivo.dataConversao), 'dd/MM/yy HH:mm')}</li>
-                            ))
-                        )}
-                    </ul>
+                    <div className="modalClose">
+                        <h3>Arquivos de {titulo}</h3>
+                        <div onClick={closeModalFilesCircle} className='imageCloseModal'></div>
+                    </div>
+                    <div className="historico cabecalho">
+                        <div className="espacamento">
+                            <b>Nome</b>
+                        </div>
+                        <div>
+                            <b>Data de criação</b>
+                        </div>
+                        <div>
+                            <b>Extensão inicial</b>
+                        </div>
+                        <div>
+                            <b>Extensão atual</b>
+                        </div>
+                    </div>
+                    <div className="arquivosHistorico">
+                        <ul>
+                            {(filesCircle.length === 0) ? (
+                                <>
+                                    <li>Esse circulo não possui nenhum arquivo!</li>
+                                </>
+                            ) : (
+                                filesCircle?.map(arquivo => (
+                                    <Historico
+                                        key={arquivo.idConversao}
+                                        nome={arquivo.nome}
+                                        extensaoAtual={arquivo.extensaoAtual}
+                                        dataConversao={format(new Date(arquivo.dataConversao), 'dd/MM/yy HH:mm')}
+                                        extensaoInicial={arquivo.extensaoInicial}
+                                    />
+                                ))
+                            )}
+                        </ul>
+                    </div>
                 </div>
             )}
         </>

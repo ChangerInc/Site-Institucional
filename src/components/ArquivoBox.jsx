@@ -113,6 +113,7 @@ function ArquivoBox() {
     setFile(null);
     setFileName('');
     setIsSelectVisible(true);
+    setIsInputClicked(false);
     setExtensao('');
   };
 

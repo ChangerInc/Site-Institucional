@@ -16,6 +16,7 @@ function ArquivoBox() {
 
   const handleFileChange = (event) => {
     const selectedFile = event.target.files[0];
+    setIsConverted(false);
     setFile(selectedFile);
     setFileName(selectedFile.name);
     handleFileUpload(selectedFile);
@@ -61,16 +62,11 @@ function ArquivoBox() {
       .post("/converter", conversionFormData)
       .then((response) => {
         console.log(response.data);
-        if (response.status === 200) {
-          setIsConverted(true);
-          setIsPlaying(false);
-        }
       })
       .catch((error) => {
         console.error(error);
       })
       .finally(() => {
-        document.getElementById('consersion-download').style.display = 'flex';
         handleUrl();
       });
   };
@@ -79,10 +75,15 @@ function ArquivoBox() {
     vertopal
       .get("/url")
       .then((response) => {
+        console.log(response.data);
         setFileName(response.data);
+        setIsConverted(true);
       })
       .catch((error) => {
         console.log(error);
+      }).finally(() => {
+        setIsPlaying(false);
+        document.getElementById('consersion-download').style.display = 'flex';
       });
   };
 

@@ -12,6 +12,8 @@ function ArquivoBox() {
   const [isConverted, setIsConverted] = useState(false);
   const [isSelectVisible, setIsSelectVisible] = useState(true);
   const [isPlaying, setIsPlaying] = useState(false);
+  const [isInputClicked, setIsInputClicked] = useState(false); 
+  const [isLoading, setIsLoading] = useState(false);
   const lottieRef = useRef(null);
 
   const handleFileChange = (event) => {
@@ -20,6 +22,7 @@ function ArquivoBox() {
     setFile(selectedFile);
     setFileName(selectedFile.name);
     handleFileUpload(selectedFile);
+    setIsInputClicked(true);
   };
 
   const handleSelectChange = (event) => {
@@ -34,14 +37,14 @@ function ArquivoBox() {
       const formData = new FormData();
       formData.append("file", uploadedFile);
 
+      setIsLoading(true);
+
       vertopal
         .post("/enviar", formData)
         .then((response) => {
           const element = document.getElementById('arquivo-box');
           if (response.status === 200) {
-            element.style.border = '3px solid #8eef80';
-            element.style.width = 'calc(290px - 6px)';
-            element.style.height = 'calc(60px - 6px)';
+            element.style.background = '#26c736';
             if (extensao !== '') {
               setIsSelectVisible(false);
             }
@@ -50,6 +53,10 @@ function ArquivoBox() {
         })
         .catch((error) => {
           console.error(error);
+        })
+        .finally(() => {
+          // Finaliza o estado de carregamento
+          setIsLoading(false);
         });
     }
   };
@@ -123,29 +130,44 @@ function ArquivoBox() {
   };
 
   return (
-    <div className="caixa_de_conversao">
+    <div className="caixa_de_conversao"> {isLoading && <style>{`.container_input_e_select { display: none; } .texto_box_informacao { display: none; }`}</style>}
+    {/* Renderiza a div de sobreposição se isLoading for true */}
+    {isLoading && (
+      <div className="loading-overlay">
+        <Player
+          lottieRef={lottieRef}
+          autoplay={true}
+          loop={true}
+          src="https://lottie.host/a8684338-19bc-4dcf-9254-83d05b85977d/7XQhM9o07g.json"
+          style={{ height: '200px', width: '200px' }}
+        ></Player>
+      </div>
+    )}
       <div className="container_input_e_select">
         {(isSelectVisible || !file) && (
           <>
             <label id="arquivo-box" htmlFor="file_upload" className="custom-file-upload-label">
-              <b className="bold_selecionar_arquivo">{file == null ? "Selecionar Arquivo" : <span>{fileName}</span>}</b>
+              <b className="bold_selecionar_arquivo">{file == null ? "Selecionar Arquivo" : <span style={{ fontSize: '16px' }}>{fileName.slice(0,28)}...</span>}</b>
             </label>
             <input id="file_upload" type="file" onChange={handleFileChange} />
-            <select
-              id="select_extensao"
-              value={extensao}
-              onChange={handleSelectChange}
-              style={{
-                backgroundImage: extensao ? 'none' : 'url("/src/assets/SetaCombo.png")',
-              }}
-            >
-              <option defaultValue={0}></option>
-              <option value="pdf">PDF</option>
-              <option value="png">PNG</option>
-              <option value="docx">DOCX</option>
-              <option value="jpeg">JPEG</option>
-              <option value="txt">TXT</option>
-            </select>
+
+            {isInputClicked && (
+          <select 
+            id="select_extensao"
+            value={extensao}
+            onChange={handleSelectChange}
+            style={{
+              backgroundImage: extensao ? 'none' : 'url("/src/assets/SetaCombo.png")',
+            }}
+          >
+            <option defaultValue={0}></option>
+            <option value="pdf">PDF</option>
+            <option value="png">PNG</option>
+            <option value="docx">DOCX</option>
+            <option value="jpeg">JPEG</option>
+            <option value="txt">TXT</option>
+          </select>
+        )}
           </>
         )}
         {!isSelectVisible && (
@@ -169,9 +191,11 @@ function ArquivoBox() {
         )}
       </div>
       {isSelectVisible && (
+        <>
         <span className="texto_box_informacao">
           Solte os arquivos aqui. 100 MB tamanho máximo do ficheiro ou <Link href="" to="/cadastro">Registrar-se</Link>.
         </span>
+        </>
       )}
     </div>
   );

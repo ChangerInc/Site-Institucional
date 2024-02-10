@@ -20,7 +20,9 @@
 }
 
 .spanclick {
-  text-decoration: #5B98BA underline;
+  background-color: rgb(255, 255, 255);
+  padding: 0 5px;
+  color: #5B98BA;
 }
 
 h1 {

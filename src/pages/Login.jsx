@@ -1,17 +1,26 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { usuario } from '../api.js'
+import Box from '@mui/material/Box';
+import InputText from '../components/InputText.jsx'
+import InputEmail from '../components/InputEmail.jsx'
+import InputSenha from '../components/InputSenha.jsx'
+import Alert from '@mui/material/Alert';
+import AlertTitle from '@mui/material/AlertTitle';
+import Stack from '@mui/material/Stack';
 import Navbar from '../components/Header';
 import Footer from '../components/Footer';
 import './styles-pages/login.css';
 
 const Login = () => {
-  const [data, setData] = useState({});
+  const [showSucess, setShowSucess] = useState(false)
+  const [showError, setShowError] = useState(false)
+  const [error, setError] = useState("")
   const [formData, setFormData] = useState({
-    email: '',
-    senha: ''
-  });
+    email: "",
+    senha: ""
+  })
 
   const navigate = useNavigate();
 
@@ -19,6 +28,19 @@ const Login = () => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
+
+  useEffect(() => {
+    let timeout;
+
+    if (showSucess) {
+      timeout = setTimeout(() => {
+        setShowSucess(false);
+        navigate('/user');
+      }, 5000);
+    }
+
+    return () => clearTimeout(timeout);
+  }, [showSucess, showError, navigate]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -28,18 +50,20 @@ const Login = () => {
         formData);
 
       if (response.status === 200) {
-        setData(response.data);
+        setShowError(false)
         sessionStorage.setItem("id", response.data.userId);
         sessionStorage.setItem("token", response.data.token);
         sessionStorage.setItem("nome", response.data.nome);
         sessionStorage.setItem("foto", response.data.fotoPerfil);
+        setShowSucess(true)
 
-        navigate("/user");
       } else {
-        throw new Error('Erro na requisição.');
+        throw new Error(response.data);
       }
     } catch (error) {
       console.error(error);
+      setShowError(true);
+      setError(error.message);
     }
   };
 
@@ -54,45 +78,52 @@ const Login = () => {
           </div>
 
           <form onSubmit={handleSubmit} className='formulario'>
-            <div>
-              <label htmlFor="email">Email </label>
-              <input
-                autoFocus
-                type="email"
-                id="email"
-                name="email"
-                value={formData.email}
-                onChange={handleInputChange}
+            <Box sx={{ display: 'flex', flexWrap: 'wrap' }}>
+              <InputEmail
+                formData={formData}
+                handleInputChange={handleInputChange}
               />
-            </div>
-            <div>
-              <label htmlFor="senha">Senha </label>
-              <input
-                type="password"
-                id="senha"
-                name="senha"
-                value={formData.senha}
-                onChange={handleInputChange}
+              <InputSenha
+                formData={formData}
+                handleInputChange={handleInputChange}
               />
-            </div>
-            <div className="wrapper_login">
-              <a href="#demo-modal_login">Esqueci a senha</a>
-            </div>
-
-            <div id="demo-modal_login" className="modal_login">
-              <div className="modal__content_login">
-                <h3>Esqueceu a senha de acesso?</h3>
-
-                <p>
-                  <input type="email" placeholder='Insira o e-mail cadastrado.' />
-                </p>
-
-                <a href="#" className="modal__close_login">&times;</a>
+              <div className="wrapper_login">
+                <a href="#demo-modal_login">Esqueci a senha</a>
               </div>
-            </div>
-            <button type="submit">Login</button>
 
+              <div id="demo-modal_login" className="modal_login">
+                <div className="modal__content_login">
+                  <h3>Esqueceu a senha de acesso?</h3>
+                  <InputText
+                    key={1}
+                    htmlFor={'emailRecSenha'}
+                    label={'E-mail da conta'}
+                    type={'email'}
+                    id={'emailRecSenha'}
+                    name={'emailRecSenha'}
+                  />
+                  <a href="#" className="modal__close_login">&times;</a>
+                </div>
+              </div>
+              <button type="submit">Login</button>
+            </Box>
           </form>
+        </div>
+        <div className="container-alerta">
+          <Stack spacing={2}>
+            {showSucess &&
+              <Alert severity="success">
+                <AlertTitle>Logado com sucesso!</AlertTitle>
+                Redirecionando a página de usuário
+              </Alert>
+            }
+            {showError &&
+              <Alert severity="error">
+                <AlertTitle>Erro ao cadastrar</AlertTitle>
+                {error}
+              </Alert>
+            }
+          </Stack>
         </div>
       </div>
       <Footer />

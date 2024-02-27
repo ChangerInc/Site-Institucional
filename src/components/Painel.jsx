@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import InputText from "./InputText.jsx";
 import { circulo } from "../api.js";
 import CardCirculo from "./CardCirculo";
 import './styles/painel.css'
@@ -97,16 +98,17 @@ const Painel = () => {
     return (
         <>
             <div className="containerPainel">
-                <div>
-                    <label htmlFor="searchInput">Pesquisar:</label>
-                    <input
-                        type="text"
-                        id="searchInput"
-                        value={searchTerm}
-                        onChange={handleSearchChange}
-                    />
-                    <div className="error">{error}</div>
-                </div>
+                <InputText
+                    key={1}
+                    htmlFor={'searchInput'}
+                    label={'Pesquisar círculo'}
+                    type={'text'}
+                    id={'searchInput'}
+                    name={'searchInput'}
+                    value={searchTerm}
+                    onChange={handleSearchChange}
+                />
+                <div className="error">{error}</div>
             </div>
             <div className="cards">
                 {!search ? (
@@ -146,19 +148,18 @@ const Painel = () => {
                         <div onClick={closeModalCreateCircle} className='imageCloseModal'></div>
                         <h2>Novo circulo</h2>
                         <form onSubmit={createCircle} className='formulario'>
-                            <div>
-                                <label htmlFor="nome_circulo">Nome do Circulo </label>
-                                <input
-                                    autoFocus
-                                    type="text"
-                                    id="nome_circulo"
-                                    name="nome_circulo"
-                                    value={nameCircle}
-                                    onChange={(e) => {
-                                        setNameCircle(e.target.value);
-                                    }}
-                                />
-                            </div>
+                            <InputText
+                                key={2}
+                                htmlFor={'nome_circulo'}
+                                label={'Nome do círculo'}
+                                type={'text'}
+                                id={'nome_circulo'}
+                                name={'nome_circulo'}
+                                value={nameCircle}
+                                onChange={(e) => {
+                                    setNameCircle(e.target.value);
+                                }}
+                            />
                             <button type="submit">Criar</button>
                         </form>
                     </div>

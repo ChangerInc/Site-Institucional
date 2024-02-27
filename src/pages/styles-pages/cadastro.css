@@ -1,5 +1,10 @@
 .container-cadastro {
+    position: relative;
     display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
     height: calc(100vh - 74px);
 
     background-image: url(/src/assets/Logo/logincadback.png);
@@ -9,12 +14,25 @@
     background-size: 40%;
 }
 
+.container-alerta {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 16px;
+    transition: .5s;
+}
+
+.MuiStack-root {
+    width: fit-content;
+}
+
 .container-box {
     width: 420px;
     height: 520px;
     gap: 1rem;
     display: flex;
     flex-direction: column;
+    align-self: center;
     align-items: center;
     box-sizing: border-box;
     padding: 2.5rem 2.5rem;
@@ -69,26 +87,12 @@
 .formulario div {
     color: var(--cinza-escuro);
     display: flex;
-    align-items: start;
     flex-direction: column;
     width: 100%;
-    gap: 0.4rem;
-    column-gap: .5rem;
     font-size: 1rem;
     font-weight: 400;
     font-style: normal;
     line-height: normal;
-}
-
-input {
-    width: 100%;
-    border: none;
-    font-size: 1rem;
-    border-bottom: 2px solid var(--cinza-claro);
-}
-
-input:focus {
-    outline: none;
 }
 
 button {

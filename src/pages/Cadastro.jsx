@@ -1,19 +1,41 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { usuario } from '../api.js';
+import InputNome from '../components/InputNome.jsx'
+import InputEmail from '../components/InputEmail.jsx'
+import InputSenha from '../components/InputSenha.jsx'
+import InputConfirmarSenha from '../components/InputConfirmarSenha.jsx'
+import Alert from '@mui/material/Alert';
+import AlertTitle from '@mui/material/AlertTitle';
+import Stack from '@mui/material/Stack';
 import Navbar from '../components/Header';
 import Footer from '../components/Footer';
 import './styles-pages/cadastro.css';
 
 function CadastroUsuario() {
   const navigate = useNavigate();
-
+  const [showSucess, setShowSucess] = useState(false)
+  const [showError, setShowError] = useState(false)
+  const [error, setError] = useState("")
   const [formData, setFormData] = useState({
     nome: '',
     email: '',
     senha: '',
     confirmar: '',
   });
+
+  useEffect(() => {
+    let timeout;
+
+    if (showSucess) {
+      timeout = setTimeout(() => {
+        setShowSucess(false);
+        navigate('/login');
+      }, 5000);
+    }
+
+    return () => clearTimeout(timeout);
+  }, [showSucess, showError, navigate]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -27,20 +49,23 @@ function CadastroUsuario() {
       const response = await usuario.post('/', formData);
 
       if (response.status === 201) {
+        setShowError(false);
         console.log('Cadastrado com sucesso!');
-        // Redirecionar para a página de login
-        navigate('/Login');
+        setShowSucess(true);
       } else {
         throw new Error('Erro na requisição.');
       }
     } catch (error) {
       console.error(error);
+      setShowError(true);
+      setError(error.message);
     }
   };
 
   return (
     <>
       <Navbar />
+
       <div className="container-cadastro">
         <div className='container-box'>
           <div className='container-texto'>
@@ -49,49 +74,40 @@ function CadastroUsuario() {
           </div>
 
           <form onSubmit={handleSubmit} className='formulario'>
-            <div>
-              <label htmlFor="nome">Nome </label>
-              <input
-                autoFocus
-                type="text"
-                id="nome"
-                name="nome"
-                value={formData.nome}
-                onChange={handleInputChange}
-              />
-            </div>
-            <div>
-              <label htmlFor="email">Email </label>
-              <input
-                type="email"
-                id="email"
-                name="email"
-                value={formData.email}
-                onChange={handleInputChange}
-              />
-            </div>
-            <div>
-              <label htmlFor="senha">Senha </label>
-              <input
-                type="password"
-                id="senha"
-                name="senha"
-                value={formData.senha}
-                onChange={handleInputChange}
-              />
-            </div>
-            <div>
-              <label htmlFor="confirmar">Confirmar senha </label>
-              <input
-                type="password"
-                id="confirmar"
-                name="confirmar"
-                value={formData.confirmar}
-                onChange={handleInputChange}
-              />
-            </div>
+            <InputNome
+              formData={formData}
+              handleInputChange={handleInputChange}
+            />
+            <InputEmail
+              formData={formData}
+              handleInputChange={handleInputChange}
+            />
+            <InputSenha
+              formData={formData}
+              handleInputChange={handleInputChange}
+            />
+            <InputConfirmarSenha
+              formData={formData}
+              handleInputChange={handleInputChange}
+            />
             <button type="submit">Cadastrar</button>
           </form>
+        </div>
+        <div className="container-alerta">
+          <Stack spacing={2}>
+            {showSucess &&
+              <Alert severity="success">
+                <AlertTitle>Cadastrado com sucesso!</AlertTitle>
+                Bem vindo a familia Changer!
+              </Alert>
+            }
+            {showError &&
+              <Alert severity="error">
+                <AlertTitle>Erro ao cadastrar</AlertTitle>
+                {error}
+              </Alert>
+            }
+          </Stack>
         </div>
       </div>
       <Footer />

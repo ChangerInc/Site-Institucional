@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { format, set } from 'date-fns';
 import { usuario, circulo, historico } from "../api";
+import InputText from './InputText'
 import Historico from './Historico';
 import './styles/cardCirculo.css';
 
@@ -255,14 +256,19 @@ function CardCirculo(props) {
                             )}
                         </ul>
                     </div>
+
                     <div className="addMembers">
                         <h3>Adicionar novo membro</h3>
-                        <div className="inputAddMember">
-                            <label>
-                                <b>Email </b>
-                            </label>
-                            <input autoFocus type="email" onChange={handleUserEmail} />
-                        </div>
+                        <InputText
+                            key={1}
+                            htmlFor={'addMember'}
+                            label={'E-mail do usuário'}
+                            type={'email'}
+                            id={'addMember'}
+                            name={'addMember'}
+                            value={newMemberEmail}
+                            onChange={handleUserEmail}
+                        />
                         <button id='buttonAddMembers' onClick={addUserInCircle}>Adicionar</button>
                     </div>
                 </div>

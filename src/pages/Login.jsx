@@ -16,7 +16,7 @@ import './styles-pages/login.css';
 const Login = () => {
   const [showSucess, setShowSucess] = useState(false)
   const [showError, setShowError] = useState(false)
-  const [error, setError] = useState("")
+  const [error, setError] = useState('')
   const [formData, setFormData] = useState({
     email: "",
     senha: ""
@@ -51,6 +51,7 @@ const Login = () => {
 
       if (response.status === 200) {
         setShowError(false)
+        setError('')
         sessionStorage.setItem("id", response.data.userId);
         sessionStorage.setItem("token", response.data.token);
         sessionStorage.setItem("nome", response.data.nome);
@@ -60,10 +61,17 @@ const Login = () => {
       } else {
         throw new Error(response.data);
       }
+
     } catch (error) {
-      console.error(error);
-      setShowError(true);
-      setError(error.message);
+      if (error.response.status === 401) {
+        setError('E-mail e/ou senha estão incorretos')
+        setShowError(true);
+      }
+      else {
+        console.error(error);
+        setShowError(true);
+        setError(error.message);
+      }
     }
   };
 
@@ -82,10 +90,12 @@ const Login = () => {
               <InputEmail
                 formData={formData}
                 handleInputChange={handleInputChange}
+                hasError={error && true}
               />
               <InputSenha
                 formData={formData}
                 handleInputChange={handleInputChange}
+                hasError={error && true}
               />
               <div className="wrapper_login">
                 <a href="#demo-modal_login">Esqueci a senha</a>

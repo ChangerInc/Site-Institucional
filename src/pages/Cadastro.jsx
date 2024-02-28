@@ -62,11 +62,22 @@ function CadastroUsuario() {
         console.log('Cadastrado com sucesso!');
         setShowSucess(true);
       }
+
       
+
     } catch (error) {
-      setShowError(true);
-      setError(error.response.data);
-      console.log(error.response.data)
+      if (error.response.status === 409) {
+        setError((prevError) => ({
+          email: 'Esse e-mail já está sendo utilizado',
+          ...prevError,
+        }));
+        setShowError(true);
+      } else {
+        setShowError(true);
+        setError(error.response.data);
+        console.log(error.response.data)
+      }
+        
     }
   };
 

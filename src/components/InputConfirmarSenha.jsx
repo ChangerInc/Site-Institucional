@@ -13,12 +13,14 @@ const InputConfirmarSenha = (props) => {
             <FormControl sx={{ m: 1, width: '25ch' }} variant="standard">
                 <InputLabel htmlFor="confirmar">Confirmar senha</InputLabel>
                 <Input
+                    required
                     id="confirmar"
                     name="confirmar"
                     type="password"
                     value={props.formData.confirmar}
                     onChange={props.handleInputChange}
                     label="Confirmar senha"
+                    error={props.hasError}
                 />
             </FormControl>
         </>

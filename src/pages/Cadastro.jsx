@@ -1,22 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { usuario } from '../api.js';
-import InputNome from '../components/InputNome.jsx'
-import InputEmail from '../components/InputEmail.jsx'
-import InputSenha from '../components/InputSenha.jsx'
-import InputConfirmarSenha from '../components/InputConfirmarSenha.jsx'
 import Alert from '@mui/material/Alert';
 import AlertTitle from '@mui/material/AlertTitle';
 import Stack from '@mui/material/Stack';
 import Navbar from '../components/Header';
+import InputNome from '../components/InputNome.jsx';
+import InputEmail from '../components/InputEmail.jsx';
+import InputSenha from '../components/InputSenha.jsx';
+import InputConfirmarSenha from '../components/InputConfirmarSenha.jsx';
 import Footer from '../components/Footer';
 import './styles-pages/cadastro.css';
 
 function CadastroUsuario() {
   const navigate = useNavigate();
-  const [showSucess, setShowSucess] = useState(false)
-  const [showError, setShowError] = useState(false)
-  const [error, setError] = useState("")
+  const [showSucess, setShowSucess] = useState(false);
+  const [showError, setShowError] = useState(false);
+  const [error, setError] = useState('');
   const [formData, setFormData] = useState({
     nome: '',
     email: '',
@@ -45,6 +45,15 @@ function CadastroUsuario() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    if (formData.senha !== formData.confirmar) {
+      setError((prevError) => ({
+        confirmar: 'tem que ser igual senha',
+        ...prevError,
+      }));
+      setShowError(true);
+      return;
+    }
+
     try {
       const response = await usuario.post('/', formData);
 
@@ -52,13 +61,12 @@ function CadastroUsuario() {
         setShowError(false);
         console.log('Cadastrado com sucesso!');
         setShowSucess(true);
-      } else {
-        throw new Error('Erro na requisição.');
       }
+      
     } catch (error) {
-      console.error(error);
       setShowError(true);
-      setError(error.message);
+      setError(error.response.data);
+      console.log(error.response.data)
     }
   };
 
@@ -67,53 +75,71 @@ function CadastroUsuario() {
       <Navbar />
 
       <div className="container-cadastro">
-        <div className='container-box'>
-          <div className='container-texto'>
-            <h2 className='texto-cinza'>Bem vindo ao <span className='texto-preto'>CHANGER</span><span className='texto-azul'>.</span></h2>
-            <h3>Já tem conta? <span className='texto-azul'><Link className="linkBox" to="/Login">Faça login</Link></span></h3>
+        <div className="container-box">
+          <div className="container-texto">
+            <h2 className="texto-cinza">
+              Bem vindo ao <span className="texto-preto">CHANGER</span>
+              <span className="texto-azul">.</span>
+            </h2>
+            <h3>
+              Já tem conta?{' '}
+              <span className="texto-azul">
+                <Link className="linkBox" to="/Login">
+                  Faça login
+                </Link>
+              </span>
+            </h3>
           </div>
 
-          <form onSubmit={handleSubmit} className='formulario'>
+          <form onSubmit={handleSubmit} className="formulario">
             <InputNome
               formData={formData}
               handleInputChange={handleInputChange}
+              hasError={error.nome && true}
             />
             <InputEmail
               formData={formData}
               handleInputChange={handleInputChange}
+              hasError={error.email && true}
             />
             <InputSenha
               formData={formData}
               handleInputChange={handleInputChange}
+              hasError={error.senha && true}
             />
             <InputConfirmarSenha
               formData={formData}
               handleInputChange={handleInputChange}
+              hasError={formData.senha != formData.confirmar && true}
             />
             <button type="submit">Cadastrar</button>
           </form>
         </div>
         <div className="container-alerta">
           <Stack spacing={2}>
-            {showSucess &&
+            {showSucess && (
               <Alert severity="success">
                 <AlertTitle>Cadastrado com sucesso!</AlertTitle>
                 Bem vindo a familia Changer!
               </Alert>
-            }
-            {showError &&
+            )}
+            {error !== '' && showError && (
               <Alert severity="error">
                 <AlertTitle>Erro ao cadastrar</AlertTitle>
-                {error}
+                {Object.keys(error).reverse().map((key, index) => (
+                  <div key={index}>
+                    <strong>{key}: </strong>
+                    {error[key]}
+                  </div>
+                ))}
               </Alert>
-            }
+            )}
           </Stack>
         </div>
       </div>
       <Footer />
     </>
   );
-
 }
 
-export default CadastroUsuario
+export default CadastroUsuario;

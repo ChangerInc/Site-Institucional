@@ -13,12 +13,14 @@ const InputEmail = (props) => {
             <FormControl sx={{ m: 1, width: '25ch' }} variant="standard">
                 <InputLabel htmlFor="email">E-mail</InputLabel>
                 <Input
+                    required
                     id="email"
                     name="email"
                     type="email"
                     value={props.formData.email}
                     onChange={props.handleInputChange}
                     label="E-mail"
+                    error={props.hasError}
                 />
             </FormControl>
         </>

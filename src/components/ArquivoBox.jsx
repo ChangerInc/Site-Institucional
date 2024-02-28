@@ -10,9 +10,10 @@ function ArquivoBox() {
   const [fileName, setFileName] = useState('');
   const [extensao, setExtensao] = useState('');
   const [isConverted, setIsConverted] = useState(false);
+  const [conversionOptions, setConversionOptions] = useState([]);
   const [isSelectVisible, setIsSelectVisible] = useState(true);
   const [isPlaying, setIsPlaying] = useState(false);
-  const [isInputClicked, setIsInputClicked] = useState(false); 
+  const [isInputClicked, setIsInputClicked] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const lottieRef = useRef(null);
 
@@ -23,6 +24,59 @@ function ArquivoBox() {
     setFileName(selectedFile.name);
     handleFileUpload(selectedFile);
     setIsInputClicked(true);
+
+    let options = [];
+    if (selectedFile) {
+      const extension = selectedFile.name.split('.').pop().toLowerCase();
+      switch (extension) {
+        case 'txt':
+          options = ['PDF', 'DOC', 'XLSX', 'CSV'];
+          break;
+        case 'pdf':
+          options = ['TXT', 'DOCX'];
+          break;
+        case 'docx':
+          options = ['TXT', 'PDF', 'XLSX', 'CSV'];
+          break;
+        case 'xlsx':
+          options = ['TXT', 'PDF', 'DOCX', 'CSV'];
+          break;
+        case 'csv':
+          options = ['PDF', 'XLSX'];
+          break;
+        case 'jpg':
+          options = ['PNG', 'GIF', 'SVG', 'PSD', 'WEBP', 'RAW', 'TIFF', 'BMP', 'JPEG', 'PDF'];
+          break;
+        case 'jpeg':
+          options = ['JPG', 'PNG', 'GIF', 'SVG', 'PSD', 'WEBP', 'RAW', 'TIFF', 'BMP', 'PDF'];
+          break;
+        case 'png':
+          options = ['JPG', 'GIF', 'SVG', 'PSD', 'WEBP', 'TIFF', 'BMP'];
+          break;
+        case 'gif':
+          options = ['JPG', 'PNG', 'SVG', 'PSD', 'WEBP', 'RAW', 'TIFF', 'BMP', 'PDF'];
+          break;
+        case 'svg':
+          options = ['JPG', 'PNG', 'GIF', 'PSD', 'WEBP', 'RAW', 'TIFF', 'BMP', 'PDF'];
+          break;
+        case 'psd':
+          options = ['JPG', 'PNG', 'GIF', 'SVG', 'WEBP', 'RAW', 'TIFF', 'BMP', 'PDF'];
+          break;
+        case 'webp':
+          options = ['JPG', 'PNG', 'GIF', 'SVG', 'PSD', 'RAW', 'TIFF', 'BMP', 'PDF'];
+          break;
+        case 'raw':
+          options = ['JPG', 'PNG', 'GIF', 'SVG', 'PSD', 'WEBP', 'TIFF', 'BMP', 'PDF'];
+          break;
+        case 'tiff':
+          options = ['JPG', 'PNG', 'GIF', 'SVG', 'PSD', 'WEBP', 'RAW', 'BMP', 'PDF'];
+          break;
+        case 'bmp':
+          options = ['JPG', 'PNG', 'GIF', 'SVG', 'PSD', 'WEBP', 'RAW', 'TIFF', 'PDF'];
+          break;
+      }
+    }
+    setConversionOptions(options);
   };
 
   const handleSelectChange = (event) => {
@@ -132,43 +186,43 @@ function ArquivoBox() {
 
   return (
     <div className="caixa_de_conversao"> {isLoading && <style>{`.container_input_e_select { display: none; } .texto_box_informacao { display: none; }`}</style>}
-    {/* Renderiza a div de sobreposição se isLoading for true */}
-    {isLoading && (
-      <div className="loading-overlay">
-        <Player
-          lottieRef={lottieRef}
-          autoplay={true}
-          loop={true}
-          src="https://lottie.host/a8684338-19bc-4dcf-9254-83d05b85977d/7XQhM9o07g.json"
-          style={{ height: '200px', width: '200px' }}
-        ></Player>
-      </div>
-    )}
+      {/* Renderiza a div de sobreposição se isLoading for true */}
+      {isLoading && (
+        <div className="loading-overlay">
+          <Player
+            lottieRef={lottieRef}
+            autoplay={true}
+            loop={true}
+            src="https://lottie.host/a8684338-19bc-4dcf-9254-83d05b85977d/7XQhM9o07g.json"
+            style={{ height: '200px', width: '200px' }}
+          ></Player>
+        </div>
+      )}
       <div className="container_input_e_select">
         {(isSelectVisible || !file) && (
           <>
             <label id="arquivo-box" htmlFor="file_upload" className="custom-file-upload-label">
-              <b className="bold_selecionar_arquivo">{file == null ? "Selecionar Arquivo" : <span style={{ fontSize: '16px' }}>{fileName.slice(0,28)}...</span>}</b>
+              <b className="bold_selecionar_arquivo">{file == null ? "Selecionar Arquivo" : <span style={{ fontSize: '16px' }}>{fileName.slice(0, 28)}...</span>}</b>
             </label>
             <input id="file_upload" type="file" onChange={handleFileChange} />
 
             {isInputClicked && (
-          <select 
-            id="select_extensao"
-            value={extensao}
-            onChange={handleSelectChange}
-            style={{
-              backgroundImage: extensao ? 'none' : 'url("/src/assets/SetaCombo.png")',
-            }}
-          >
-            <option defaultValue={0}></option>
-            <option value="pdf">PDF</option>
-            <option value="png">PNG</option>
-            <option value="docx">DOCX</option>
-            <option value="jpeg">JPEG</option>
-            <option value="txt">TXT</option>
-          </select>
-        )}
+              <select
+                id="select_extensao"
+                value={extensao}
+                onChange={handleSelectChange}
+                style={{
+                  backgroundImage: extensao ? 'none' : 'url("/src/assets/SetaCombo.png")',
+                }}
+              >
+                <option defaultValue={0}></option>
+                {conversionOptions.map((option, index) => (
+                  <option key={index} value={option.toLowerCase()}>
+                    {option}
+                  </option>
+                ))}
+              </select>
+            )}
           </>
         )}
         {!isSelectVisible && (
@@ -193,9 +247,9 @@ function ArquivoBox() {
       </div>
       {isSelectVisible && (
         <>
-        <span className="texto_box_informacao">
-          Solte os arquivos aqui. 100 MB tamanho máximo do ficheiro ou <Link href="" to="/cadastro">Registrar-se</Link>.
-        </span>
+          <span className="texto_box_informacao">
+            Solte os arquivos aqui. 100 MB tamanho máximo do ficheiro ou <Link href="" to="/cadastro">Registrar-se</Link>.
+          </span>
         </>
       )}
     </div>

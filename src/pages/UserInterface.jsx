@@ -32,7 +32,7 @@ const UserInterface = () => {
         .post(`/upload/${sessionStorage.getItem("id")}`, formData)
         .then(response => {
           if (response.status === 200) {
-            console.log(response.data);            
+            console.log(response.data);
           }
         })
         .catch((error) => {
@@ -45,7 +45,7 @@ const UserInterface = () => {
     }
   };
 
-  
+
   const fetchHistorico = async () => {
     historico.get(`/usuario/${id}`)
       .then(response => {
@@ -53,13 +53,14 @@ const UserInterface = () => {
           console.warn("Não há arquivos no histórico");
         } else {
           console.log(response.data);
-          setHistorico(response.data);          
-        }})
+          setHistorico(response.data);
+        }
+      })
       .catch(error => {
         console.log(error);
       });
   }
-  
+
 
   useEffect(() => {
     fetchHistorico();
@@ -82,39 +83,20 @@ const UserInterface = () => {
       </div>
       <div className="boxPai">
         <div className="box">
-          <div className="historico cabecalho">
-            <div className="espacamento margem">
-              <b>Nome</b>
-            </div>
-            <div className="espacamento">
-              <b>Data de criação</b>
-            </div>
-            <div className="espacamento">
-              <b>Extensão inicial</b>
-            </div>
-            <div className="espacamento">
-              <b>Extensão atual</b>
-            </div>
-          </div>
           {(historicoArq.length == 0) ? (
             <>
               <div className='msgSemArq'>
                 <b>
-                  Não há arquivos recentes, faça upload ou converta algum arquivo para vê-los aqui
+                  Não há arquivos salvos no seu histórico, faça conversões ou salve arquivos
                 </b>
               </div>
             </>
           ) : (
-            historicoArq.map((hist, index) => (
-              <Historico
-                key = {index}
-                idConversao = {hist.idConversao}
-                nome = {hist.nome}
-                dataConversao = {format(new Date(hist.dataConversao), 'dd/MM/yy HH:mm')}
-                extensaoAtual = {hist.extensaoAtual}
-                extensaoInicial = {hist.extensaoInicial}
-              />
-            ))
+            <Historico
+              key={1}
+              idConversao={historicoArq.idConversao}
+              historico={historicoArq}
+            />
           )}
         </div>
       </div>

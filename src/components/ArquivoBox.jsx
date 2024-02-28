@@ -36,7 +36,7 @@ function ArquivoBox() {
           options = ['TXT', 'DOCX'];
           break;
         case 'docx':
-          options = ['TXT', 'PDF', 'XLSX', 'CSV'];
+          options = ['TXT', 'PDF'];
           break;
         case 'xlsx':
           options = ['TXT', 'PDF', 'DOCX', 'CSV'];
@@ -125,6 +125,10 @@ function ArquivoBox() {
         console.log(response.data);
       })
       .catch((error) => {
+        if (error.response.status === 401) {
+          console.log('Conversão não suportada')
+          setShowError(true);
+        }
         console.error(error);
       })
       .finally(() => {

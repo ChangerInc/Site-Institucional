@@ -5,7 +5,7 @@
   align-items: center;
   gap: 1rem;
   width: 100vw;
-  height: 50vh;
+  height: 25vh;
 }
 
 .auxTexto {
@@ -48,20 +48,6 @@ button:hover {
 .box{
   display: flex;
   width: 70vw;
+  height: calc(75vh - 83px);
   flex-direction: column;
-}
-
-.cabecalho {
-  border-top: solid 1px;  
-}
-
-.margem {
-  margin-left: 30px;
-}
-
-.espacamento {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  width: 235px;
 }

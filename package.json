@@ -15,6 +15,7 @@
     "@lottiefiles/react-lottie-player": "^3.5.3",
     "@mui/icons-material": "^5.15.11",
     "@mui/material": "^5.15.11",
+    "@mui/x-data-grid": "^6.19.5",
     "@react-navigation/native": "^6.1.9",
     "@react-navigation/native-stack": "^6.9.15",
     "axios": "^1.5.1",

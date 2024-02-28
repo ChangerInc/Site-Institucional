@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Box from '@mui/material/Box';
+import { DataGrid } from '@mui/x-data-grid';
 import "../components/styles/historico.css"
 import { historico, usuario } from "../api";
 import DownloadComponent from './Download';
+import DeleteIcon from './DeleteIcon';
 // PNGs das extensões
 import aviIcon from '../assets/icones/avi.png';
 import docxIcon from '../assets/icones/doc.png';
@@ -22,8 +25,8 @@ import csvIcon from '../assets/icones/csv.png';
 
 const Historico = (props) => {
     const [showDownload, setShowDownload] = useState(false);
-    const [deleted, setDeleted] = useState(false);
     const [idCirculo, setIdCirculo] = useState(props.idCirculo);
+    const [historico, setHistorico] = useState(props.historico);
 
     const navigate = new useNavigate();
     const iconPaths = {
@@ -44,24 +47,48 @@ const Historico = (props) => {
         csv: csvIcon
     };
 
+    const columns = [
+        {
+            field: 'icon',
+            headerName: 'Icon',
+            width: 80,
+            align: 'left',
+            renderCell: (params) => (
+                <div>
+                    <img src={iconPaths[params.row.extensaoAtual]} alt={params.row.extensaoAtual} />
+                </div>
+            )
+        },
+        { field: 'nome', headerName: 'Nome', width: 200, align: 'left' },
+        { field: 'dataConversao', headerName: 'Data de conversão', width: 160, align: 'left' },
+        { field: 'extensaoInicial', headerName: 'Extensão inicial', width: 120, align: 'center' },
+        { field: 'extensaoAtual', headerName: 'Extensão atual', width: 120, align: 'center' },
+        {
+            field: 'actions',
+            headerName: 'Ações',
+            width: 90,
+            align: 'center',
+            renderCell: (params) => (
+                <div className="deleteDownload">
+                    <DownloadComponent id={params.row.id} nome={params.row.nome} />
+                    <DeleteIcon id={params.row.id} />
+                </div>
+            ),
+        },
+    ];
+
+    const rows = props.historico.map(item => ({
+        id: item.idConversao,
+        nome: item.nome,
+        dataConversao: new Date(item.dataConversao).toLocaleString(),
+        extensaoInicial: item.extensaoInicial,
+        extensaoAtual: item.extensaoAtual
+    }));
+
     async function limparFks() {
         console.log(idCirculo)
         historico
             .delete(`/limpar/${idCirculo}/${props.idConversao}`)
-            .then((response) => {
-                console.log(response.data);
-                setDeleted(true)
-                deleteArquivo()
-            })
-            .catch(error => {
-                console.error('Erro ao apagar arquivo:', error);
-            });
-    }
-
-    async function deleteArquivo() {
-        console.log(props.idConversao);
-        usuario
-            .delete(`/excluir/${sessionStorage?.getItem("id")}/${props.idConversao}`)
             .then((response) => {
                 console.log(response.data);
                 setDeleted(true)
@@ -75,33 +102,19 @@ const Historico = (props) => {
         setShowDownload(true);
     }
 
-    if (deleted) {
-        return null;
-    }
-
     return (
-        <div className="historico">
-            <div className="espacamento margem">
-                <img src={iconPaths[props.extensaoAtual]} alt={props.extensaoAtual} />
-                <p>{props.nome}</p>
+        <>
+            <div className="historico">
+                <Box sx={{ height: 370, width: '100%' }}>
+                    <DataGrid
+                        rows={rows}
+                        columns={columns}
+                        pageSize={5}
+                        disableRowSelectionOnClick
+                    />
+                </Box>
             </div>
-            <div className="espacamento">
-                <p>{props.dataConversao}</p>
-            </div>
-            <div className="espacamento">
-                <p>{props.extensaoInicial}</p>
-            </div>
-            <div className="espacamento">
-                <p>{props.extensaoAtual}</p>
-            </div>
-            <div className="deleteDownload">
-                {/* <div onClick={baixar} className="downloadImage" alt="Ícone de baixar arquivo" /> */}
-                {/* Renderiza o DownloadComponent quando showDownload for true */}
-                {/* {showDownload && } */}
-                <DownloadComponent id={props.idConversao} nome={props.nome} />
-                <div onClick={deleteArquivo} className='deleteImage' />
-            </div>
-        </div>
+        </>
     );
 }
 

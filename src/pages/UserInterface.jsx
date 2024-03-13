@@ -4,7 +4,7 @@ import Header from '../components/Header'
 import Historico from '../components/Historico';
 import './styles-pages/user-interface.css'
 import { format } from 'date-fns';
-import { usuario, historico } from "../api";
+import { usuario, arquivo, arquivosUser } from "../api";
 
 
 const UserInterface = () => {
@@ -47,7 +47,7 @@ const UserInterface = () => {
 
 
   const fetchHistorico = async () => {
-    historico.get(`/usuario/${id}`)
+    arquivosUser.get(`/${id}`)
       .then(response => {
         if (response.status === 204) {
           console.warn("Não há arquivos no histórico");

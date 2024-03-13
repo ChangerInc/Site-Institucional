@@ -1,13 +1,13 @@
 import "../components/styles/historico.css"
 import React, { useState } from 'react';
-import { usuario } from "../api";
+import { arquivosUser } from "../api";
 
 const DeleteIcon = (props) => {
 
     async function deleteArquivo() {
         console.log(props.id);
-        usuario
-            .delete(`/excluir/${sessionStorage?.getItem("id")}/${props.id}`)
+        arquivosUser
+            .delete(`/${sessionStorage?.getItem("id")}/${props.id}`)
             .then((response) => {
                 console.log(response.data);
                 window.location.reload();

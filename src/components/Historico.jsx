@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import { DataGrid } from '@mui/x-data-grid';
+import { format } from 'date-fns';
 import "../components/styles/historico.css"
-import { historico, usuario } from "../api";
 import DownloadComponent from './Download';
 import DeleteIcon from './DeleteIcon';
 // PNGs das extensões
@@ -55,14 +55,13 @@ const Historico = (props) => {
             align: 'left',
             renderCell: (params) => (
                 <div>
-                    <img src={iconPaths[params.row.extensaoAtual]} alt={params.row.extensaoAtual} />
+                    <img src={iconPaths[params.row.extensao]} alt={params.row.extensao} />
                 </div>
             )
         },
         { field: 'nome', headerName: 'Nome', width: 200, align: 'left' },
-        { field: 'dataConversao', headerName: 'Data de conversão', width: 160, align: 'left' },
-        { field: 'extensaoInicial', headerName: 'Extensão inicial', width: 120, align: 'center' },
-        { field: 'extensaoAtual', headerName: 'Extensão atual', width: 120, align: 'center' },
+        { field: 'criacao', headerName: 'Data de criação', width: 160, align: 'left' },
+        { field: 'extensao', headerName: 'Extensão', width: 120, align: 'center' },
         {
             field: 'actions',
             headerName: 'Ações',
@@ -78,17 +77,17 @@ const Historico = (props) => {
     ];
 
     const rows = props.historico.map(item => ({
-        id: item.idConversao,
+        id: item.idArquivo,
         nome: item.nome,
-        dataConversao: new Date(item.dataConversao).toLocaleString(),
-        extensaoInicial: item.extensaoInicial,
-        extensaoAtual: item.extensaoAtual
+        // criacao: new Date(item.cricao).toLocaleString(),
+        criacao: format(new Date(item.criacao), 'dd/MM/yyyy HH:mm:ss'),
+        extensao: item.extensao
     }));
 
     async function limparFks() {
         console.log(idCirculo)
-        historico
-            .delete(`/limpar/${idCirculo}/${props.idConversao}`)
+        arquivosCirculo
+            .delete(`/${idCirculo}/${props.idArquivo}`)
             .then((response) => {
                 console.log(response.data);
                 setDeleted(true)

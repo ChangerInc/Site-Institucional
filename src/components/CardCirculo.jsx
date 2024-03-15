@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { format, set } from 'date-fns';
-import { usuario, circulo, historico } from "../api";
+import { usuario, circulo, arquivosUser } from "../api";
 import InputText from './InputText'
 import Historico from './Historico';
 import './styles/cardCirculo.css';
@@ -74,8 +74,8 @@ function CardCirculo(props) {
             const formData = new FormData();
             formData.append("file", file);
 
-            usuario
-                .post(`/upload/${id}`, formData)
+            arquivosUser
+                .post(`/${id}`, formData)
                 .then((response) => {
                     console.log(response.data);
                     setIdConversao(response.data);
@@ -92,8 +92,8 @@ function CardCirculo(props) {
     }
 
     async function addFileInCircle(idConversaoTeste) {
-        circulo
-            .patch(`/publicar/${idCirculo}/${idConversaoTeste}`)
+        arquivosCirculo
+            .patch(`/${idCirculo}/${idConversaoTeste}`)
             .then((response) => {
                 console.log(response.data);
             })
@@ -103,8 +103,8 @@ function CardCirculo(props) {
     }
 
     async function handleFilesUser() {
-        historico
-            .get(`/usuario/${id}`)
+        arquivosUser
+            .get(`/${id}`)
             .then((response) => {
                 console.log(response.data);
                 console.log(idCirculo);
@@ -116,8 +116,8 @@ function CardCirculo(props) {
     }
 
     async function handleFilesCircle() {
-        circulo
-            .get(`/arquivos/${idCirculo}`)
+        arquivosCirculo
+            .get(`/${idCirculo}`)
             .then((response) => {
                 console.log(response.data);
                 setFilesCircle(response.data);

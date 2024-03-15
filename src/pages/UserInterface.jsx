@@ -4,7 +4,7 @@ import Header from '../components/Header'
 import Historico from '../components/Historico';
 import './styles-pages/user-interface.css'
 import { format } from 'date-fns';
-import { usuario, historico } from "../api";
+import { usuario, arquivo, arquivosUser } from "../api";
 
 
 const UserInterface = () => {
@@ -28,8 +28,8 @@ const UserInterface = () => {
 
       console.log(sessionStorage.getItem("id"));
 
-      usuario
-        .post(`/upload/${sessionStorage.getItem("id")}`, formData)
+      arquivosUser
+        .post(`/${sessionStorage.getItem("id")}`, formData)
         .then(response => {
           if (response.status === 200) {
             console.log(response.data);
@@ -47,7 +47,7 @@ const UserInterface = () => {
 
 
   const fetchHistorico = async () => {
-    historico.get(`/usuario/${id}`)
+    arquivosUser.get(`/${id}`)
       .then(response => {
         if (response.status === 204) {
           console.warn("Não há arquivos no histórico");
@@ -94,7 +94,7 @@ const UserInterface = () => {
           ) : (
             <Historico
               key={1}
-              idConversao={historicoArq.idConversao}
+              idConversao={historicoArq.idArquivo}
               historico={historicoArq}
             />
           )}

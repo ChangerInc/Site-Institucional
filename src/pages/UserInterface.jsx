@@ -28,8 +28,8 @@ const UserInterface = () => {
 
       console.log(sessionStorage.getItem("id"));
 
-      usuario
-        .post(`/upload/${sessionStorage.getItem("id")}`, formData)
+      arquivosUser
+        .post(`/${sessionStorage.getItem("id")}`, formData)
         .then(response => {
           if (response.status === 200) {
             console.log(response.data);
@@ -94,7 +94,7 @@ const UserInterface = () => {
           ) : (
             <Historico
               key={1}
-              idConversao={historicoArq.idConversao}
+              idConversao={historicoArq.idArquivo}
               historico={historicoArq}
             />
           )}

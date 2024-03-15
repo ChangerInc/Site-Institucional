@@ -1,12 +1,12 @@
 import "../components/styles/historico.css"
 import React, { useEffect } from 'react';
-import { historico } from '../api';
+import { arquivo } from '../api';
 
 const DownloadComponent = (props) => {
     const downloadFile = async () => {
         try {
             // Fazer a requisição para o endpoint Java
-            const response = await historico.get(`/arquivo/${props.id}`, { responseType: 'arraybuffer' });
+            const response = await arquivo.get(`/${props.id}`, { responseType: 'arraybuffer' });
 
             // Criar um Blob a partir dos bytes recebidos
             const blob = new Blob([response.data]);

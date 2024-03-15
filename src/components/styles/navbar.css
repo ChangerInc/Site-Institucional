@@ -49,13 +49,31 @@ img {
 .divFotoPerfil {
   width: 35px;
   height: 35px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .fotoNavbar {
   width: 100%;
   height: 100%;
   border-radius: 50%;
-  background-color: #FFF;
+  /* background-color: #FFF; */
+}
+.notification-count{
+  position: absolute;
+  top: -5px; /* Ajusta a posição vertical */
+  right: -5px; /* Ajusta a posição horizontal */
+  background-color: red; /* Adiciona uma cor de fundo para o número */
+  color: white; /* Define a cor do texto */
+  border-radius: 50%; /* Garante que o número seja exibido como um círculo */
+  width: 20px; /* Ajusta a largura do número */
+  height: 20px; /* Ajusta a altura do número */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
 }
 
 .fotoNavbar:hover {

@@ -56,6 +56,7 @@ const Login = () => {
         sessionStorage.setItem("token", response.data.token);
         sessionStorage.setItem("nome", response.data.nome);
         sessionStorage.setItem("foto", response.data.fotoPerfil);
+        sessionStorage.setItem("email", response.data.email);
         setShowSucess(true)
 
       } else {

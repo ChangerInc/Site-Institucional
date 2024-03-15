@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import changerLogo from '../assets/Logo/changer_white.png'
 import "./styles/navbar-white.css"
 import ProfileModal from './ProfileModal';
+import { usuario } from '../api.js';
 
 const Header = () => {
 
@@ -17,10 +18,22 @@ const Header = () => {
   const navigate = useNavigate();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isProfileModalOpen, setProfileModalOpen] = useState(false);
+  const [notificationCount, setNotificationCount] = useState(0);
 
   useEffect(() => {
     const isAuthenticated = sessionStorage.getItem('id') != undefined;
     setIsLoggedIn(isAuthenticated);
+
+    const fetchNotificationCount = async () => {
+      try {
+        const response = await usuario.get(`/notificacoes/${sessionStorage.getItem('email')}`);
+        setNotificationCount(response.data);
+      } catch (error) {
+        console.error('Erro ao obter contagem de notificações:', error);
+      }
+    };
+    
+    fetchNotificationCount();
   }, []);
 
   const handleLogout = () => {
@@ -48,6 +61,16 @@ const Header = () => {
             <li>
               <Link className="linkNav-white" to="/grupo">
                 Circulos
+              </Link>
+            </li>
+            <li>
+              <Link className="linkNav" to="/notificacoes">
+                <div className="divFotoPerfil">
+                {notificationCount > 0 && (
+                    <span className="notification-count">{notificationCount}</span>
+                  )}
+                  <img className='fotoNavbar' src='src/assets/packard-bell.png'/>
+                </div>
               </Link>
             </li>
             <li>

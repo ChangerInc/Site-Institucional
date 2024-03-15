@@ -24,13 +24,21 @@ function Convites() {
             <div className="container-convites">
                 <div className="box-convites">
                     <div className="head-convites"></div>
-                    {convites.map((convite, index) => (
-                    <UnidadeConvite key={index} 
-                    fotoPerfil={'src/assets/perfil-de-usuario.png'} 
-                    anfitriao={convite.anfitriao} 
-                    nomeCirculo={convite.nomeCirculo} 
-                    />
-                ))}
+                    {convites.length === 0 ? ( // Verifica se não há convites
+                        <div className="sem-convites"><span>Não há convites!</span>
+                        </div>
+                    ) : (
+                        convites.map((convite, index) => (
+                            <UnidadeConvite
+                                key={index}
+                                fotoPerfil={'src/assets/perfil-de-usuario.png'}
+                                anfitriao={convite.anfitriao}
+                                nomeCirculo={convite.nomeCirculo}
+                                idCirculo={convite.idCirculo}
+                                horario={convite.horario}
+                            />
+                        ))
+                    )}
                 </div>
             </div>
         </>
@@ -39,8 +47,22 @@ function Convites() {
 
 
 
-function UnidadeConvite({ fotoPerfil, anfitriao, nomeCirculo }) {
+function UnidadeConvite({ fotoPerfil, anfitriao, nomeCirculo, idCirculo, horario }) {
+    // Função para calcular o tempo decorrido
+    const tempoDecorrido = (horario) => {
+        const dataAtual = new Date();
+        const dataHorario = new Date(horario);
 
+        const diferencaEmMilissegundos = dataAtual - dataHorario;
+        const diferencaEmMinutos = Math.floor(diferencaEmMilissegundos / (1000 * 60));
+
+        if (diferencaEmMinutos < 60) {
+            return `há ${diferencaEmMinutos} minutos atrás`;
+        } else {
+            const diferencaEmHoras = Math.floor(diferencaEmMinutos / 60);
+            return `há ${diferencaEmHoras} horas atrás`;
+        }
+    };
 
     return (
         <li className="convite">
@@ -50,6 +72,7 @@ function UnidadeConvite({ fotoPerfil, anfitriao, nomeCirculo }) {
                 <p>convidou você para o círculo</p>
                 <span>{nomeCirculo}</span>
             </div>
+                <div className="horario"><i>{tempoDecorrido(horario)}</i> {/* Exibir tempo decorrido */}</div>
             <div className="botoes-convite">
                 <button className="aceitar"></button>
                 <button className="negar"></button>
@@ -57,5 +80,4 @@ function UnidadeConvite({ fotoPerfil, anfitriao, nomeCirculo }) {
         </li>
     );
 }
-
 export default Convites;

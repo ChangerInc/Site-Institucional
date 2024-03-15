@@ -146,13 +146,12 @@ function CardCirculo(props) {
     }
 
     async function addUserInCircle() {
-        const newMember = {
-            idCirculo: idCirculo,
-            email: newMemberEmail,
-            idDono: id
-        }
+        const formData = new FormData();
+        formData.append("idAnfitriao", id);
+        formData.append("emailDoConvidado", newMemberEmail);
+
         circulo
-            .post(`/adicionar-membro`, newMember)
+            .post(`/convidar/${idCirculo}`, formData)
             .then((response) => {
                 console.log(response.data);
                 setFilesCircle(response.data);

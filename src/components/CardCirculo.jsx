@@ -150,20 +150,37 @@ function CardCirculo(props) {
         formData.append("idAnfitriao", id);
         formData.append("emailDoConvidado", newMemberEmail);
 
-        if(newMemberEmail == sessionStorage.getItem("email")){
+        if (newMemberEmail == sessionStorage.getItem("email")) {
             alert("impossivel se convidar")
         } else {
             circulo
-            .post(`/convidar/${idCirculo}`, formData)
-            .then((response) => {
-                setFilesCircle(response.data);
-                closeModalMembers();
-            })
-            .catch((error) => {
-                console.error(error);
-            });
+                .post(`/convidar/${idCirculo}`, formData)
+                .then((response) => {
+                    setFilesCircle(response.data);
+                    closeModalMembers();
+                })
+                .catch((error) => {
+                    console.error(error);
+                });
         }
 
+    }
+
+    async function sairDoCirculo() {
+
+        if (id == props.idDono) {
+            oNeymarNeymar()
+        } else {
+            console.log("idCirculo"+idCirculo)
+            console.log("id"+id)
+            circulo
+                .patch(`/sair/${idCirculo}/${id}`)
+                .then(
+                    window.location.reload())
+                .catch((error) => {
+                    console.error(error);
+                });
+        }
     }
 
     async function oNeymarNeymar(event) {
@@ -272,6 +289,7 @@ function CardCirculo(props) {
                             onChange={handleUserEmail}
                         />
                         <button id='buttonAddMembers' onClick={addUserInCircle}>Adicionar</button>
+                        <button id='buttonSairCirculo' onClick={sairDoCirculo}>{id == props.idDono ? "Excluir Círculo" : "Sair"}</button>
                     </div>
                 </div>
             )}

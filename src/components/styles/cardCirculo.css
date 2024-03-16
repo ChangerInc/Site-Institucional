@@ -399,3 +399,10 @@
 ul {
     list-style: none;
 }
+
+#buttonSairCirculo{
+    background-color: rgb(253, 75, 75);
+}
+#buttonSairCirculo:hover{
+    background-color: rgb(216, 39, 39);
+}

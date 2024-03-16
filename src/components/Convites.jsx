@@ -25,11 +25,6 @@ function Convites() {
         formData.append("email", sessionStorage.getItem("email"));
         formData.append("idCirculo", idCirculo);
         formData.append("idUsuario", sessionStorage.getItem("id"));
-        for (const pair of formData.entries()) {
-            console.log(pair[0], pair[1]);
-        }
-        console.log(acaoBotao)
-    
         try {
             const response = await circulo.patch(`/convite/botao/${acaoBotao}`, formData);
             if (response.status === 200 || response.status ) {

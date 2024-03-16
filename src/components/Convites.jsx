@@ -1,23 +1,46 @@
 import "../components/styles/convites.css"
 import React, { useState, useEffect } from 'react';
-import { usuario } from '../api.js';
+import { usuario, circulo } from '../api.js';
 
 function Convites() {
 
     const [convites, setConvites] = useState([]);
 
+    const fetchConvites = async () => {
+        try {
+            const response = await usuario.get(`/convites/${sessionStorage.getItem("email")}`);
+            const data = await response.data;
+            setConvites(data);
+        } catch (error) {
+            console.error('Erro ao buscar convites:', error);
+        }
+    };
+
     useEffect(() => {
-        const fetchConvites = async () => {
-            try {
-                const response = await usuario.get(`/convites/${sessionStorage.getItem("email")}`);
-                const data = await response.data;
-                setConvites(data);
-            } catch (error) {
-                console.error('Erro ao buscar convites:', error);
-            }
-        };
-        fetchConvites();
+        fetchConvites(); // Chamar a função diretamente dentro do useEffect
     }, []);
+
+    async function handleButtonClick(idCirculo, acaoBotao) {
+        const formData = new FormData();
+        formData.append("email", sessionStorage.getItem("email"));
+        formData.append("idCirculo", idCirculo);
+        formData.append("idUsuario", sessionStorage.getItem("id"));
+        for (const pair of formData.entries()) {
+            console.log(pair[0], pair[1]);
+        }
+        console.log(acaoBotao)
+    
+        try {
+            const response = await circulo.patch(`/convite/botao/${acaoBotao}`, formData);
+            if (response.status === 200 || response.status ) {
+                fetchConvites(); // Chamar a função para atualizar os convites
+            } else {
+                console.error('Erro ao executar ação do botão:', response.statusText);
+            }
+        } catch (error) {
+            console.error('Erro ao executar ação do botão:', error);
+        }
+    }
 
     return (
         <>
@@ -36,6 +59,7 @@ function Convites() {
                                 nomeCirculo={convite.nomeCirculo}
                                 idCirculo={convite.idCirculo}
                                 horario={convite.horario}
+                                onButtonClick={handleButtonClick}
                             />
                         ))
                     )}
@@ -47,7 +71,7 @@ function Convites() {
 
 
 
-function UnidadeConvite({ fotoPerfil, anfitriao, nomeCirculo, idCirculo, horario }) {
+function UnidadeConvite({ fotoPerfil, anfitriao, nomeCirculo, idCirculo, horario, onButtonClick  }) {
     // Função para calcular o tempo decorrido
     const tempoDecorrido = (horario) => {
         const dataAtual = new Date();
@@ -74,8 +98,8 @@ function UnidadeConvite({ fotoPerfil, anfitriao, nomeCirculo, idCirculo, horario
             </div>
                 <div className="horario"><i>{tempoDecorrido(horario)}</i> {/* Exibir tempo decorrido */}</div>
             <div className="botoes-convite">
-                <button className="aceitar"></button>
-                <button className="negar"></button>
+                <button className="aceitar" onClick={() => onButtonClick(idCirculo, 1)}></button>
+                <button className="negar" onClick={() => onButtonClick(idCirculo, 2)}></button>
             </div>
         </li>
     );

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { format, set } from 'date-fns';
-import { usuario, circulo, arquivosUser } from "../api";
+import { usuario, circulo, arquivosUser, arquivosCirculo } from "../api";
 import InputText from './InputText'
 import Historico from './Historico';
 import './styles/cardCirculo.css';
@@ -150,17 +150,20 @@ function CardCirculo(props) {
         formData.append("idAnfitriao", id);
         formData.append("emailDoConvidado", newMemberEmail);
 
-        circulo
+        if(newMemberEmail == sessionStorage.getItem("email")){
+            alert("impossivel se convidar")
+        } else {
+            circulo
             .post(`/convidar/${idCirculo}`, formData)
             .then((response) => {
-                console.log(response.data);
                 setFilesCircle(response.data);
-                window.location.reload();
                 closeModalMembers();
             })
             .catch((error) => {
                 console.error(error);
             });
+        }
+
     }
 
     async function oNeymarNeymar(event) {

@@ -4,14 +4,16 @@ import { usuario, circulo, arquivosUser, arquivosCirculo } from "../api";
 import InputText from './InputText'
 import Historico from './Historico';
 import './styles/cardCirculo.css';
+import { Alert } from '@mui/material';
 
 function CardCirculo(props) {
     const [file, setFile] = useState(null);
     const [newMemberEmail, setNewMemberEmail] = useState('');
     const [fileName, setFileName] = useState('');
     const [filesUser, setFilesUser] = useState([]);
-    const [filesCircle, setFilesCircle] = useState([]);
+    const [filesCircle, setFilesCircle] = useState(props.arquivos);
     const [idCirculo, setIdCirculo] = useState(props.idCirculo);
+    const [idArquivo, setIdArquivo] = useState(props.idCirculo);
     const [idConversao, setIdConversao] = useState('');
     const [titulo, setTitulo] = useState(props.tituloGrupo);
     const [membros, setMembros] = useState(props.membros);
@@ -79,9 +81,9 @@ function CardCirculo(props) {
                 .then((response) => {
                     console.log(response.data);
                     setIdConversao(response.data);
+                    addFileInCircle(response.data);
                     setFile(null)
                     setFileName('');
-                    addFileInCircle(response.data);
                     closeModalUploadFile();
                 })
                 .catch((error) => {
@@ -91,9 +93,9 @@ function CardCirculo(props) {
         }
     }
 
-    async function addFileInCircle(idConversaoTeste) {
+    async function addFileInCircle(idArquivo) {
         arquivosCirculo
-            .patch(`/${idCirculo}/${idConversaoTeste}`)
+            .patch(`/${idCirculo}/${idArquivo}`)
             .then((response) => {
                 console.log(response.data);
             })
@@ -156,7 +158,6 @@ function CardCirculo(props) {
             circulo
                 .post(`/convidar/${idCirculo}`, formData)
                 .then((response) => {
-                    setFilesCircle(response.data);
                     closeModalMembers();
                 })
                 .catch((error) => {
@@ -171,8 +172,8 @@ function CardCirculo(props) {
         if (id == props.idDono) {
             oNeymarNeymar()
         } else {
-            console.log("idCirculo"+idCirculo)
-            console.log("id"+id)
+            console.log("idCirculo" + idCirculo)
+            console.log("id" + id)
             circulo
                 .patch(`/sair/${idCirculo}/${id}`)
                 .then(
@@ -296,49 +297,6 @@ function CardCirculo(props) {
             {modalUploadFile && (
                 <>
                     <div className="modalUploadFile">
-                        <div className="conteudoEsquerdo">
-                            <div className="historico cabecalho">
-                                <div className="espacamento margem">
-                                    <b>Nome</b>
-                                </div>
-                                <div className="espacamento">
-                                    <b>Data de criação</b>
-                                </div>
-                                <div className="espacamento">
-                                    <b>Extensão inicial</b>
-                                </div>
-                                <div className="espacamento">
-                                    <b>Extensão atual</b>
-                                </div>
-                            </div>
-                            <ul>
-                                {(filesUser.length === 0) ? (
-                                    <>
-                                        <b>Você não possui nenhum arquivo no histórico</b>
-                                    </>
-                                ) : (
-
-                                    filesUser?.map(arquivo => (
-                                        <>
-                                            {idCirculo && (
-                                                <Historico
-                                                    key={arquivo.idConversao}
-                                                    idConversao={arquivo.idConversao}
-                                                    idCirculo={idCirculo}
-                                                    nome={arquivo.nome}
-                                                    extensaoAtual={arquivo.extensaoAtual}
-                                                    dataConversao={format(new Date(arquivo.dataConversao), 'dd/MM/yy HH:mm')}
-                                                    extensaoInicial={arquivo.extensaoInicial}
-                                                />
-                                            )}
-                                        </>
-                                    ))
-                                )}
-                            </ul>
-                        </div>
-                        <div className="muro">
-
-                        </div>
                         <div className="conteudoDireito">
                             <h3>Adicionar Arquivo no Circulo</h3>
                             <div onClick={closeModalUploadFile} className='imageCloseModal'></div>
@@ -360,35 +318,21 @@ function CardCirculo(props) {
                         <h3>Arquivos de {titulo}</h3>
                         <div onClick={closeModalFilesCircle} className='imageCloseModal'></div>
                     </div>
-                    <div className="historico cabecalho">
-                        <div className="espacamento margem">
-                            <b>Nome</b>
-                        </div>
-                        <div className="espacamento">
-                            <b>Data de criação</b>
-                        </div>
-                        <div className="espacamento">
-                            <b>Extensão inicial</b>
-                        </div>
-                        <div className="espacamento">
-                            <b>Extensão atual</b>
-                        </div>
-                    </div>
                     <div className="arquivosHistorico">
                         <ul>
-                            {(filesCircle.length === 0) ? (
+                            {(props.arquivos.length === 0) ? (
                                 <>
                                     <li>Esse circulo não possui nenhum arquivo!</li>
                                 </>
                             ) : (
-                                filesCircle?.map(arquivo => (
+                                props.arquivos?.map(arquivo => (
                                     <Historico
-                                        key={arquivo.idConversao}
-                                        idConversao={arquivo.idConversao}
+                                        key={arquivo.idArquivo}
+                                        idArquivo={arquivo.idArquivo}
                                         nome={arquivo.nome}
-                                        extensaoAtual={arquivo.extensaoAtual}
-                                        dataConversao={format(new Date(arquivo.dataConversao), 'dd/MM/yy HH:mm')}
-                                        extensaoInicial={arquivo.extensaoInicial}
+                                        criacao={arquivo.criacao}
+                                        extensao={arquivo.extensao}
+                                        historico={props.arquivos}
                                     />
                                 ))
                             )}

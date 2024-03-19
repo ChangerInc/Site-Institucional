@@ -120,6 +120,7 @@ const Painel = () => {
                                 idDono={circulo.dono.id}
                                 tituloGrupo={circulo.nomeCirculo}
                                 membros={circulo.membros}
+                                arquivos={circulo.arquivos}
                             />
                         ))}
                         <div className="divCreateCircle">
@@ -135,6 +136,7 @@ const Painel = () => {
                                 idCirculo={circulo.id}
                                 tituloGrupo={circulo.nome}
                                 membros={circulo.membros}
+                                // arquivos={circulo.arquivos}
                             />
                         ))}
                         <div className="divCreateCircle">

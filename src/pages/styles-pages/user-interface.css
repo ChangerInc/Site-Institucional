@@ -43,11 +43,11 @@ button:hover {
 .boxPai {
   display: flex;
   justify-content: center;
+  align-items: center;
 }
 
 .box{
   display: flex;
-  width: 70vw;
+  width: 850px;
   height: calc(75vh - 83px);
-  flex-direction: column;
 }

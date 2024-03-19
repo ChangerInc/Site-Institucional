@@ -27,6 +27,7 @@ const Historico = (props) => {
     const [showDownload, setShowDownload] = useState(false);
     const [idCirculo, setIdCirculo] = useState(props.idCirculo);
     const [historico, setHistorico] = useState(props.historico);
+    console.log(props.historico)
 
     const navigate = new useNavigate();
     const iconPaths = {
@@ -51,21 +52,21 @@ const Historico = (props) => {
         {
             field: 'icon',
             headerName: 'Icon',
-            width: 80,
-            align: 'left',
+            width:120,
+            align: 'center',
             renderCell: (params) => (
                 <div>
                     <img src={iconPaths[params.row.extensao]} alt={params.row.extensao} />
                 </div>
             )
         },
-        { field: 'nome', headerName: 'Nome', width: 200, align: 'left' },
-        { field: 'criacao', headerName: 'Data de criação', width: 160, align: 'left' },
-        { field: 'extensao', headerName: 'Extensão', width: 120, align: 'center' },
+        { field: 'nome', headerName: 'Nome', width: 250, align: 'center' },
+        { field: 'criacao', headerName: 'Data de criação', width: 180, align: 'center' },
+        { field: 'extensao', headerName: 'Extensão', width:120, align: 'center' },
         {
             field: 'actions',
             headerName: 'Ações',
-            width: 90,
+            width: 180,
             align: 'center',
             renderCell: (params) => (
                 <div className="deleteDownload">
@@ -76,10 +77,9 @@ const Historico = (props) => {
         },
     ];
 
-    const rows = props.historico.map(item => ({
+    const rows = historico?.map(item => ({
         id: item.idArquivo,
         nome: item.nome,
-        // criacao: new Date(item.cricao).toLocaleString(),
         criacao: format(new Date(item.criacao), 'dd/MM/yyyy HH:mm:ss'),
         extensao: item.extensao
     }));
@@ -104,7 +104,7 @@ const Historico = (props) => {
     return (
         <>
             <div className="historico">
-                <Box sx={{ height: 370, width: '100%' }}>
+                <Box sx={{ height: 370, width: 850 }}>
                     <DataGrid
                         rows={rows}
                         columns={columns}

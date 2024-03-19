@@ -11,6 +11,24 @@
     width: 45px;
 }
 
+.MuiDataGrid-columnHeaderTitleContainer {
+    display: flex;
+    justify-content: center;
+}
+
+.MuiDataGrid-menuIcon {
+    display: flex;
+    width: 80;
+    justify-content: center;
+    align-items: center;
+}
+
+.MuiButtonBase-root {
+    width: 50px;
+    justify-self: center;
+    align-self: center;
+}
+
 .msgSemArq {
     margin: 20px 0px;
 }

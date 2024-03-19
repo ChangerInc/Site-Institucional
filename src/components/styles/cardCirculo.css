@@ -152,8 +152,8 @@
 
 .modalUploadFile {
     position: fixed;
-    width: 80vw;
-    height: 70vh;
+    width: 30vw;
+    height: 40vh;
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -170,14 +170,10 @@
     /* Certifique-se de que o z-index seja maior que outros elementos */
 }
 
-.conteudoEsquerdo {
-    width: 69%;
-    height: 70vh;
-}
 .conteudoDireito {
     display: flex;
-    width: calc(30% - 1px);
-    height: 70vh;
+    width: 100%;
+    height: 100%;
     flex-direction: column;
     justify-content: center;
     gap: 50px;
@@ -236,7 +232,7 @@
 
 /* Modal Members */
 .modalMembers {
-    width: 60vw;
+    width: 40vw;
     height: 50vh;
     padding: 20px;
 

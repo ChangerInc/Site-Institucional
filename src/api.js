@@ -1,31 +1,33 @@
 import axios from "axios";
 
+const host = "http://localhost:8080"
+
 const usuario = axios.create({
-  baseURL: "http://localhost:8080/usuario"
+  baseURL: host+"/usuario"
 });
 
 const circulo = axios.create({
-  baseURL: "http://localhost:8080/circulo"
+  baseURL: host+"/circulo"
 });
 
 const arquivosUser = axios.create({
-  baseURL: "http://localhost:8080/usuario/arquivos"
+  baseURL: host+"/usuario/arquivos"
 });
 
 const arquivosCirculo = axios.create({
-  baseURL: "http://localhost:8080/circulo/arquivos"
+  baseURL: host+"/circulo/arquivos"
 });
 
 const arquivo = axios.create({
-  baseURL: "http://localhost:8080/arquivo"
+  baseURL: host+"/arquivo"
 });
 
 const vertopal = axios.create({
-  baseURL: "http://localhost:8080/vertopal"
+  baseURL: host+"/vertopal"
 });
 
 const changer = axios.create({
-  baseURL: "http://localhost:8080/changer"
+  baseURL: host+"/changer"
 });
 
 export { usuario, circulo , arquivosUser , arquivosCirculo , arquivo , vertopal , changer };

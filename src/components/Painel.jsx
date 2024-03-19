@@ -134,9 +134,9 @@ const Painel = () => {
                             <CardCirculo
                                 key={circulo.id}
                                 idCirculo={circulo.id}
-                                tituloGrupo={circulo.nome}
+                                tituloGrupo={circulo.nomeCirculo}
                                 membros={circulo.membros}
-                                // arquivos={circulo.arquivos}
+                                arquivos={circulo.arquivos}
                             />
                         ))}
                         <div className="divCreateCircle">

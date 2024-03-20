@@ -16,6 +16,7 @@ function CardCirculo(props) {
     const [idArquivo, setIdArquivo] = useState(props.idCirculo);
     const [idConversao, setIdConversao] = useState('');
     const [titulo, setTitulo] = useState(props.tituloGrupo);
+    const [idDoDono, setDono] = useState(props.idDono);
     const [membros, setMembros] = useState(props.membros);
     const [addUser, setAddUser] = useState(false);
     const [deleted, setDeleted] = useState(false);
@@ -228,9 +229,18 @@ function CardCirculo(props) {
         <>
             <div onClick={openModalFilesCircle} className="card">
                 <div className="containerConteudoCard">
-                    <div className='containerTituloDeleteGrupo'>
-                        <b className="tituloDoCirculo">{titulo}</b>
-                        <div onClick={oNeymarNeymar} className='deleteImage'></div>
+                    <div className='coroaTituloLixeira'>
+                        <div className='crownIcon'>
+                        {sessionStorage.getItem('id') == idDoDono && (
+                            <img className='crownIcon' src={"src/assets/coroa.png"} alt="Coroa" />
+                        )}
+                        </div>
+                        <div className='containerTituloDeleteGrupo'>
+                            <b className="tituloDoCirculo">{titulo}</b>
+                            {sessionStorage.getItem('id') == idDoDono && (
+                                <div onClick={oNeymarNeymar} className='deleteImage'></div>
+                            )}
+                        </div>
                     </div>
                     <div className="membrosCirculo">
                         <ul className='listaOrnedadaMembros'>

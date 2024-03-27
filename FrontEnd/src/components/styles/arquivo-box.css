@@ -1,0 +1,191 @@
+.imagem{
+    /* style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '100vh' }} */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 80vh;
+}
+
+.caixa_de_conversao {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: calc(70% - 6px);
+    height: 25vh;
+    gap: 2rem;
+    border: 3px #5B98BA dashed;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.205), rgba(0, 0, 0, 0.074));
+}
+
+.container_input_e_select {
+    display: flex;
+    justify-content: center;
+    width: 40%;
+}
+
+.texto_box_informacao {
+    text-decoration: none;
+    color: #FFF;
+    text-align: center;
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 900;
+    line-height: normal;
+}
+
+.texto_box_informacao a {
+    text-decoration: none;
+    color: #5B98BA;
+    background-color: #FFF;
+    padding: 0 2px;
+}
+
+.texto_box_informacao a:hover {
+    border-bottom: 2px solid #5B98BA;
+}
+
+.custom-file-upload-label {
+    color: white;
+    display: flex;
+    background-color: #5B98BA;
+    width: 290px;
+    height: 60px;
+    cursor: pointer;
+    justify-content: center;
+    align-items: center;
+}
+
+.custom-file-upload-label:hover {
+    color: #5B98BA;
+    background-color: #f8f8f8;
+}
+
+.bold_selecionar_arquivo {
+    font-size: 20px;
+}
+
+#file_upload {
+    display: none;
+}
+
+.container_input_e_select select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+
+    display: flex;
+    text-align: center;
+
+    width: 70px;
+    height: 60px;
+    font-size: 1rem;
+
+    background-image: url(../assets/SetaCombo.png);
+    background-repeat: no-repeat;
+    background-size: 100%;
+    background-position: center;
+}
+
+.container_input_e_select select:focus {
+    outline: none;
+}
+
+.container_input_e_select button {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    width: 180px;
+    padding: 0;
+    border-radius: 0%;
+
+    font-size: 1rem;
+}
+
+.segunda-parte-pai {
+    display: flex;
+    margin-left: 200px;
+    margin-bottom: 100px;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.segunda-parte {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 50%;
+    gap: 20px;
+}
+
+.cardArquivo {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 20px;
+    margin-bottom: 20px;
+    width: 100%;
+    flex: 1;
+    max-width: 600px;
+}
+
+.conteudo {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.imagem-container img {
+    width: 100%;
+    height: auto;
+}
+
+.icone-como {
+    width: 150px;
+    margin-bottom: 20px;
+}
+
+.icone-seguranca {
+    width: 150px;
+    margin-bottom: 20px;
+}
+
+.icone-lugar {
+    width: 150px;
+    margin-bottom: 20px;
+}
+
+.titulo-como {
+    font-weight: 900px;
+    font-size: 38px;
+}
+
+.titulo-seguranca {
+    font-weight: 900px;
+    font-size: 38px;
+}
+
+.titulo-lugar {
+    font-weight: 900px;
+    font-size: 38px;
+    text-shadow: 1px 1px 0px #000000;
+}
+
+.texto-como {
+    font-weight: 900px;
+    font-size: 16px;
+}
+
+.texto-seguranca {
+    font-weight: 900px;
+    font-size: 16px;
+}
+
+.texto-lugar {
+    font-weight: 900px;
+    font-size: 16px;
+}

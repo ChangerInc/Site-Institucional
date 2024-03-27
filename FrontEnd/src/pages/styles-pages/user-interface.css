@@ -1,0 +1,53 @@
+.user-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  width: 100vw;
+  height: 25vh;
+}
+
+.auxTexto {
+  display: flex;
+}
+
+.auxTexto b {
+  margin-left: 4px;
+}
+
+.ponto {
+  color: #505CFD;
+  margin-left: 0px;
+  font-size: 16px;
+}
+
+button {
+  color: #FFF;
+  background-color: var(--azul-claro);
+  font-size: 1.2rem;
+  width: 240px;
+  height: 50px;
+  flex-shrink: 0;
+  border: none;
+  border-radius: 5rem;
+  align-self: center;
+  transition: .3s;
+}
+
+button:hover {
+  background-color: var(--azul-principal);
+  cursor: pointer;
+}
+
+.boxPai {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.box{
+  display: flex;
+  width: 850px;
+  height: calc(75vh - 83px);
+}

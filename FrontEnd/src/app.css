@@ -1,0 +1,12 @@
+@font-face {
+    font-family: 'Montserrat';
+    src: url('/src/Fonts/Montserrat-Regular.ttf') format('truetype');
+}
+
+:root {
+    --azul-principal: #145DA0;
+    --azul-claro: #5B98BA;
+    --roxo: #505CFD;
+    --cinza-claro: #868686;
+    --cinza-escuro: #383838;
+}

@@ -1,0 +1,67 @@
+:root {
+  --azul-principal: #145DA0;
+  --azul-claro: #5B98BA;
+  --roxo: #505CFD;
+  --cinza-claro: #868686;
+  --cinza-escuro: #383838;
+}
+
+img {
+  width: 200px;
+}
+
+.navbar-white {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: calc(100% - 4rem);
+  padding: 1.5rem 2rem;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.423), rgba(0, 0, 0, 0));
+}
+
+.navbar-white ul {
+  display: flex;
+  gap: 2rem;
+  list-style: none;
+  text-decoration: none;
+  align-items: center
+}
+
+.linkBox-white {
+  /* classe pra transitar entre login e cadastro */
+  text-decoration: none;
+  color: var(--azul-texto);
+}
+
+.linkNav:hover {
+  cursor: pointer;
+}
+
+.divFotoPerfil {
+  width: 35px;
+  height: 35px;
+}
+
+.fotoNavbar {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  /* background-color: #FFF; */
+}
+
+.fotoNavbar:hover {
+  cursor: pointer;
+}
+
+.linkNav-white {
+  /* classe para os links na navbar */
+  font-size: 1rem;
+  text-decoration: none;
+  color: white;
+  transition: 0.3s;
+  font-weight: bold;
+}
+
+.linkNav-white:hover {
+  border-bottom: solid 1px var(--azul-claro);
+}

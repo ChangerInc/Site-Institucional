@@ -1,0 +1,114 @@
+.container-cadastro {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: calc(100vh - 74px);
+
+    background-image: url(/src/assets/Logo/logincadback.png);
+    background-position-x: 130%;
+    background-position-y: 50%;
+    background-repeat: no-repeat;
+    background-size: 40%;
+}
+
+.container-alerta {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 16px;
+    transition: .5s;
+}
+
+.MuiStack-root {
+    width: fit-content;
+}
+
+.container-box {
+    width: 420px;
+    height: 520px;
+    gap: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    align-items: center;
+    box-sizing: border-box;
+    padding: 2.5rem 2.5rem;
+    box-shadow: 10px 12px 39px 19px rgba(0, 0, 0, 0.25);
+}
+
+.container-texto {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.container-texto h2 {
+    font-size: 1.2rem;
+}
+
+.container-texto h3 {
+    font-size: 1rem;
+}
+
+.texto-cinza {
+    font-weight: 600;
+    color: var(--cinza-claro);
+    line-height: normal;
+}
+
+.texto-preto {
+    text-decoration: none;
+    font-weight: 750;
+    color: #000;
+}
+
+.texto-azul {
+    text-decoration: none;
+    font-weight: 600;
+    color: var(--azul-claro);
+}
+
+.linkBox:hover {
+    border-bottom: 2px solid var(--azul-claro);
+}
+
+.formulario {
+    flex-direction: column;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    height: 500px;
+}
+
+.formulario div {
+    color: var(--cinza-escuro);
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    font-size: 1rem;
+    font-weight: 400;
+    font-style: normal;
+    line-height: normal;
+}
+
+button {
+    color: #FFF;
+    background-color: var(--azul-claro);
+    font-size: 1.2rem;
+    width: 140px;
+    height: 50px;
+    flex-shrink: 0;
+    border: none;
+    border-radius: 5rem;
+    align-self: end;
+    transition: .3s;
+}
+
+button:hover {
+    background-color: var(--azul-principal);
+    cursor: pointer;
+}

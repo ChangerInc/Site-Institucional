@@ -1,0 +1,25 @@
+name: Deploy to Production
+
+on:
+  push:
+    branches:
+      - prod  
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Set Permissions
+        run: |
+          chmod 400 changer.pem
+
+      - name: Debug - Show Key File Contents
+        run: cat ./changer.pem
+              
+      - name: SSH to remote server and execute commands
+        run: |
+          ssh -i ./changer.pem -o StrictHostKeyChecking=no ubuntu@3.218.90.124 "cd /home/ubuntu/Site-Institucional && sudo npm install && sudo npm run build && sudo cp -r dist/ assets/ src/ /var/www/html/ && cp /var/www/html/dist/* /var/www/html/ && sudo systemctl start nginx && sudo systemctl restart nginx && exit"

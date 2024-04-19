@@ -24,11 +24,6 @@ const Login = () => {
 
   const navigate = useNavigate();
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-  };
-
   useEffect(() => {
     let timeout;
 
@@ -36,11 +31,16 @@ const Login = () => {
       timeout = setTimeout(() => {
         setShowSucess(false);
         navigate('/user');
-      }, 5000);
+      }, 1000);
     }
 
     return () => clearTimeout(timeout);
   }, [showSucess, showError, navigate]);
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();

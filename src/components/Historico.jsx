@@ -104,7 +104,7 @@ const Historico = (props) => {
     return (
         <>
             <div className="historico">
-                <Box sx={{ height: 370, width: 850 }}>
+                <Box sx={{ height: 370, width: 870 }}>
                     <DataGrid
                         rows={rows}
                         columns={columns}

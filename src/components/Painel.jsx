@@ -117,7 +117,7 @@ const Painel = () => {
                             <CardCirculo
                                 key={circulo.id}
                                 idCirculo={circulo.id}
-                                idDono={circulo.dono.id}
+                                dono={circulo.dono}
                                 tituloGrupo={circulo.nomeCirculo}
                                 membros={circulo.membros}
                                 arquivos={circulo.arquivos}

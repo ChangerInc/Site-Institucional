@@ -3,6 +3,7 @@ import { format, set } from 'date-fns';
 import { usuario, circulo, arquivosUser, arquivosCirculo } from "../api";
 import InputText from './InputText'
 import Historico from './Historico';
+import '../assets/coroa.png'
 import './styles/cardCirculo.css';
 import { Alert } from '@mui/material';
 
@@ -16,7 +17,7 @@ function CardCirculo(props) {
     const [idArquivo, setIdArquivo] = useState(props.idCirculo);
     const [idConversao, setIdConversao] = useState('');
     const [titulo, setTitulo] = useState(props.tituloGrupo);
-    const [idDoDono, setDono] = useState(props.idDono);
+    const [idDoDono, setDono] = useState(props.dono);
     const [membros, setMembros] = useState(props.membros);
     const [addUser, setAddUser] = useState(false);
     const [deleted, setDeleted] = useState(false);
@@ -170,7 +171,7 @@ function CardCirculo(props) {
 
     async function sairDoCirculo() {
 
-        if (id == props.idDono) {
+        if (id == props.dono) {
             oNeymarNeymar()
         } else {
             console.log("idCirculo" + idCirculo)
@@ -207,7 +208,7 @@ function CardCirculo(props) {
     async function deleteCircle() {
         const ids = {
             idCirc: props.idCirculo,
-            idDono: props.idDono
+            idDono: props.dono
         };
 
         circulo
@@ -300,7 +301,7 @@ function CardCirculo(props) {
                             onChange={handleUserEmail}
                         />
                         <button id='buttonAddMembers' onClick={addUserInCircle}>Adicionar</button>
-                        <button id='buttonSairCirculo' onClick={sairDoCirculo}>{id == props.idDono ? "Excluir Círculo" : "Sair"}</button>
+                        <button id='buttonSairCirculo' onClick={sairDoCirculo}>{id == props.dono ? "Excluir Círculo" : "Sair"}</button>
                     </div>
                 </div>
             )}

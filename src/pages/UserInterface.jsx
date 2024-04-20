@@ -41,6 +41,7 @@ const UserInterface = () => {
         .finally(() => {
           setFileName("Salvar arquivo");
           fetchHistorico();
+          window.location.reload();
         });
     }
   };

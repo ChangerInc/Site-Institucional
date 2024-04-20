@@ -84,6 +84,8 @@ const Historico = (props) => {
         extensao: item.extensao
     }));
 
+    const rowsInvertida = rows.slice().reverse();
+
     async function limparFks() {
         console.log(idCirculo)
         arquivosCirculo
@@ -106,7 +108,7 @@ const Historico = (props) => {
             <div className="historico">
                 <Box sx={{ height: 370, width: 870 }}>
                     <DataGrid
-                        rows={rows}
+                        rows={rowsInvertida}
                         columns={columns}
                         pageSize={5}
                         disableRowSelectionOnClick

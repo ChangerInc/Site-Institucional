@@ -16,6 +16,7 @@ const ProfileModal = ({ isOpen, onRequestClose, options }) => {
     const openAdditionalModal = (option) => {
         setSelectedOption(option);
         setAdditionalModalIsOpen(true);
+        onRequestClose()
     };
 
     const closeAdditionalModal = () => {
@@ -33,12 +34,11 @@ const ProfileModal = ({ isOpen, onRequestClose, options }) => {
     };
 
     const handleFileChange = (event) => {
-        const file = event.target.files[0];
+        setFile(event.target.files[0]);
         setFileName(event.target.files[0].name);
-        handleFileUpload(file);
     };
 
-    const handleFileUpload = (file) => {
+    const handleFileUpload = () => {
         if (file) {
             // Verifica se o arquivo é uma imagem
             if (file.type.startsWith("image/")) {
@@ -57,6 +57,7 @@ const ProfileModal = ({ isOpen, onRequestClose, options }) => {
                     })
                     .finally(() => {
                         setFileName("Salvar arquivo");
+                        window.location.reload();
                     });
             } else {
                 console.error("O arquivo selecionado não é uma imagem.");
@@ -92,12 +93,38 @@ const ProfileModal = ({ isOpen, onRequestClose, options }) => {
                     contentLabel="Modal Adicional"
                     className="modal-adicional"
                 >
-                    <div className='container-modal-adicional'>
-                        <h2>{selectedOption}</h2>
-                        {selectedOption === options[0] && (
-                            handleLogout()
+                    <div className='modal-alterar-imagem'>
+                        <img className='fecharModalAlterarImagem' onClick={closeAdditionalModal} src="src/assets/fechar-modal.png" alt="Imagem para fechar o modal ao clicar" />
+                        <div className="topo">
+                            <h2>{selectedOption}</h2>
+                            {selectedOption === options[1] && (
+                                handleLogout()
+                            )}
+                        </div>
+                        <div className="centro">
+                            {(file == null) ? (
+                                <>
+                                    <img src="src/assets/foto-vazia.svg" alt="" />
+                                    <h3>Nenhum foto selecionada...</h3>
+                                </>
+                            ) : (
+                                <>
+                                    <img src={URL.createObjectURL(file)} alt="" />
+                                    <span>{fileName} - <span onClick={handleFileChange}>Alterar</span></span>
+                                </>
+                            )}
+                        </div>
+                        {(file == null) ? (
+                            <>
+                                <label htmlFor="file_upload_modal" className="custom-file-upload-label">
+                                    <b className="bold_selecionar_arquivo">{file == null ? "Selecionar Arquivo" : <span>{fileName}</span>}</b>
+                                </label>
+
+                                <input id="file_upload_modal" type="file" onChange={handleFileChange} />
+                            </>
+                        ) : (
+                            <button onClick={handleFileUpload}>Atualizar foto</button>
                         )}
-                        <button className='botaoModalMudarFoto' onClick={closeAdditionalModal}>Fechar Modal Adicional</button>
                     </div>
                 </Modal>
             </div>

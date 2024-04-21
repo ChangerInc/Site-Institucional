@@ -3,9 +3,9 @@ import { format, set } from 'date-fns';
 import { usuario, circulo, arquivosUser, arquivosCirculo } from "../api";
 import InputText from './InputText'
 import Historico from './Historico';
+import ModalExcluir from './ModalExcluir';
 import '../assets/coroa.png'
 import './styles/cardCirculo.css';
-import { Alert } from '@mui/material';
 
 function CardCirculo(props) {
     const [file, setFile] = useState(null);
@@ -60,6 +60,19 @@ function CardCirculo(props) {
 
     const closeModalMembers = () => {
         setModalMembers(false)
+    }
+
+    // Modal confirmar exclusão
+
+    const [modalConfirmarExcluir, setModalConfirmarExcluir] = useState(false)
+
+    const openModalConfirmarExcluir = (event) => {
+        setModalConfirmarExcluir(true)
+        event.stopPropagation();
+    }
+
+    const closeModalConfirmarExcluir = () => {
+        setModalConfirmarExcluir(false)
     }
 
     const handleFileChange = (event) => {
@@ -228,18 +241,25 @@ function CardCirculo(props) {
 
     return (
         <>
+            <ModalExcluir
+                name={props.tituloGrupo}
+                description={'Confirmar exclusão do círculo'}
+                modal={modalConfirmarExcluir}
+                delete={oNeymarNeymar}
+                handleClose={closeModalConfirmarExcluir}
+            />
             <div onClick={openModalFilesCircle} className="card">
                 <div className="containerConteudoCard">
                     <div className='coroaTituloLixeira'>
                         <div className='crownIcon'>
-                        {sessionStorage.getItem('id') == idDoDono && (
-                            <img className='crownIcon' src={"src/assets/coroa.png"} alt="Coroa" />
-                        )}
+                            {sessionStorage.getItem('id') == idDoDono && (
+                                <img className='crownIcon' src={"src/assets/coroa.png"} alt="Coroa" />
+                            )}
                         </div>
                         <div className='containerTituloDeleteGrupo'>
                             <b className="tituloDoCirculo">{titulo}</b>
                             {sessionStorage.getItem('id') == idDoDono && (
-                                <div onClick={oNeymarNeymar} className='deleteImage'></div>
+                                <div onClick={openModalConfirmarExcluir} className='deleteImage'></div>
                             )}
                         </div>
                     </div>
@@ -249,11 +269,10 @@ function CardCirculo(props) {
                                 <li key={membro.id}>
                                     {membro.fotoPerfil && (
                                         <img className='imageMember'
-                                            src={`data:image/png;base64,${membro.fotoPerfil}`}
+                                            src={membro.fotoPerfil}
                                             alt=""
                                         />
-                                    )}
-                                    {membro.nome}</li>
+                                    )}</li>
                             ))}
                         </ul>
                     </div>
@@ -271,18 +290,19 @@ function CardCirculo(props) {
                         <ul>
                             {(props.membros.length === 0) ? (
                                 <>
-                                    <li>Esse circulo não possui nenhum membro</li>
+                                    <li>Esse circulo não possui nenhum outro membro</li>
                                 </>
                             ) : (
                                 props.membros?.map(membro => (
                                     <li key={membro.id}>
                                         {membro.fotoPerfil && (
                                             <img className='imageMember'
-                                                src={`data:image/png;base64,${membro.fotoPerfil}`}
-                                                alt=""
+                                                src={membro.fotoPerfil}
+                                                alt="Foto do membro"
                                             />
                                         )}
-                                        <span>{membro.nome}</span></li>
+                                        <span>{membro.nome}</span>
+                                    </li>
                                 ))
                             )}
                         </ul>

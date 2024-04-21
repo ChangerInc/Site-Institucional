@@ -3,17 +3,20 @@ import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { usuario } from '../api.js'
 import Box from '@mui/material/Box';
-import InputText from '../components/InputText.jsx'
-import InputEmail from '../components/InputEmail.jsx'
-import InputSenha from '../components/InputSenha.jsx'
+import Backdrop from '@mui/material/Backdrop';
+import CircularProgress from '@mui/material/CircularProgress';
 import Alert from '@mui/material/Alert';
 import AlertTitle from '@mui/material/AlertTitle';
 import Stack from '@mui/material/Stack';
+import InputText from '../components/InputText.jsx'
+import InputEmail from '../components/InputEmail.jsx'
+import InputSenha from '../components/InputSenha.jsx'
 import Navbar from '../components/Header';
 import Footer from '../components/Footer';
 import './styles-pages/login.css';
 
 const Login = () => {
+  const [loading, setLoading] = useState(false)
   const [showSucess, setShowSucess] = useState(false)
   const [showError, setShowError] = useState(false)
   const [error, setError] = useState('')
@@ -23,6 +26,13 @@ const Login = () => {
   })
 
   const navigate = useNavigate();
+
+  const handleStopLoading = () => {
+    setLoading(false);
+  };
+  const handleStartLoading = () => {
+    setLoading(true);
+  };
 
   useEffect(() => {
     let timeout;
@@ -44,7 +54,7 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    handleStartLoading();
     try {
       const response = await usuario.post('login',
         formData);
@@ -60,25 +70,38 @@ const Login = () => {
         setShowSucess(true)
 
       } else {
+        handleStopLoading();
         throw new Error(response.data);
       }
 
     } catch (error) {
       if (error.response.status === 401) {
+        handleStopLoading();
         setError('E-mail e/ou senha estão incorretos')
         setShowError(true);
       }
       else {
+        handleStopLoading();
         console.error(error);
-        setShowError(true);
         setError(error.message);
       }
+    } finally {
+      timeout = setTimeout(() => {
+        handleStopLoading();
+      }, 1000);
+      setShowError(true);
     }
   };
 
   return (
     <>
       <Navbar />
+      <Backdrop
+        sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+        open={loading}
+      >
+        <CircularProgress color="inherit" />
+      </Backdrop>
       <div className="container-login">
         <div className='container-box'>
           <div className='container-texto'>

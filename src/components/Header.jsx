@@ -73,7 +73,12 @@ const Header = () => {
             <li>
               <Link className="linkNav">
                 <div className="divFotoPerfil">
-                  <img className='fotoNavbar' onClick={handleProfileClick} src={sessionStorage.foto} />
+                  {(sessionStorage.foto == "Foto padrão") ? (
+                    <img className='fotoNavbar' onClick={handleProfileClick} src="src/assets/perfil-de-usuario.png" />
+                  ) : (
+                    <img className='fotoNavbar' onClick={handleProfileClick} src={sessionStorage.foto} />
+                  )}
+                  
                 </div>
                 <ProfileModal
                   isOpen={isProfileModalOpen}

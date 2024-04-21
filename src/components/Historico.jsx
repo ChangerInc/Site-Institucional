@@ -71,7 +71,7 @@ const Historico = (props) => {
             renderCell: (params) => (
                 <div className="deleteDownload">
                     <DownloadComponent id={params.row.id} nome={params.row.nome} />
-                    <DeleteIcon id={params.row.id} />
+                    <DeleteIcon id={params.row.id} nome={params.row.nome}/>
                 </div>
             ),
         },

@@ -51,7 +51,7 @@ const UserInterface = () => {
     arquivosUser.get(`/${id}`)
       .then(response => {
         if (response.status === 204) {
-          console.warn("Não há arquivos no histórico");
+          console.log("Não há arquivos no histórico");
         } else {
           console.log(response.data);
           setHistorico(response.data);

@@ -409,8 +409,17 @@ ul {
 }
 
 #buttonSairCirculo{
+    width: 120px;
+    height: 50px;
+    align-self: center;
+    z-index: 4;
     background-color: rgb(253, 75, 75);
 }
+
 #buttonSairCirculo:hover{
+    width: 120px;
+    height: 50px;
+    align-self: center;
+    z-index: 4;
     background-color: rgb(216, 39, 39);
 }

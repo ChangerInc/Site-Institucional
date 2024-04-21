@@ -58,18 +58,28 @@ img {
 .fotoNavbar {
   width: 100%;
   height: 100%;
+  object-fit: cover;
+  /* try 20% 10% */
   border-radius: 50%;
   /* background-color: #FFF; */
 }
-.notification-count{
+
+.notification-count {
   position: absolute;
-  top: -5px; /* Ajusta a posição vertical */
-  right: -5px; /* Ajusta a posição horizontal */
-  background-color: red; /* Adiciona uma cor de fundo para o número */
-  color: white; /* Define a cor do texto */
-  border-radius: 50%; /* Garante que o número seja exibido como um círculo */
-  width: 20px; /* Ajusta a largura do número */
-  height: 20px; /* Ajusta a altura do número */
+  top: -5px;
+  /* Ajusta a posição vertical */
+  right: -5px;
+  /* Ajusta a posição horizontal */
+  background-color: red;
+  /* Adiciona uma cor de fundo para o número */
+  color: white;
+  /* Define a cor do texto */
+  border-radius: 50%;
+  /* Garante que o número seja exibido como um círculo */
+  width: 20px;
+  /* Ajusta a largura do número */
+  height: 20px;
+  /* Ajusta a altura do número */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -97,10 +107,12 @@ img {
 }
 
 .ReactModal__Overlay {
-  background-color: rgba(0, 0, 0, 0) !important; /* Torna o overlay completamente transparente */
+  background-color: rgba(0, 0, 0, 0) !important;
+  /* Torna o overlay completamente transparente */
   z-index: 5;
 }
-.div-da-lista{
+
+.div-da-lista {
   flex-direction: column;
   width: 100%;
   height: 100%;
@@ -109,7 +121,7 @@ img {
   justify-content: center;
 }
 
-.lista-opcoes li{
+.lista-opcoes li {
   padding: 5px;
 }
 
@@ -182,9 +194,7 @@ img {
   align-items: center;
 }
 
-.centro img {
-
-}
+.centro img {}
 
 h3 {
   font-size: 16px;

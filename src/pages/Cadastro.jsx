@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { usuario } from '../api.js';
+import Backdrop from '@mui/material/Backdrop';
+import CircularProgress from '@mui/material/CircularProgress';
 import Alert from '@mui/material/Alert';
 import AlertTitle from '@mui/material/AlertTitle';
 import Stack from '@mui/material/Stack';
@@ -14,6 +16,7 @@ import './styles-pages/cadastro.css';
 
 function CadastroUsuario() {
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false)
   const [showSucess, setShowSucess] = useState(false);
   const [showError, setShowError] = useState(false);
   const [error, setError] = useState('');
@@ -31,11 +34,18 @@ function CadastroUsuario() {
       timeout = setTimeout(() => {
         setShowSucess(false);
         navigate('/login');
-      }, 5000);
+      }, 1000);
     }
 
     return () => clearTimeout(timeout);
   }, [showSucess, showError, navigate]);
+
+  const handleStopLoading = () => {
+    setLoading(false);
+  };
+  const handleStartLoading = () => {
+    setLoading(true);
+  };
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -44,12 +54,13 @@ function CadastroUsuario() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    handleStartLoading();
     if (formData.senha !== formData.confirmar) {
       setError((prevError) => ({
         confirmar: 'tem que ser igual senha',
         ...prevError,
       }));
+      handleStopLoading();
       setShowError(true);
       return;
     }
@@ -63,7 +74,7 @@ function CadastroUsuario() {
         setShowSucess(true);
       }
 
-      
+
 
     } catch (error) {
       if (error.response.status === 409) {
@@ -77,14 +88,23 @@ function CadastroUsuario() {
         setError(error.response.data);
         console.log(error.response.data)
       }
-        
+
+    } finally {
+      timeout = setTimeout(() => {
+        handleStopLoading();
+      }, 1000);
     }
   };
 
   return (
     <>
       <Navbar />
-
+      <Backdrop
+        sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+        open={loading}
+      >
+        <CircularProgress color="inherit" />
+      </Backdrop>
       <div className="container-cadastro">
         <div className="container-box">
           <div className="container-texto">

@@ -49,7 +49,7 @@ function Convites() {
                         convites.map((convite, index) => (
                             <UnidadeConvite
                                 key={index}
-                                fotoPerfil={'src/assets/perfil-de-usuario.png'}
+                                fotoPerfil={convite.fotoAnfitriao}
                                 anfitriao={convite.anfitriao}
                                 nomeCirculo={convite.nomeCirculo}
                                 idCirculo={convite.idCirculo}

@@ -10,6 +10,7 @@ const ProfileModal = ({ isOpen, onRequestClose, options }) => {
     const navigate = useNavigate();
     const [file, setFile] = useState(null);
     const [fileName, setFileName] = useState('');
+    const [textoImagem, setTextoImagem] = useState('');
     const [additionalModalIsOpen, setAdditionalModalIsOpen] = useState(false);
     const [selectedOption, setSelectedOption] = useState(null);
 
@@ -36,6 +37,9 @@ const ProfileModal = ({ isOpen, onRequestClose, options }) => {
     const handleFileChange = (event) => {
         setFile(event.target.files[0]);
         setFileName(event.target.files[0].name);
+        if (!event.target.files[0].type.startsWith("image/")) {
+            setTextoImagem("Arquivo selecionado não é uma imagem!")
+        }
     };
 
     const handleFileUpload = () => {
@@ -56,12 +60,12 @@ const ProfileModal = ({ isOpen, onRequestClose, options }) => {
                         console.error(error);
                     })
                     .finally(() => {
-                        setFileName("Salvar arquivo");
+                        setTextoImagem("Nenhum foto selecionada...");
                         window.location.reload();
                     });
             } else {
+                setTextoImagem("Nenhum foto selecionada...");
                 console.error("O arquivo selecionado não é uma imagem.");
-                // Adicione lógica para lidar com o erro de tipo de arquivo aqui
             }
         }
     };
@@ -105,19 +109,29 @@ const ProfileModal = ({ isOpen, onRequestClose, options }) => {
                             {(file == null) ? (
                                 <>
                                     <img src="src/assets/foto-vazia.svg" alt="" />
-                                    <h3>Nenhum foto selecionada...</h3>
+                                    <h3>Nenhuma foto selecionada...</h3>
                                 </>
                             ) : (
                                 <>
-                                    <img src={URL.createObjectURL(file)} alt="" />
-                                    <span>{fileName} - <span onClick={handleFileChange}>Alterar</span></span>
+                                    {(file.type.startsWith("image/")) ? (
+                                        <>
+                                            <img src={URL.createObjectURL(file)} alt="" />
+                                            <span>{fileName} - <span onClick={handleFileChange}>Alterar</span></span>
+                                        </>
+                                    ) : (
+                                        <>
+                                            <img src="src/assets/foto-vazia.svg" alt="" />
+                                            <span>{textoImagem}</span>
+                                        </>
+                                    )}
+
                                 </>
                             )}
                         </div>
-                        {(file == null) ? (
+                        {(file == null || !file.type.startsWith("image/")) ? (
                             <>
                                 <label htmlFor="file_upload_modal" className="custom-file-upload-label">
-                                    <b className="bold_selecionar_arquivo">{file == null ? "Selecionar Arquivo" : <span>{fileName}</span>}</b>
+                                    <b className="bold_selecionar_arquivo">{file == null ? "Selecionar Arquivo" : "Escolhe outro arquivo"}</b>
                                 </label>
 
                                 <input id="file_upload_modal" type="file" onChange={handleFileChange} />

@@ -14,12 +14,15 @@ import InputSenha from '../components/InputSenha.jsx'
 import Navbar from '../components/Header';
 import Footer from '../components/Footer';
 import './styles-pages/login.css';
+import ReCAPTCHA from 'react-google-recaptcha';
 
 const Login = () => {
+  const [isVerified, setIsVerified] = useState(false);
   const [loading, setLoading] = useState(false)
   const [showSucess, setShowSucess] = useState(false)
   const [showError, setShowError] = useState(false)
   const [error, setError] = useState('')
+  const RECAPTCHA_KEY = "6LdgHcIpAAAAAB7E0JfGD4F9I59q10Rj-0BFoiBt";
   const [formData, setFormData] = useState({
     email: "",
     senha: ""
@@ -53,6 +56,11 @@ const Login = () => {
   };
 
   const handleSubmit = async (e) => {
+    if (!isVerified) {
+      setError('Por favor, verifique o reCAPTCHA');
+      setShowError(true);
+      return;
+    }
     e.preventDefault();
     handleStartLoading();
     try {
@@ -93,6 +101,10 @@ const Login = () => {
     }
   };
 
+  const handleRecaptchaChange = (value) => {
+    setIsVerified(true); // Atualize o estado quando o reCAPTCHA for verificado
+  };
+
   return (
     <>
       <Navbar />
@@ -124,6 +136,11 @@ const Login = () => {
               <div className="wrapper_login">
                 <a href="#demo-modal_login">Esqueci a senha</a>
               </div>
+
+              <ReCAPTCHA
+                  sitekey={RECAPTCHA_KEY}
+                  onChange={handleRecaptchaChange}
+                />
 
               <div id="demo-modal_login" className="modal_login">
                 <div className="modal__content_login">

@@ -4,6 +4,8 @@ import { usuario, circulo, arquivosUser, arquivosCirculo } from "../api";
 import InputText from './InputText'
 import Historico from './Historico';
 import ModalExcluir from './ModalExcluir';
+import Backdrop from '@mui/material/Backdrop';
+import CircularProgress from '@mui/material/CircularProgress';
 import '../assets/coroa.png'
 import './styles/cardCirculo.css';
 
@@ -12,6 +14,7 @@ function CardCirculo(props) {
     const [newMemberEmail, setNewMemberEmail] = useState('');
     const [fileName, setFileName] = useState('');
     const [filesUser, setFilesUser] = useState([]);
+    const [loading, setLoading] = useState(false);
     const [filesCircle, setFilesCircle] = useState(props.arquivos);
     const [idCirculo, setIdCirculo] = useState(props.idCirculo);
     const [idArquivo, setIdArquivo] = useState(props.idCirculo);
@@ -109,6 +112,7 @@ function CardCirculo(props) {
     }
 
     async function addFileInCircle(idArquivo) {
+        setLoading(true)
         arquivosCirculo
             .patch(`/${idCirculo}/${idArquivo}`)
             .then((response) => {
@@ -120,6 +124,7 @@ function CardCirculo(props) {
             .catch((error) => {
                 console.error(error);
             });
+        setLoading(true)
     }
 
     async function handleFilesUser() {
@@ -244,6 +249,12 @@ function CardCirculo(props) {
 
     return (
         <>
+            <Backdrop
+                sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+                open={loading}
+            >
+                <CircularProgress color="inherit" />
+            </Backdrop>
             <ModalExcluir
                 name={props.tituloGrupo}
                 description={'Confirmar exclusão do círculo'}

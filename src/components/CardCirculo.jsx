@@ -112,6 +112,9 @@ function CardCirculo(props) {
         arquivosCirculo
             .patch(`/${idCirculo}/${idArquivo}`)
             .then((response) => {
+                if (response.status == 200) {
+                    window.location.reload();
+                }
                 console.log(response.data);
             })
             .catch((error) => {

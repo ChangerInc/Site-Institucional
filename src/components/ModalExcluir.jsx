@@ -44,7 +44,7 @@ function ModalExcluir(props) {
                         <Typography id="modal-titulo" sx={{color: '#d32f2f', fontWeight: 'bold'}}>
                             EXCLUIR
                         </Typography>
-                        <Typography id="transition-modal-description" sx={{ mt: 0 }}>
+                        <Typography id="transition-modal-description" sx={{ textAlign: 'center'}}>
                             {props.description} "{props.name}"
                         </Typography>
                         <div>

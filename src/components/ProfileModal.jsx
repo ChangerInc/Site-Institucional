@@ -1,6 +1,8 @@
 import React from 'react';
 import { useState } from 'react';
 import Modal from 'react-modal';
+import Backdrop from '@mui/material/Backdrop';
+import CircularProgress from '@mui/material/CircularProgress';
 import { useNavigate } from 'react-router-dom';
 import { usuario } from "../api";
 
@@ -9,6 +11,7 @@ Modal.setAppElement('#root');
 const ProfileModal = ({ isOpen, onRequestClose, options }) => {
     const navigate = useNavigate();
     const [file, setFile] = useState(null);
+    const [loading, setLoading] = useState(false);
     const [fileName, setFileName] = useState('');
     const [textoImagem, setTextoImagem] = useState('');
     const [additionalModalIsOpen, setAdditionalModalIsOpen] = useState(false);
@@ -46,6 +49,7 @@ const ProfileModal = ({ isOpen, onRequestClose, options }) => {
         if (file) {
             // Verifica se o arquivo é uma imagem
             if (file.type.startsWith("image/")) {
+                setLoading(true);
                 const formData = new FormData();
                 formData.append("file", file);
                 usuario
@@ -61,6 +65,7 @@ const ProfileModal = ({ isOpen, onRequestClose, options }) => {
                     })
                     .finally(() => {
                         setTextoImagem("Nenhum foto selecionada...");
+                        setLoading(false);
                         window.location.reload();
                     });
             } else {
@@ -73,6 +78,12 @@ const ProfileModal = ({ isOpen, onRequestClose, options }) => {
 
     return (
         <>
+            <Backdrop
+                sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+                open={loading}
+            >
+                <CircularProgress color="inherit" />
+            </Backdrop>
             <Modal
                 isOpen={isOpen}
                 onRequestClose={onRequestClose}

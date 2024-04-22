@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react'
 import Footer from '../components/Footer'
 import Header from '../components/Header'
 import Historico from '../components/Historico';
+import Backdrop from '@mui/material/Backdrop';
+import CircularProgress from '@mui/material/CircularProgress';
 import './styles-pages/user-interface.css'
 import { format } from 'date-fns';
 import { usuario, arquivo, arquivosUser } from "../api";
@@ -10,6 +12,7 @@ import { usuario, arquivo, arquivosUser } from "../api";
 const UserInterface = () => {
   const username = sessionStorage?.getItem('nome');
   const id = sessionStorage?.getItem('id');
+  const [loading, setLoading] = useState(false);
   const [historicoArq, setHistorico] = useState([]);
   const [file, setFile] = useState(null);
   const [fileName, setFileName] = useState('');
@@ -22,6 +25,7 @@ const UserInterface = () => {
   };
 
   const handleFileUpload = (uploadedFile) => {
+    setLoading(true);
     if (uploadedFile) {
       const formData = new FormData();
       formData.append("file", uploadedFile);
@@ -40,6 +44,7 @@ const UserInterface = () => {
         })
         .finally(() => {
           setFileName("Salvar arquivo");
+          setLoading(true);
           fetchHistorico();
           window.location.reload();
         });
@@ -70,6 +75,12 @@ const UserInterface = () => {
   return (
     <>
       <Header />
+      <Backdrop
+        sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+        open={loading}
+      >
+        <CircularProgress color="inherit" />
+      </Backdrop>
       <div className="user-container">
         <div className="texto-container">
           <h1>Bem-vindo, {username}</h1>

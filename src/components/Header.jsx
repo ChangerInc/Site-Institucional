@@ -2,13 +2,14 @@ import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import changerLogo from '../assets/Logo/changer_black.png'
-import "./styles/navbar.css"
 import ProfileModal from './ProfileModal';
+import "./styles/navbar.css"
 import { usuario } from '../api.js';
 
 const Header = () => {
   const navigate = useNavigate();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [isProfileModalOpen, setProfileModalOpen] = useState(false);
   const [notificationCount, setNotificationCount] = useState(0);
 
@@ -63,10 +64,10 @@ const Header = () => {
             <li>
               <Link className="linkNav" to="/notificacoes">
                 <div className="divFotoPerfil">
-                {notificationCount > 0 && (
+                  {notificationCount > 0 && (
                     <span className="notification-count">{notificationCount}</span>
                   )}
-                  <img className='fotoNavbar' src='src/assets/packard-bell.png'/>
+                  <img className='fotoNavbar' src='src/assets/packard-bell.png' />
                 </div>
               </Link>
             </li>
@@ -78,7 +79,7 @@ const Header = () => {
                   ) : (
                     <img className='fotoNavbar' onClick={handleProfileClick} src={sessionStorage.foto} />
                   )}
-                  
+
                 </div>
                 <ProfileModal
                   isOpen={isProfileModalOpen}

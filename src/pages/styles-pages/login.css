@@ -44,11 +44,14 @@
 }
 
 /*MODAL LOGIN*/
+.wrapper_login {
+  display: flex;
+  flex-direction: column;
+}
 
 .wrapper_login a {
-  display: inline-block;
   text-decoration: none;
-  padding: 15px;
+  padding: 0 15px;
   background-color: #fff;
   border-radius: 3px;
   color: #5B98BA;

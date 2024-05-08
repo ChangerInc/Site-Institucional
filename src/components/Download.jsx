@@ -3,10 +3,11 @@ import React, { useEffect } from 'react';
 import { arquivo } from '../api';
 
 const DownloadComponent = (props) => {
+    const id = sessionStorage?.getItem('id');
     const downloadFile = async () => {
         try {
             // Fazer a requisição para o endpoint Java
-            const response = await arquivo.get(`/${props.id}`, { responseType: 'arraybuffer' });
+            const response = await arquivo.get(`/${props.id}`, id);
 
             // Criar um Blob a partir dos bytes recebidos
             const blob = new Blob([response.data]);

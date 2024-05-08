@@ -32,7 +32,7 @@ const UserInterface = () => {
 
       console.log(sessionStorage.getItem("id"));
 
-      arquivosUser
+      arquivo
         .post(`/${sessionStorage.getItem("id")}`, formData)
         .then(response => {
           if (response.status === 200) {

@@ -53,7 +53,7 @@ const UserInterface = () => {
 
 
   const fetchHistorico = async () => {
-    arquivosUser.get(`/${id}`)
+    arquivo.get(`/${id}`)
       .then(response => {
         if (response.status === 204) {
           console.log("Não há arquivos no histórico");

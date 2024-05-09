@@ -28,14 +28,14 @@
 
 .container-box {
     width: 420px;
-    height: 520px;
+    height: 550px;
     gap: 1rem;
     display: flex;
     flex-direction: column;
     align-self: center;
     align-items: center;
     box-sizing: border-box;
-    padding: 2.5rem 2.5rem;
+    padding: 2rem 2.5rem;
     box-shadow: 10px 12px 39px 19px rgba(0, 0, 0, 0.25);
 }
 

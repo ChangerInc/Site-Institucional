@@ -26,7 +26,7 @@ function CardCirculo(props) {
     const [deleted, setDeleted] = useState(false);
     const id = sessionStorage?.getItem('id');
 
-    // Modal Upload Files
+    // Modal Files in Circles
     const [modalFilesCircle, setModalFilesCircle] = useState(false)
 
 
@@ -94,7 +94,7 @@ function CardCirculo(props) {
             const formData = new FormData();
             formData.append("file", file);
 
-            arquivosUser
+            arquivo
                 .post(`/${id}`, formData)
                 .then((response) => {
                     console.log(response.data);

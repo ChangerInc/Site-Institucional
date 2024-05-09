@@ -59,50 +59,51 @@ const Login = () => {
     if (!isVerified) {
       setError('Por favor, verifique o reCAPTCHA');
       setShowError(true);
-      return;
-    }
-    e.preventDefault();
-    handleStartLoading();
-    try {
-      const response = await usuario.post('login',
-        formData);
+    } else {
+      e.preventDefault();
+      handleStartLoading();
+      try {
+        const response = await usuario.post('login',
+          formData);
 
-      if (response.status === 200) {
-        setShowError(false)
-        setError('')
-        sessionStorage.setItem("id", response.data.userId);
-        sessionStorage.setItem("token", response.data.token);
-        sessionStorage.setItem("nome", response.data.nome);
-        sessionStorage.setItem("foto", response.data.fotoPerfil);
-        sessionStorage.setItem("email", response.data.email);
-        setShowSucess(true)
+        if (response.status === 200) {
+          setShowError(false)
+          setError('')
+          sessionStorage.setItem("id", response.data.userId);
+          sessionStorage.setItem("token", response.data.token);
+          sessionStorage.setItem("nome", response.data.nome);
+          sessionStorage.setItem("foto", response.data.fotoPerfil);
+          sessionStorage.setItem("email", response.data.email);
+          setShowSucess(true)
 
-      } else {
-        handleStopLoading();
-        throw new Error(response.data);
-      }
+        } else {
+          handleStopLoading();
+          throw new Error(response.data);
+        }
 
-    } catch (error) {
-      if (error.response.status === 401) {
-        handleStopLoading();
-        setError('E-mail e/ou senha estão incorretos')
+      } catch (error) {
+        if (error.response.status === 401) {
+          handleStopLoading();
+          setError('E-mail e/ou senha estão incorretos')
+          setShowError(true);
+        }
+        else {
+          handleStopLoading();
+          console.error(error);
+          setError(error.message);
+        }
+      } finally {
+        timeout = setTimeout(() => {
+          handleStopLoading();
+        }, 1000);
         setShowError(true);
       }
-      else {
-        handleStopLoading();
-        console.error(error);
-        setError(error.message);
-      }
-    } finally {
-      timeout = setTimeout(() => {
-        handleStopLoading();
-      }, 1000);
-      setShowError(true);
     }
+
   };
 
   const handleRecaptchaChange = (value) => {
-    setIsVerified(true); // Atualize o estado quando o reCAPTCHA for verificado
+    setIsVerified(true);
   };
 
   return (

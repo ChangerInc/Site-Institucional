@@ -1,7 +1,7 @@
 import "../components/styles/historico.css"
 import React, { useState } from 'react';
 import ModalExcluir from "./ModalExcluir";
-import { arquivosUser } from "../api";
+import { arquivo } from "../api";
 
 const DeleteIcon = (props) => {
     const [modalConfirmarExcluir, setModalConfirmarExcluir] = useState(false)
@@ -17,7 +17,7 @@ const DeleteIcon = (props) => {
 
     async function deleteArquivo() {
         console.log(props.id);
-        arquivosUser
+        arquivo
             .delete(`/${sessionStorage?.getItem("id")}/${props.id}`)
             .then((response) => {
                 console.log(response.data);

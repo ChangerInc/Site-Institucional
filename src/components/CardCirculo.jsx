@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { format, set } from 'date-fns';
-import { usuario, circulo, arquivosUser, arquivo } from "../api";
+import React, { useState } from 'react';
+import { circulo, arquivosUser, arquivo } from "../api";
 import InputText from './InputText'
 import Historico from './Historico';
 import ModalExcluir from './ModalExcluir';
@@ -373,17 +372,15 @@ function CardCirculo(props) {
                                     <li>Esse circulo não possui nenhum arquivo!</li>
                                 </>
                             ) : (
-                                props.arquivos?.map(arquivo => (
-                                    <Historico
-                                        key={arquivo.idArquivo}
-                                        idCirculo={props.idCirculo}
-                                        idArquivo={arquivo.idArquivo}
-                                        nome={arquivo.nome}
-                                        criacao={arquivo.criacao}
-                                        extensao={arquivo.extensao}
-                                        historico={props.arquivos}
-                                    />
-                                ))
+                                <Historico
+                                    key={arquivo.idArquivo}
+                                    idCirculo={props.idCirculo}
+                                    idArquivo={arquivo.idArquivo}
+                                    nome={arquivo.nome}
+                                    criacao={arquivo.criacao}
+                                    extensao={arquivo.extensao}
+                                    historico={props.arquivos}
+                                />
                             )}
                         </ul>
                     </div>

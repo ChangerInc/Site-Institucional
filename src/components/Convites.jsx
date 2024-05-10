@@ -1,10 +1,14 @@
-import "../components/styles/convites.css"
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Fragment } from 'react';
+import { styled } from '@mui/material/styles';
 import { usuario, circulo } from '../api.js';
+import { Grid, Typography } from '@mui/material';
+import InvitationItem from './InvitationItem.jsx';
+import List from '@mui/material/List';
+import "../components/styles/convites.css"
 
 function Convites() {
-
     const [convites, setConvites] = useState([]);
+    const [dense, setDense] = React.useState(false);
 
     const fetchConvites = async () => {
         try {
@@ -17,7 +21,7 @@ function Convites() {
     };
 
     useEffect(() => {
-        fetchConvites(); // Chamar a função diretamente dentro do useEffect
+        fetchConvites();
     }, []);
 
     async function handleButtonClick(idCirculo, acaoBotao) {
@@ -27,8 +31,8 @@ function Convites() {
         formData.append("idUsuario", sessionStorage.getItem("id"));
         try {
             const response = await circulo.patch(`/convite/botao/${acaoBotao}`, formData);
-            if (response.status === 200 || response.status ) {
-                fetchConvites(); // Chamar a função para atualizar os convites
+            if (response.status === 200 || response.status) {
+                fetchConvites();
             } else {
                 console.error('Erro ao executar ação do botão:', response.statusText);
             }
@@ -39,15 +43,28 @@ function Convites() {
 
     return (
         <>
-            <div className="container-convites">
-                <div className="box-convites">
-                    <div className="head-convites"></div>
-                    {convites.length === 0 ? ( // Verifica se não há convites
-                        <div className="sem-convites"><span>Não há convites!</span>
-                        </div>
+            <Grid sx={{
+                overflow: 'auto',
+                height: '100%',
+                '&::-webkit-scrollbar': {
+                    width: '5px'
+                },
+                '&::-webkit-scrollbar-thumb': {
+                    backgroundColor: '#145DA0',
+                    borderRadius: '20px'
+                }
+            }} item xs={12} md={6}>
+                <Typography variant="h6" component="div">
+                    Convites para círculos
+                </Typography>
+                <List dense={dense}>
+                    {convites.length === 0 ? (
+                        <Typography variant="h6" component="div">
+                            Não há nenhum convite!
+                        </Typography>
                     ) : (
                         convites.map((convite, index) => (
-                            <UnidadeConvite
+                            <InvitationItem
                                 key={index}
                                 fotoPerfil={convite.fotoAnfitriao}
                                 anfitriao={convite.anfitriao}
@@ -58,45 +75,10 @@ function Convites() {
                             />
                         ))
                     )}
-                </div>
-            </div>
+                </List>
+            </Grid>
         </>
     );
 };
 
-
-
-function UnidadeConvite({ fotoPerfil, anfitriao, nomeCirculo, idCirculo, horario, onButtonClick  }) {
-    // Função para calcular o tempo decorrido
-    const tempoDecorrido = (horario) => {
-        const dataAtual = new Date();
-        const dataHorario = new Date(horario);
-
-        const diferencaEmMilissegundos = dataAtual - dataHorario;
-        const diferencaEmMinutos = Math.floor(diferencaEmMilissegundos / (1000 * 60));
-
-        if (diferencaEmMinutos < 60) {
-            return `há ${diferencaEmMinutos} minutos atrás`;
-        } else {
-            const diferencaEmHoras = Math.floor(diferencaEmMinutos / 60);
-            return `há ${diferencaEmHoras} horas atrás`;
-        }
-    };
-
-    return (
-        <li className="convite">
-            <div className="texto-convite">
-                <img className="fotoConvite" src={fotoPerfil} alt="" />
-                <span>{anfitriao}</span>
-                <p>convidou você para o círculo</p>
-                <span>{nomeCirculo}</span>
-            </div>
-                <div className="horario"><i>{tempoDecorrido(horario)}</i> {/* Exibir tempo decorrido */}</div>
-            <div className="botoes-convite">
-                <button className="aceitar" onClick={() => onButtonClick(idCirculo, 1)}></button>
-                <button className="negar" onClick={() => onButtonClick(idCirculo, 2)}></button>
-            </div>
-        </li>
-    );
-}
 export default Convites;

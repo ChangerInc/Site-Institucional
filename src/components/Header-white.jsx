@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import NotificationIcon from './NotificationIcon.jsx';
 import Avatar from '@mui/material/Avatar';
 import Menu from "../components/Menu";
 import changerLogo from '../assets/Logo/changer_white.png'
@@ -12,7 +13,6 @@ const Header = () => {
   const navigate = useNavigate();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [anchorEl, setAnchorEl] = React.useState(null);
-  const open = Boolean(anchorEl);
   const [modalPerfilIsOpen, setModalPerfilIsOpen] = useState(false);
   const [notificationCount, setNotificationCount] = useState(0);
 
@@ -88,14 +88,9 @@ const Header = () => {
                 </Link>
               </li>
               <li>
-                <Link className="linkNav" to="/notificacoes">
-                  <div className="divFotoPerfil">
-                    {notificationCount > 0 && (
-                      <span className="notification-count">{notificationCount}</span>
-                    )}
-                    <img className='fotoNavbar' src='src/assets/packard-bell.png' />
-                  </div>
-                </Link>
+                <NotificationIcon
+                  count={notificationCount}
+                />
               </li>
               <li>
                 <div>

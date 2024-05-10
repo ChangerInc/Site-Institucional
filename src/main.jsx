@@ -19,7 +19,6 @@ import UserInterface from "./pages/UserInterface";
 import Grupos from "./pages/Grupos";
 
 import { createBrowserRouter, RouterProvider, Route } from "react-router-dom";
-import Notificacoes from './pages/Notificacoes.jsx';
 
 const router = createBrowserRouter([
   {
@@ -52,10 +51,6 @@ const router = createBrowserRouter([
       {
         path: "/grupo",
         element: <Grupos />
-      },
-      {
-        path: "/notificacoes",
-        element: <Notificacoes />
       }
     ]
   }

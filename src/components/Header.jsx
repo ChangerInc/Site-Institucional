@@ -85,7 +85,7 @@ const Header = () => {
                   Circulos
                 </Link>
               </li>
-              <li>''
+              <li>
                 <NotificationIcon
                   count={notificationCount}
                 />

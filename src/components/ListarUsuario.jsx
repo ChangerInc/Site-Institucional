@@ -11,7 +11,7 @@ class ListarUsuario extends Component {
 
     componentDidMount() {
         // Faz a requisição GET para a sua API
-        axios.get('http://localhost:8080/usuario/')
+        axios.get('http://44.217.150.7:8080/usuario/')
             .then(response => {
                 this.setState({ usuarios: response.data });
             })

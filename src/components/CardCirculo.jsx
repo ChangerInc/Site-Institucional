@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { format, set } from 'date-fns';
-import { usuario, circulo, arquivosUser, arquivosCirculo } from "../api";
+import { usuario, circulo, arquivosUser, arquivo } from "../api";
 import InputText from './InputText'
 import Historico from './Historico';
 import ModalExcluir from './ModalExcluir';
@@ -17,7 +17,6 @@ function CardCirculo(props) {
     const [loading, setLoading] = useState(false);
     const [filesCircle, setFilesCircle] = useState(props.arquivos);
     const [idCirculo, setIdCirculo] = useState(props.idCirculo);
-    const [idArquivo, setIdArquivo] = useState(props.idCirculo);
     const [idConversao, setIdConversao] = useState('');
     const [titulo, setTitulo] = useState(props.tituloGrupo);
     const [idDoDono, setDono] = useState(props.dono);
@@ -44,7 +43,6 @@ function CardCirculo(props) {
 
     const openModalUploadFile = (event) => {
         setModalUploadFile(true)
-        handleFilesUser();
         event.stopPropagation();
     }
 
@@ -111,20 +109,25 @@ function CardCirculo(props) {
         }
     }
 
-    async function addFileInCircle(idArquivo) {
+    async function addFileInCircle() {
+        const formData = new FormData();
+        formData.append("file", file);
+
         setLoading(true)
-        arquivosCirculo
-            .patch(`/${idCirculo}/${idArquivo}`)
+        arquivo
+            .patch(`/circulo/${idCirculo}`, formData)
             .then((response) => {
-                if (response.status == 200) {
+                if (response.status == 201) {
                     window.location.reload();
                 }
                 console.log(response.data);
             })
             .catch((error) => {
                 console.error(error);
+            })
+            .finally(() => {
+                setLoading(false)
             });
-        setLoading(true)
     }
 
     async function handleFilesUser() {
@@ -141,8 +144,8 @@ function CardCirculo(props) {
     }
 
     async function handleFilesCircle() {
-        arquivosCirculo
-            .get(`/${idCirculo}`)
+        arquivo
+            .get(`/circulo/${idCirculo}`)
             .then((response) => {
                 console.log(response.data);
                 setFilesCircle(response.data);
@@ -350,7 +353,7 @@ function CardCirculo(props) {
                             </label>
 
                             <input id="file_upload_modal" type="file" onChange={handleFileChange} />
-                            <button id='buttonUploadModal' onClick={uploadNewFileInHistoric}>Enviar Arquivo</button>
+                            <button id='buttonUploadModal' onClick={addFileInCircle}>Enviar Arquivo</button>
                         </div>
                     </div>
 
@@ -373,6 +376,7 @@ function CardCirculo(props) {
                                 props.arquivos?.map(arquivo => (
                                     <Historico
                                         key={arquivo.idArquivo}
+                                        idCirculo={props.idCirculo}
                                         idArquivo={arquivo.idArquivo}
                                         nome={arquivo.nome}
                                         criacao={arquivo.criacao}

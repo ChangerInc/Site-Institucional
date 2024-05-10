@@ -6,7 +6,7 @@ import Backdrop from '@mui/material/Backdrop';
 import CircularProgress from '@mui/material/CircularProgress';
 import './styles-pages/user-interface.css'
 import { format } from 'date-fns';
-import { usuario, arquivo, arquivosUser } from "../api";
+import { usuario, arquivo } from "../api";
 
 
 const UserInterface = () => {
@@ -106,6 +106,7 @@ const UserInterface = () => {
           ) : (
             <Historico
               key={1}
+              idCirculo={null}
               idConversao={historicoArq.idArquivo}
               historico={historicoArq}
             />

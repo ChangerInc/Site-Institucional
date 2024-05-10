@@ -8,33 +8,15 @@ import { usuario } from "../api";
 
 Modal.setAppElement('#root');
 
-const ProfileModal = ({ isOpen, onRequestClose, options }) => {
+const ProfileModal = ({ modalOpen, handleProfileModal }) => {
     const navigate = useNavigate();
     const [file, setFile] = useState(null);
     const [loading, setLoading] = useState(false);
     const [fileName, setFileName] = useState('');
     const [textoImagem, setTextoImagem] = useState('');
-    const [additionalModalIsOpen, setAdditionalModalIsOpen] = useState(false);
-    const [selectedOption, setSelectedOption] = useState(null);
-
-    const openAdditionalModal = (option) => {
-        setSelectedOption(option);
-        setAdditionalModalIsOpen(true);
-        onRequestClose()
-    };
-
-    const closeAdditionalModal = () => {
-        setAdditionalModalIsOpen(false);
-    };
-
-    const handleLogout = () => {
-        sessionStorage.clear();
-        navigate('/login');
-    };
 
     const handleClick = (event) => {
         event.stopPropagation();
-        // Seu código de manipulação de clique aqui
     };
 
     const handleFileChange = (event) => {
@@ -84,37 +66,18 @@ const ProfileModal = ({ isOpen, onRequestClose, options }) => {
             >
                 <CircularProgress color="inherit" />
             </Backdrop>
-            <Modal
-                isOpen={isOpen}
-                onRequestClose={onRequestClose}
-                contentLabel="Perfil"
-                className="modal-perfil"
-            >
-                <div className='div-da-lista'>
-                    <ul className='lista-opcoes'>
-                        {options.map((option, index) => (
-                            <li key={index} onClick={() => openAdditionalModal(option)}>
-                                {option}
-                            </li>
-                        ))}
-                    </ul>
-                </div>
-            </Modal>
 
             <div onClick={handleClick} >
                 <Modal
-                    isOpen={additionalModalIsOpen}
-                    onRequestClose={closeAdditionalModal}
+                    isOpen={modalOpen}
+                    onRequestClose={handleProfileModal}
                     contentLabel="Modal Adicional"
                     className="modal-adicional"
                 >
                     <div className='modal-alterar-imagem'>
-                        <img className='fecharModalAlterarImagem' onClick={closeAdditionalModal} src="src/assets/fechar-modal.png" alt="Imagem para fechar o modal ao clicar" />
+                        <img className='fecharModalAlterarImagem' onClick={handleProfileModal} src="src/assets/fechar-modal.png" alt="Imagem para fechar o modal ao clicar" />
                         <div className="topo">
-                            <h2>{selectedOption}</h2>
-                            {selectedOption === options[1] && (
-                                handleLogout()
-                            )}
+                            <h2>Mudar foto</h2>
                         </div>
                         <div className="centro">
                             {(file == null) ? (

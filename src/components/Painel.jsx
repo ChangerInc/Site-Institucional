@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import InputText from "./InputText.jsx";
-import { circulo } from "../api.js";
+import { circulo, arquivo } from "../api.js";
 import CardCirculo from "./CardCirculo";
 import './styles/painel.css'
 

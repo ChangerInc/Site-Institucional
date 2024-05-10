@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import Box from '@mui/material/Box';
 import { DataGrid } from '@mui/x-data-grid';
 import { format } from 'date-fns';
-import "../components/styles/historico.css"
+import Box from '@mui/material/Box';
 import DownloadComponent from './Download';
 import DeleteIcon from './DeleteIcon';
+import "../components/styles/historico.css"
 // PNGs das extensões
 import aviIcon from '../assets/icones/avi.png';
 import docxIcon from '../assets/icones/doc.png';
@@ -24,12 +23,9 @@ import xlsIcon from '../assets/icones/xls.png';
 import csvIcon from '../assets/icones/csv.png';
 
 const Historico = (props) => {
-    const [showDownload, setShowDownload] = useState(false);
-    const [idCirculo, setIdCirculo] = useState(props.idCirculo);
     const [historico, setHistorico] = useState(props.historico);
-    console.log(props.historico)
+    console.log("Id do círculo: " + props.idCirculo)
 
-    const navigate = new useNavigate();
     const iconPaths = {
         avi: aviIcon,
         docx: docxIcon,
@@ -52,7 +48,7 @@ const Historico = (props) => {
         {
             field: 'icon',
             headerName: 'Icon',
-            width:120,
+            width: 120,
             align: 'center',
             renderCell: (params) => (
                 <div>
@@ -62,7 +58,7 @@ const Historico = (props) => {
         },
         { field: 'nome', headerName: 'Nome', width: 250, align: 'center' },
         { field: 'criacao', headerName: 'Data de criação', width: 180, align: 'center' },
-        { field: 'extensao', headerName: 'Extensão', width:120, align: 'center' },
+        { field: 'extensao', headerName: 'Extensão', width: 120, align: 'center' },
         {
             field: 'actions',
             headerName: 'Ações',
@@ -70,8 +66,16 @@ const Historico = (props) => {
             align: 'center',
             renderCell: (params) => (
                 <div className="deleteDownload">
-                    <DownloadComponent id={params.row.id} nome={params.row.nome} />
-                    <DeleteIcon id={params.row.id} nome={params.row.nome}/>
+                    <DownloadComponent
+                        idCirculo={props.idCirculo}
+                        idArquivo={params.row.id}
+                        nome={params.row.nome}
+                    />
+                    <DeleteIcon
+                        idCirculo={props.idCirculo}
+                        idArquivo={params.row.id}
+                        nome={params.row.nome}
+                    />
                 </div>
             ),
         },
@@ -92,15 +96,10 @@ const Historico = (props) => {
             .delete(`/${idCirculo}/${props.idArquivo}`)
             .then((response) => {
                 console.log(response.data);
-                setDeleted(true)
             })
             .catch(error => {
                 console.error('Erro ao apagar arquivo:', error);
             });
-    }
-
-    const baixar = () => {
-        setShowDownload(true);
     }
 
     return (

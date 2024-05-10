@@ -3,8 +3,9 @@ import React, { useState } from 'react';
 import ModalExcluir from "./ModalExcluir";
 import { arquivo } from "../api";
 
-const DeleteIcon = (props) => {
+const DeleteIcon = ({idCirculo, idArquivo, nome}) => {
     const [modalConfirmarExcluir, setModalConfirmarExcluir] = useState(false)
+    const idUsuario = sessionStorage?.getItem('id');
 
     const openModalConfirmarExcluir = (event) => {
         setModalConfirmarExcluir(true)
@@ -15,10 +16,29 @@ const DeleteIcon = (props) => {
         setModalConfirmarExcluir(false)
     }
 
-    async function deleteArquivo() {
-        console.log(props.id);
+    const handleDeleteFileHistoricOrCircle = () => {
+        if (idCirculo) {
+            deleteArquivoDoCirculo()
+        } else {
+            deleteArquivoDoHistorico()
+        }
+    }
+
+    async function deleteArquivoDoCirculo() {
         arquivo
-            .delete(`/${sessionStorage?.getItem("id")}/${props.id}`)
+            .delete(`/circulo/${idCirculo}/${idArquivo}`)
+            .then((response) => {
+                console.log(response.data);
+                window.location.reload();
+            })
+            .catch(error => {
+                console.error('Erro ao apagar arquivo:', error);
+            });
+    }
+
+    async function deleteArquivoDoHistorico() {
+        arquivo
+            .delete(`/${idUsuario}/${idArquivo}`)
             .then((response) => {
                 console.log(response.data);
                 window.location.reload();
@@ -31,10 +51,10 @@ const DeleteIcon = (props) => {
     return (
         <>
             <ModalExcluir
-                name={props.nome}
+                name={nome}
                 description={'Confirmar exclusão do arquivo'}
                 modal={modalConfirmarExcluir}
-                delete={deleteArquivo}
+                delete={handleDeleteFileHistoricOrCircle}
                 handleClose={closeModalConfirmarExcluir}
             />
             <div onClick={openModalConfirmarExcluir} className="deleteImage" alt="Ícone de excluir arquivo" />

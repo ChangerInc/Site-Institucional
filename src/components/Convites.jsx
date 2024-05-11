@@ -1,4 +1,4 @@
-import React, { useState, useEffect, Fragment } from 'react';
+import React, { useState, useEffect } from 'react';
 import { usuario, circulo } from '../api.js';
 import { Grid, Typography } from '@mui/material';
 import InvitationItem from './InvitationItem.jsx';

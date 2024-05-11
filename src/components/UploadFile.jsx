@@ -1,7 +1,38 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Button from '@mui/material/Button';
+import { arquivo } from "../api";
 
-function UploadFile({ handleFileChange, addFileInCircle, file, fileName }) {
+function UploadFile({ setLoading, idCirculo }) {
+    const [file, setFile] = useState(null);
+    const [fileName, setFileName] = useState('');
+
+    const handleFileChange = (event) => {
+        const selectedFile = event.target.files[0];
+        setFile(selectedFile);
+        setFileName(selectedFile.name);
+    };
+
+    async function addFileInCircle() {
+        const formData = new FormData();
+        formData.append("file", file);
+
+        setLoading(true)
+        arquivo
+            .patch(`/circulo/${idCirculo}`, formData)
+            .then((response) => {
+                if (response.status == 201) {
+                    window.location.reload();
+                }
+                console.log(response.data);
+            })
+            .catch((error) => {
+                console.error(error);
+            })
+            .finally(() => {
+                setLoading(false)
+            });
+    }
+
     return (
         <div className="conteudoDireito">
             <h3>Adicionar arquivo ao círculo</h3>

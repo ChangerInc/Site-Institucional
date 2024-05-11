@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { circulo, arquivosUser, arquivo } from "../api";
-import InputText from './InputText'
+import AddNewMembers from './AddNewMembers';
 import GenericModal from './GenericModal';
 import UploadFile from './UploadFile';
 import Historico from './Historico';
@@ -11,14 +11,9 @@ import '../assets/coroa.png'
 import './styles/cardCirculo.css';
 
 function CardCirculo(props) {
-    const [file, setFile] = useState(null);
-    const [newMemberEmail, setNewMemberEmail] = useState('');
-    const [fileName, setFileName] = useState('');
-    const [filesUser, setFilesUser] = useState([]);
     const [loading, setLoading] = useState(false);
     const [filesCircle, setFilesCircle] = useState(props.arquivos);
     const [idCirculo, setIdCirculo] = useState(props.idCirculo);
-    const [idConversao, setIdConversao] = useState('');
     const [titulo, setTitulo] = useState(props.tituloGrupo);
     const [idDoDono, setDono] = useState(props.dono);
     const [membros, setMembros] = useState(props.membros);
@@ -75,73 +70,6 @@ function CardCirculo(props) {
         setModalConfirmarExcluir(false)
     }
 
-    const handleFileChange = (event) => {
-        const selectedFile = event.target.files[0];
-        setFile(selectedFile);
-        setFileName(selectedFile.name);
-    };
-
-    const handleUserEmail = (event) => {
-        const userEmail = event.target.value;
-        setNewMemberEmail(userEmail);
-    };
-
-    async function uploadNewFileInHistoric(event) {
-        if (file) {
-            const formData = new FormData();
-            formData.append("file", file);
-
-            arquivo
-                .post(`/${id}`, formData)
-                .then((response) => {
-                    console.log(response.data);
-                    setIdConversao(response.data);
-                    addFileInCircle(response.data);
-                    setFile(null)
-                    setFileName('');
-                    closeModalUploadFile();
-                })
-                .catch((error) => {
-                    console.error(error);
-                });
-            event.stopPropagation();
-        }
-    }
-
-    async function addFileInCircle() {
-        const formData = new FormData();
-        formData.append("file", file);
-
-        setLoading(true)
-        arquivo
-            .patch(`/circulo/${idCirculo}`, formData)
-            .then((response) => {
-                if (response.status == 201) {
-                    window.location.reload();
-                }
-                console.log(response.data);
-            })
-            .catch((error) => {
-                console.error(error);
-            })
-            .finally(() => {
-                setLoading(false)
-            });
-    }
-
-    async function handleFilesUser() {
-        arquivosUser
-            .get(`/${id}`)
-            .then((response) => {
-                console.log(response.data);
-                console.log(idCirculo);
-                setFilesUser(response.data);
-            })
-            .catch((error) => {
-                console.error(error);
-            });
-    }
-
     async function handleFilesCircle() {
         arquivo
             .get(`/circulo/${idCirculo}`)
@@ -172,44 +100,7 @@ function CardCirculo(props) {
             });
     }
 
-    async function addUserInCircle() {
-        const formData = new FormData();
-        formData.append("idAnfitriao", id);
-        formData.append("emailDoConvidado", newMemberEmail);
-
-        if (newMemberEmail == sessionStorage.getItem("email")) {
-            alert("impossivel se convidar")
-        } else {
-            circulo
-                .post(`/convidar/${idCirculo}`, formData)
-                .then((response) => {
-                    closeModalMembers();
-                })
-                .catch((error) => {
-                    console.error(error);
-                });
-        }
-
-    }
-
-    async function sairDoCirculo() {
-
-        if (id == props.dono) {
-            oNeymarNeymar()
-        } else {
-            console.log("idCirculo" + idCirculo)
-            console.log("id" + id)
-            circulo
-                .patch(`/sair/${idCirculo}/${id}`)
-                .then(
-                    window.location.reload())
-                .catch((error) => {
-                    console.error(error);
-                });
-        }
-    }
-
-    async function oNeymarNeymar(event) {
+    async function limparCirculo(event) {
         if (membros.length != 0) {
             circulo
                 .delete(`/limpar/${idCirculo}`)
@@ -261,7 +152,7 @@ function CardCirculo(props) {
                 name={props.tituloGrupo}
                 description={'Confirmar exclusão do círculo'}
                 modal={modalConfirmarExcluir}
-                delete={oNeymarNeymar}
+                delete={limparCirculo}
                 handleClose={closeModalConfirmarExcluir}
             />
             <div onClick={openModalFilesCircle} className="card">
@@ -299,57 +190,30 @@ function CardCirculo(props) {
                 </div>
             </div>
             {modalMembers && (
-                <div className="modalMembers">
-                    <div onClick={closeModalMembers} className='imageCloseModal'></div>
-                    <div className="membersInCircle">
-                        <h3>Membros do circulo {props.tituloGrupo}</h3>
-                        <ul>
-                            {(props.membros.length === 0) ? (
-                                <>
-                                    <li>Esse circulo não possui nenhum outro membro</li>
-                                </>
-                            ) : (
-                                props.membros?.map(membro => (
-                                    <li key={membro.id}>
-                                        {membro.fotoPerfil && (
-                                            <img className='imageMember'
-                                                src={membro.fotoPerfil}
-                                                alt="Foto do membro"
-                                            />
-                                        )}
-                                        <span>{membro.nome}</span>
-                                    </li>
-                                ))
-                            )}
-                        </ul>
-                    </div>
-
-                    <div className="addMembers">
-                        <h3>Adicionar novo membro</h3>
-                        <InputText
+                <GenericModal
+                    Component={() => (
+                        <AddNewMembers
                             key={1}
-                            htmlFor={'addMember'}
-                            label={'E-mail do usuário'}
-                            type={'email'}
-                            id={'addMember'}
-                            name={'addMember'}
-                            value={newMemberEmail}
-                            onChange={handleUserEmail}
+                            idCirculo={idCirculo}
+                            tituloGrupo={titulo}
+                            dono={idDoDono}
+                            membros={membros}
+                            limparCirculo={limparCirculo}
+                            closeModal={closeModalMembers}
                         />
-                        <button id='buttonAddMembers' onClick={addUserInCircle}>Adicionar</button>
-                        <button id='buttonSairCirculo' onClick={sairDoCirculo}>{id == props.dono ? "Excluir Círculo" : "Sair"}</button>
-                    </div>
-                </div>
+                    )}
+                    width={'40%'}
+                    open={modalMembers}
+                    handleClose={closeModalMembers}
+                />
             )}
             {modalUploadFile && (
                 <GenericModal
                     Component={() => (
                         <UploadFile
                             key={1}
-                            handleFileChange={handleFileChange}
-                            addFileInCircle={addFileInCircle}
-                            file={file}
-                            fileName={fileName}
+                            setLoading={setLoading}
+                            idCirculo={idCirculo}
                         />
                     )}
                     width={'25%'}

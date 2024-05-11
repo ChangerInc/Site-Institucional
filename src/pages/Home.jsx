@@ -1,10 +1,17 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import Header from '../components/Header-white'
 import ArquivoBox from '../components/ArquivoBox'
 import Footer from '../components/Footer'
 import '../pages/styles-pages/home.css';
 
 function Home() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    const isAuthenticated = sessionStorage.getItem('id') != undefined;
+    setIsLoggedIn(isAuthenticated);
+  }, []);
+
   return (
     <>
       <div className='container-index'>
@@ -15,7 +22,9 @@ function Home() {
               com a facilidade de um <span className='spanclick'>click.</span></h1>
           </div>
           <i className='white-text'>Para compartilhar seus arquivos crie sua conta</i>
-          <ArquivoBox />
+          <ArquivoBox
+            isLoggedIn={isLoggedIn}
+          />
         </div>
       </div>
       <div className='main'>
@@ -79,11 +88,11 @@ function Home() {
               </div>
             </div>
             <div className="boxCard">
-                  <img src="/src/assets/timer.png" alt="" />
-                <div className="boxText">
-                  <h2>FACILIDADE</h2>
-                  <p>Nosso ponto forte. Sendo muito fácil de usar, até para quem não tem experiência em conversão de arquivos. </p>
-                </div>
+              <img src="/src/assets/timer.png" alt="" />
+              <div className="boxText">
+                <h2>FACILIDADE</h2>
+                <p>Nosso ponto forte. Sendo muito fácil de usar, até para quem não tem experiência em conversão de arquivos. </p>
+              </div>
             </div>
           </div>
         </div>

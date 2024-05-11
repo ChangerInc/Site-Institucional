@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import '../components/styles/arquivo-box.css';
 import Navbar from '../components/Header';
 import Footer from '../components/Footer';
@@ -11,12 +11,21 @@ import PessoasComputador from '../assets/Pessoas_Computador.png';
 
 
 const Converter = () => {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    const isAuthenticated = sessionStorage.getItem('id') != undefined;
+    setIsLoggedIn(isAuthenticated);
+  }, []);
+
   return (
     <>
       <Navbar />
       <div className='imagem'>
         <img src={ConversorPapeis} alt="Compartilhamento" style={{ width: '300px', marginBottom: '20px' }} />
-        <ArquivoBox />
+        <ArquivoBox 
+          isLoggedIn={isLoggedIn}
+        />
       </div>
       <div className='segunda-parte-pai'>
         <div className="segunda-parte">

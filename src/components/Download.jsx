@@ -2,6 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { saveAs } from "file-saver";
 import { arquivo } from '../api';
 import ProgressBox from './ProgressBox';
+import Tooltip from '@mui/material/Tooltip';
+import IconButton from '@mui/material/IconButton';
+import FileDownloadIcon from '@mui/icons-material/FileDownload';
 import 'react-circular-progressbar/dist/styles.css';
 import "../components/styles/historico.css"
 
@@ -61,7 +64,22 @@ const DownloadComponent = ({ loadingState, idCirculo, idArquivo, nome }) => {
                 {loading ? (
                     <ProgressBox value={progress} />
                 ) : (
-                    <div onClick={handleDownloadFileHistoricOrCircle} className="downloadImage" alt="Ícone de baixar arquivo" />
+                    <Tooltip title='Baixar arquivo'>
+                        <IconButton
+                            onClick={handleDownloadFileHistoricOrCircle}
+                            aria-label="Baixar"
+                            sx={{
+                                width: 20,
+                                height: 20,
+                                color: 'black',
+                                ":hover": {
+                                    color: 'blue',
+                                }
+                            }}
+                        >
+                            <FileDownloadIcon />
+                        </IconButton>
+                    </Tooltip>
                 )}
             </div>
         </>

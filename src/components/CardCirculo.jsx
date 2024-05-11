@@ -8,6 +8,9 @@ import ModalExcluir from './ModalExcluir';
 import Backdrop from '@mui/material/Backdrop';
 import AvatarGroup from '@mui/material/AvatarGroup';
 import Avatar from '@mui/material/Avatar';
+import Tooltip from '@mui/material/Tooltip';
+import IconButton from '@mui/material/IconButton';
+import DeleteIcon from '@mui/icons-material/Delete';
 import CircularProgress from '@mui/material/CircularProgress';
 import '../assets/coroa.png'
 import './styles/cardCirculo.css';
@@ -162,11 +165,28 @@ function CardCirculo(props) {
                     <div className='coroaTituloLixeira'>
                         <div className='containerTituloDeleteGrupo'>
                             {sessionStorage.getItem('id') == idDoDono && (
-                                <img className='crownIcon' src={"src/assets/coroa.png"} alt="Coroa" />
+                                <Tooltip title='Dono'>
+                                    <img className='crownIcon' src={"src/assets/coroa.png"} alt="Coroa" />
+                                </Tooltip>
                             )}
                             <b className="tituloDoCirculo">{titulo}</b>
                             {sessionStorage.getItem('id') == idDoDono && (
-                                <div onClick={openModalConfirmarExcluir} className='deleteImage'></div>
+                                <Tooltip title='Excluir círculo'>
+                                    <IconButton
+                                        onClick={openModalConfirmarExcluir}
+                                        aria-label="Excluir"
+                                        sx={{
+                                            width: 20,
+                                            height: 20,
+                                            color: 'black',
+                                            ":hover": {
+                                                color: 'red',
+                                            }
+                                        }}
+                                    >
+                                        <DeleteIcon />
+                                    </IconButton>
+                                </Tooltip>
                             )}
                         </div>
                     </div>
@@ -178,8 +198,12 @@ function CardCirculo(props) {
                         </AvatarGroup>
                     </div>
                     <div className="btnsCircle">
-                        <div onClick={openModalMembers} className="membersImage"></div>
-                        <div onClick={openModalUploadFile} className="fileImage"></div>
+                        <Tooltip title='Membros'>
+                            <div onClick={openModalMembers} className="membersImage"></div>
+                        </Tooltip>
+                        <Tooltip title='Adicionar arquivo'>
+                            <div onClick={openModalUploadFile} className="fileImage"></div>
+                        </Tooltip>
                     </div>
                 </div>
             </div>

@@ -1,11 +1,11 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { vertopal } from "../api";
 import { saveAs } from "file-saver";
 import { Link } from 'react-router-dom';
 import { Player } from '@lottiefiles/react-lottie-player';
 import './styles/arquivo-box.css';
 
-function ArquivoBox() {
+function ArquivoBox({ isLoggedIn }) {
   const [file, setFile] = useState(null);
   const [fileName, setFileName] = useState('');
   const [extensao, setExtensao] = useState('');
@@ -251,9 +251,16 @@ function ArquivoBox() {
       </div>
       {isSelectVisible && (
         <>
-          <span className="texto_box_informacao">
-            Solte os arquivos aqui. 100 MB tamanho máximo do ficheiro ou <Link href="" to="/cadastro">Registrar-se</Link>.
-          </span>
+          {isLoggedIn ? (
+            <span className="texto_box_informacao">
+              Solte os arquivos aqui. 100 MB tamanho máximo do ficheiro.
+            </span>
+          ) : (
+            <span className="texto_box_informacao">
+              Solte os arquivos aqui. 100 MB tamanho máximo do ficheiro ou <Link href="" to="/cadastro">Registrar-se</Link>.
+            </span>
+          )}
+
         </>
       )}
     </div>

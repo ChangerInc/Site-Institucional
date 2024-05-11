@@ -23,7 +23,7 @@
     height: 200px;
 }
 
-.coroaTituloLixeira{
+.coroaTituloLixeira {
     display: flex;
     justify-content: space-evenly;
 }
@@ -34,7 +34,7 @@
     justify-content: space-between;
 }
 
-.crownIcon{
+.crownIcon {
     width: 20px;
     height: 20px;
 }
@@ -96,6 +96,7 @@
 }
 
 .membrosCirculo {
+    margin-bottom: 5px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -109,28 +110,16 @@
     flex-wrap: wrap;
 }
 
-.containerConteudoCard button {
+/* .containerConteudoCard button {
     display: flex;
     justify-content: center;
     align-items: center;
     width: 50px;
     font-size: 3rem;
-}
+} */
 
 .containerConteudoCard button img {
     width: 35px;
-}
-
-.containerConteudoCard button:hover {
-    background-color: #FFF;
-}
-
-.containerConteudoCard button {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 50px;
-    font-size: 3rem;
 }
 
 #file_upload_modal {
@@ -168,12 +157,14 @@
     gap: 50px;
     align-items: center;
 }
-.muro{
+
+.muro {
     width: 1px;
     height: 70vh;
     background-color: #145DA0;
-    
+
 }
+
 /* Adicione estilos adicionais conforme necessário */
 .custom-file-upload-label {
     color: white;
@@ -373,7 +364,7 @@ ul {
     list-style: none;
 }
 
-#buttonSairCirculo{
+#buttonSairCirculo {
     width: 120px;
     height: 50px;
     align-self: center;
@@ -381,7 +372,7 @@ ul {
     background-color: rgb(253, 75, 75);
 }
 
-#buttonSairCirculo:hover{
+#buttonSairCirculo:hover {
     width: 120px;
     height: 50px;
     align-self: center;

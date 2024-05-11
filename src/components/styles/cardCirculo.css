@@ -20,7 +20,7 @@
     display: flex;
     flex-direction: column;
     width: 240px;
-    height: 280px;
+    height: 200px;
 }
 
 .coroaTituloLixeira{
@@ -35,14 +35,12 @@
 }
 
 .crownIcon{
-    position: static;
     width: 20px;
     height: 20px;
 }
 
 .tituloDoCirculo {
-    margin: 0;
-    padding-left: 10px;
+    margin: auto;
     font-size: 1.2rem;
     justify-self: center;
 }

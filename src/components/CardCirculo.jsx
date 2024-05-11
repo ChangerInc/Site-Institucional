@@ -160,12 +160,10 @@ function CardCirculo(props) {
             <div onClick={openModalFilesCircle} className="card">
                 <div className="containerConteudoCard">
                     <div className='coroaTituloLixeira'>
-                        <div className='crownIcon'>
+                        <div className='containerTituloDeleteGrupo'>
                             {sessionStorage.getItem('id') == idDoDono && (
                                 <img className='crownIcon' src={"src/assets/coroa.png"} alt="Coroa" />
                             )}
-                        </div>
-                        <div className='containerTituloDeleteGrupo'>
                             <b className="tituloDoCirculo">{titulo}</b>
                             {sessionStorage.getItem('id') == idDoDono && (
                                 <div onClick={openModalConfirmarExcluir} className='deleteImage'></div>

@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
-import { circulo, arquivosUser, arquivo } from "../api";
+import { circulo, arquivo } from "../api";
 import AddNewMembers from './AddNewMembers';
 import GenericModal from './GenericModal';
 import UploadFile from './UploadFile';
 import Historico from './Historico';
 import ModalExcluir from './ModalExcluir';
 import Backdrop from '@mui/material/Backdrop';
+import AvatarGroup from '@mui/material/AvatarGroup';
+import Avatar from '@mui/material/Avatar';
 import CircularProgress from '@mui/material/CircularProgress';
 import '../assets/coroa.png'
 import './styles/cardCirculo.css';
@@ -171,17 +173,11 @@ function CardCirculo(props) {
                         </div>
                     </div>
                     <div className="membrosCirculo">
-                        <ul className='listaOrnedadaMembros'>
+                        <AvatarGroup max={4}>
                             {props.membros?.map(membro => (
-                                <li key={membro.id}>
-                                    {membro.fotoPerfil && (
-                                        <img className='imageMember'
-                                            src={membro.fotoPerfil}
-                                            alt=""
-                                        />
-                                    )}</li>
+                                <Avatar key={membro.id} src={membro.fotoPerfil} alt="Foto perfil do membro" />
                             ))}
-                        </ul>
+                        </AvatarGroup>
                     </div>
                     <div className="btnsCircle">
                         <div onClick={openModalMembers} className="membersImage"></div>

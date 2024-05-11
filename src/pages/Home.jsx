@@ -42,7 +42,6 @@ function Home() {
             <p className='destaque'>
               A relevância da <span className='blueSpan'>Changer</span> é destacada pelo fornecimento de uma solução simples e segura.
             </p>
-            <button>Saiba mais!</button>
           </div>
         </div>
       </div>

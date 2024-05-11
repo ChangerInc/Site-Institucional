@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { circulo } from "../api";
 import MembersList from './MembersList';
-import InputText from './InputText';
 import Divider from '@mui/material/Divider';
+import AddMember from './AddMember';
+import Box from '@mui/material/Box';
 
 const AddNewMembers = ({ idCirculo, dono, tituloGrupo, membros, limparCirculo, closeModal }) => {
     const [newMemberEmail, setNewMemberEmail] = useState('');
@@ -51,28 +52,19 @@ const AddNewMembers = ({ idCirculo, dono, tituloGrupo, membros, limparCirculo, c
     }
 
     return (
-        <div className="modalMembers">
+        <Box width={'100%'} height={'60vh'} display="flex" flexDirection="row">
             <MembersList
                 tituloGrupo={tituloGrupo}
                 membros={membros}
             />
-
-            <div className="addMembers">
-                <h3>Adicionar novo membro</h3>
-                <InputText
-                    key={1}
-                    htmlFor={'addMember'}
-                    label={'E-mail do usuário'}
-                    type={'email'}
-                    id={'addMember'}
-                    name={'addMember'}
-                    value={newMemberEmail}
-                    onChange={handleUserEmail}
-                />
-                <button id='buttonAddMembers' onClick={addUserInCircle}>Adicionar</button>
-                <button id='buttonSairCirculo' onClick={sairDoCirculo}>{id == dono ? "Excluir Círculo" : "Sair"}</button>
-            </div>
-        </div>
+            <AddMember
+                newMemberEmail={newMemberEmail}
+                handleUserEmail={handleUserEmail}
+                addUserInCircle={addUserInCircle}
+                sairDoCirculo={sairDoCirculo}
+                dono={dono}
+            />
+        </Box>
     );
 };
 

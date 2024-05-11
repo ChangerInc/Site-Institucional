@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { circulo, arquivosUser, arquivo } from "../api";
 import InputText from './InputText'
+import GenericModal from './GenericModal';
+import UploadFile from './UploadFile';
 import Historico from './Historico';
 import ModalExcluir from './ModalExcluir';
 import Backdrop from '@mui/material/Backdrop';
@@ -20,13 +22,11 @@ function CardCirculo(props) {
     const [titulo, setTitulo] = useState(props.tituloGrupo);
     const [idDoDono, setDono] = useState(props.dono);
     const [membros, setMembros] = useState(props.membros);
-    const [addUser, setAddUser] = useState(false);
     const [deleted, setDeleted] = useState(false);
     const id = sessionStorage?.getItem('id');
 
     // Modal Files in Circles
     const [modalFilesCircle, setModalFilesCircle] = useState(false)
-
 
     const openModalFilesCircle = () => {
         setModalFilesCircle(true)
@@ -342,49 +342,39 @@ function CardCirculo(props) {
                 </div>
             )}
             {modalUploadFile && (
-                <>
-                    <div className="modalUploadFile">
-                        <div className="conteudoDireito">
-                            <h3>Adicionar Arquivo no Circulo</h3>
-                            <div onClick={closeModalUploadFile} className='imageCloseModal'></div>
-                            <label htmlFor="file_upload_modal" className="custom-file-upload-label">
-                                <b className="bold_selecionar_arquivo">{file == null ? "Selecionar Arquivo" : <span>{fileName}</span>}</b>
-                            </label>
-
-                            <input id="file_upload_modal" type="file" onChange={handleFileChange} />
-                            <button id='buttonUploadModal' onClick={addFileInCircle}>Enviar Arquivo</button>
-                        </div>
-                    </div>
-
-
-                </>
+                <GenericModal
+                    Component={() => (
+                        <UploadFile
+                            key={1}
+                            handleFileChange={handleFileChange}
+                            addFileInCircle={addFileInCircle}
+                            file={file}
+                            fileName={fileName}
+                        />
+                    )}
+                    width={'25%'}
+                    open={modalUploadFile}
+                    handleClose={closeModalUploadFile}
+                />
             )}
             {modalFilesCircle && (
-                <div className="modalFilesCircle">
-                    <div className="modalClose">
-                        <h3>Arquivos de {titulo}</h3>
-                        <div onClick={closeModalFilesCircle} className='imageCloseModal'></div>
-                    </div>
-                    <div className="arquivosHistorico">
-                        <ul>
-                            {(props.arquivos.length === 0) ? (
-                                <>
-                                    <li>Esse circulo não possui nenhum arquivo!</li>
-                                </>
-                            ) : (
-                                <Historico
-                                    key={arquivo.idArquivo}
-                                    idCirculo={props.idCirculo}
-                                    idArquivo={arquivo.idArquivo}
-                                    nome={arquivo.nome}
-                                    criacao={arquivo.criacao}
-                                    extensao={arquivo.extensao}
-                                    historico={props.arquivos}
-                                />
-                            )}
-                        </ul>
-                    </div>
-                </div>
+                <GenericModal
+                    Component={() => (
+                        <Historico
+                            key={arquivo.idArquivo}
+                            idCirculo={props.idCirculo}
+                            idArquivo={arquivo.idArquivo}
+                            nome={arquivo.nome}
+                            criacao={arquivo.criacao}
+                            extensao={arquivo.extensao}
+                            historico={props.arquivos}
+                        />
+                    )}
+                    width={'55%'}
+                    open={modalFilesCircle}
+                    handleClose={closeModalFilesCircle}
+                >
+                </GenericModal>
             )}
         </>
     )

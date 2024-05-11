@@ -37,19 +37,19 @@
 
 .texto_box_informacao a {
     text-decoration: none;
-    color: #5B98BA;
+    color: var(--color-primary);
     background-color: #FFF;
     padding: 0 2px;
 }
 
 .texto_box_informacao a:hover {
-    border-bottom: 2px solid #5B98BA;
+    border-bottom: 2px solid var(--color-primary);
 }
 
 .custom-file-upload-label {
     color: white;
     display: flex;
-    background-color: #5B98BA;
+    background-color: var(--color-primary);
     width: 290px;
     height: 60px;
     cursor: pointer;

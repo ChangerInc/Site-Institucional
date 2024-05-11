@@ -6,13 +6,11 @@ import CloseIcon from '@mui/icons-material/Close';
 import IconButton from '@mui/material/IconButton';
 import Modal from '@mui/material/Modal';
 import Fade from '@mui/material/Fade';
-import { max } from 'date-fns';
 
 function GenericModal({ Component, width, open, handleClose }) {
 
     const style = {
         width: width,
-        height: '75%',
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
@@ -21,6 +19,7 @@ function GenericModal({ Component, width, open, handleClose }) {
         left: '50%',
         transform: 'translate(-50%, -50%)',
         border: 'none',
+        borderRadius: '10px',
         bgcolor: 'background.paper',
         boxShadow: 24,
         gap: '10px',
@@ -52,8 +51,8 @@ function GenericModal({ Component, width, open, handleClose }) {
                                     width: 30,
                                     height: 30,
                                     position: 'absolute',
-                                    right: 3,
-                                    top: 3,
+                                    right: 5,
+                                    top: 5,
                                 }}
                             >
                                 <CloseIcon />

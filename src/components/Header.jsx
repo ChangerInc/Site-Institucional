@@ -44,17 +44,18 @@ const Header = () => {
     }
   ];
 
+  const fetchNotificationCount = async () => {
+    try {
+      const response = await usuario.get(`/notificacoes/${sessionStorage.getItem('email')}`);
+      setNotificationCount(response.data);
+    } catch (error) {
+      console.error('Erro ao obter contagem de notificações:', error);
+    }
+  };
+
   useEffect(() => {
     const isAuthenticated = sessionStorage.getItem('id') != undefined;
     setIsLoggedIn(isAuthenticated);
-    const fetchNotificationCount = async () => {
-      try {
-        const response = await usuario.get(`/notificacoes/${sessionStorage.getItem('email')}`);
-        setNotificationCount(response.data);
-      } catch (error) {
-        console.error('Erro ao obter contagem de notificações:', error);
-      }
-    };
     fetchNotificationCount();
   }, []);
 
@@ -88,6 +89,7 @@ const Header = () => {
               <li>
                 <NotificationIcon
                   count={notificationCount}
+                  updateCount={fetchNotificationCount}
                 />
               </li>
               <li>

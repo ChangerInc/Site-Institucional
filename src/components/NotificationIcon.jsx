@@ -7,7 +7,7 @@ import IconButton from '@mui/material/IconButton';
 import NotificationsActiveIcon from '@mui/icons-material/NotificationsActive';
 
 
-const NotificationIcon = ({ count }) => {
+const NotificationIcon = ({ count, updateCount }) => {
     const [modalNotifications, setModalNotifications] = useState(false);
 
     const handleNotificationsModal = () => {
@@ -17,7 +17,13 @@ const NotificationIcon = ({ count }) => {
     return (
         <>
             <GenericModal
-                Component={Convites}
+                Component={
+                    () => (
+                        <Convites
+                            updateCount={updateCount}
+                        />
+                    )
+                }
                 width='500px'
                 open={modalNotifications}
                 handleClose={handleNotificationsModal}

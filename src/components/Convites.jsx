@@ -5,7 +5,7 @@ import InvitationItem from './InvitationItem.jsx';
 import List from '@mui/material/List';
 import "../components/styles/convites.css"
 
-function Convites() {
+function Convites({ updateCount }) {
     const [convites, setConvites] = useState([]);
     const [dense, setDense] = React.useState(false);
 
@@ -37,6 +37,8 @@ function Convites() {
             }
         } catch (error) {
             console.error('Erro ao executar ação do botão:', error);
+        } finally {
+            updateCount();
         }
     }
 

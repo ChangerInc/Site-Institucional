@@ -4,7 +4,6 @@
 
     display: flex;
     padding: 20px;
-    gap: 20px;
 
     overflow-y: scroll;
     flex-wrap: wrap;
@@ -57,6 +56,7 @@
 }
 
 .divCreateCircle {
+    margin-left: 40px;
     display: flex;
     flex-direction: column;
     align-items: center;

@@ -252,7 +252,7 @@ function CardCirculo(props) {
                             historico={props.arquivos}
                         />
                     )}
-                    width={'55%'}
+                    width={'880px'}
                     open={modalFilesCircle}
                     handleClose={closeModalFilesCircle}
                 >

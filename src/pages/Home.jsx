@@ -110,7 +110,7 @@ function Home() {
                 </li>
                 <li className="pricing-features-item">Não pode criar grupos
                 </li>
-                <li className="pricing-features-item">Não pode participar de circulos
+                <li className="pricing-features-item">Não pode participar de círculos
 
                 </li>
                 <li className="pricing-features-item">Criptografia de arquivos
@@ -126,9 +126,9 @@ function Home() {
               <ul className="pricing-features">
                 <li className="pricing-features-item">100MB de armazenamento
                 </li>
-                <li className="pricing-features-item">Criação de circulos
+                <li className="pricing-features-item">Criação de círculos
                 </li>
-                <li className="pricing-features-item">Participação de circulos (Limitado)
+                <li className="pricing-features-item">Participação de círculos (Limitado)
 
                 </li>
                 <li className="pricing-features-item">Compartilhamento de arquivo
@@ -151,9 +151,9 @@ function Home() {
               <ul className="pricing-features">
                 <li className="pricing-features-item">210MB de armazenamento
                 </li>
-                <li className="pricing-features-item">Criação de circulos
+                <li className="pricing-features-item">Criação de círculos
                 </li>
-                <li className="pricing-features-item">Participação de circulos (sem limite)
+                <li className="pricing-features-item">Participação de círculos (sem limite)
                 </li>
                 <li className="pricing-features-item">Compartilhamento de arquivo
                 </li>
@@ -162,7 +162,7 @@ function Home() {
                 <li className="pricing-features-item">Histórico de arquivos</li>
               </ul>
               <span className="pricing-price">31 a 100 pessoas R$8,00</span>
-              <a href="#/" className="pricing-button">EMRPESAS</a>
+              <a href="#/" className="pricing-button">EMPRESAS</a>
             </div>
 
           </div>

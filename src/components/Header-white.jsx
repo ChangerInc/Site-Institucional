@@ -91,6 +91,7 @@ const Header = () => {
                 <NotificationIcon
                   count={notificationCount}
                   updateCount={fetchNotificationCount}
+                  color={'white'}
                 />
               </li>
               <li>

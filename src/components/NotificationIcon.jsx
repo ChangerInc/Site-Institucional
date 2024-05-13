@@ -7,7 +7,7 @@ import IconButton from '@mui/material/IconButton';
 import NotificationsActiveIcon from '@mui/icons-material/NotificationsActive';
 
 
-const NotificationIcon = ({ count, updateCount }) => {
+const NotificationIcon = ({ count, updateCount, color }) => {
     const [modalNotifications, setModalNotifications] = useState(false);
 
     const handleNotificationsModal = () => {
@@ -31,7 +31,9 @@ const NotificationIcon = ({ count, updateCount }) => {
             <Tooltip onClick={handleNotificationsModal} title='Notificações'>
                 <IconButton>
                     <Badge badgeContent={count} color='error'>
-                        <NotificationsActiveIcon />
+                        <NotificationsActiveIcon
+                            sx={{color: color}}
+                        />
                     </Badge>
                 </IconButton>
             </Tooltip>

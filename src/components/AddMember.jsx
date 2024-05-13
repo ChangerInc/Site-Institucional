@@ -5,16 +5,16 @@ import { Box } from '@mui/material';
 import CircularProgress from '@mui/material/CircularProgress';
 import { green } from '@mui/material/colors';
 
-const AddMember = ({ newMemberEmail, handleUserEmail, addUserInCircle, sairDoCirculo, dono, msgError, success }) => {
+const AddMember = ({ newMemberEmail, handleUserEmail, addUserInCircle, msgError, success }) => {
     const id = sessionStorage?.getItem('id');
     const [loading, setLoading] = useState(false);
     const timer = useRef();
 
     const buttonSx = {
-        width: '90px', 
-            height: '55px', 
-            backgroundColor: '#5B98BA', 
-            padding: '5px',
+        width: '90px',
+        height: '55px',
+        backgroundColor: '#5B98BA',
+        padding: '5px',
         ...(success && {
             bgcolor: green[500],
             '&:hover': {
@@ -61,7 +61,7 @@ const AddMember = ({ newMemberEmail, handleUserEmail, addUserInCircle, sairDoCir
                 <div style={{ width: '100%', display: 'flex', justifyContent: 'space-evenly', marginBottom: '40px' }}>
                     <Box sx={{ m: 1, position: 'relative' }}>
                         <Button
-                            sx={ buttonSx }
+                            sx={buttonSx}
                             variant="contained"
                             onClick={handleButtonClick}
                             disabled={loading || (newMemberEmail === '' && !success)}
@@ -82,14 +82,6 @@ const AddMember = ({ newMemberEmail, handleUserEmail, addUserInCircle, sairDoCir
                             />
                         )}
                     </Box>
-                    <Button
-                        sx={{ width: '90px', height: '55px', backgroundColor: 'rgb(216, 39, 39)', padding: '5px' }}
-                        color='error'
-                        variant="contained"
-                        onClick={sairDoCirculo}
-                    >
-                        {id == dono ? 'Excluir Círculo' : 'Sair'}
-                    </Button>
                 </div>
             </div>
         </>

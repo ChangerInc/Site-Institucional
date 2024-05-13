@@ -11,6 +11,7 @@ import Avatar from '@mui/material/Avatar';
 import Tooltip from '@mui/material/Tooltip';
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
+import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import CircularProgress from '@mui/material/CircularProgress';
 import '../assets/coroa.png'
 import './styles/cardCirculo.css';
@@ -105,6 +106,18 @@ function CardCirculo(props) {
             });
     }
 
+    async function sairDoCirculo() {
+        console.log("idCirculo" + idCirculo)
+        console.log("id" + id)
+        circulo
+            .patch(`/sair/${idCirculo}/${id}`)
+            .then(
+                window.location.reload())
+            .catch((error) => {
+                console.error(error);
+            });
+    }
+
     async function limparCirculo(event) {
         if (membros.length != 0) {
             circulo
@@ -155,9 +168,9 @@ function CardCirculo(props) {
             </Backdrop>
             <ModalExcluir
                 name={props.tituloGrupo}
-                description={'Confirmar exclusão do círculo'}
+                description={id == idDoDono ? 'Confirmar exclusão do círculo' : 'Confirmar saída do círculo'}
                 modal={modalConfirmarExcluir}
-                delete={limparCirculo}
+                delete={id == idDoDono ? limparCirculo : sairDoCirculo}
                 handleClose={closeModalConfirmarExcluir}
             />
             <div onClick={openModalFilesCircle} className="card">
@@ -170,24 +183,22 @@ function CardCirculo(props) {
                                 </Tooltip>
                             )}
                             <b className="tituloDoCirculo">{titulo}</b>
-                            {sessionStorage.getItem('id') == idDoDono && (
-                                <Tooltip title='Excluir círculo'>
-                                    <IconButton
-                                        onClick={openModalConfirmarExcluir}
-                                        aria-label="Excluir"
-                                        sx={{
-                                            width: 20,
-                                            height: 20,
-                                            color: 'black',
-                                            ":hover": {
-                                                color: 'red',
-                                            }
-                                        }}
-                                    >
-                                        <DeleteIcon />
-                                    </IconButton>
-                                </Tooltip>
-                            )}
+                            <Tooltip title={id == idDoDono ? 'Excluir círculo' : 'Sair do círculo'}>
+                                <IconButton
+                                    onClick={openModalConfirmarExcluir}
+                                    aria-label="Excluir"
+                                    sx={{
+                                        width: 20,
+                                        height: 20,
+                                        color: 'black',
+                                        ":hover": {
+                                            color: 'red',
+                                        }
+                                    }}
+                                >
+                                    {id == idDoDono ? <DeleteIcon /> : <ExitToAppIcon />}
+                                </IconButton>
+                            </Tooltip>
                         </div>
                     </div>
                     <div className="membrosCirculo">
@@ -217,10 +228,13 @@ function CardCirculo(props) {
                             dono={idDoDono}
                             membros={membros}
                             limparCirculo={limparCirculo}
+                            modalConfirmarExcluir={modalConfirmarExcluir}
+                            openModalConfirmarExcluir={openModalConfirmarExcluir}
                             closeModal={closeModalMembers}
+                            closeModalConfirmarExcluir={closeModalConfirmarExcluir}
                         />
                     )}
-                    width={'40%'}
+                    width={id == idDoDono ? '40%' : '400px'}
                     open={modalMembers}
                     handleClose={closeModalMembers}
                 />

@@ -42,7 +42,7 @@ function ModalExcluir(props) {
                 <Fade in={props.modal}>
                     <Box sx={style}>
                         <Typography id="modal-titulo" sx={{color: '#d32f2f', fontWeight: 'bold'}}>
-                            EXCLUIR
+                            {props.description === 'Confirmar saída do círculo' ? 'SAIR' : 'EXCLUIR'}
                         </Typography>
                         <Typography id="transition-modal-description" sx={{ textAlign: 'center'}}>
                             {props.description} "{props.name}"

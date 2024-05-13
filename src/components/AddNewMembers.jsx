@@ -3,9 +3,9 @@ import { circulo } from "../api";
 import MembersList from './MembersList';
 import AddMember from './AddMember';
 import Box from '@mui/material/Box';
-import { set } from 'date-fns';
+import ModalExcluir from './ModalExcluir';
 
-const AddNewMembers = ({ idCirculo, dono, tituloGrupo, membros, limparCirculo }) => {
+const AddNewMembers = ({ idCirculo, dono, tituloGrupo, membros }) => {
     const [newMemberEmail, setNewMemberEmail] = useState('');
     const [msgError, setMsgError] = useState('');
     const [success, setSuccess] = useState(false);
@@ -52,38 +52,22 @@ const AddNewMembers = ({ idCirculo, dono, tituloGrupo, membros, limparCirculo })
         }
     }
 
-    async function sairDoCirculo() {
-
-        if (id == dono) {
-            limparCirculo()
-        } else {
-            console.log("idCirculo" + idCirculo)
-            console.log("id" + id)
-            circulo
-                .patch(`/sair/${idCirculo}/${id}`)
-                .then(
-                    window.location.reload())
-                .catch((error) => {
-                    console.error(error);
-                });
-        }
-    }
-
     return (
         <Box width={'100%'} height={'60vh'} display="flex" flexDirection="row">
             <MembersList
                 tituloGrupo={tituloGrupo}
                 membros={membros}
+                width={sessionStorage.getItem('id') == dono ? '50%' : '100%'}
             />
-            <AddMember
-                newMemberEmail={newMemberEmail}
-                handleUserEmail={handleUserEmail}
-                addUserInCircle={addUserInCircle}
-                sairDoCirculo={sairDoCirculo}
-                dono={dono}
-                msgError={msgError}
-                success={success}
-            />
+            {sessionStorage.getItem('id') == dono && (
+                <AddMember
+                    newMemberEmail={newMemberEmail}
+                    handleUserEmail={handleUserEmail}
+                    addUserInCircle={addUserInCircle}
+                    msgError={msgError}
+                    success={success}
+                />
+            )}
         </Box>
     );
 };

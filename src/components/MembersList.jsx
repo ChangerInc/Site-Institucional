@@ -4,14 +4,14 @@ import MemberItem from './MemberItem.jsx';
 import List from '@mui/material/List';
 import Divider from '@mui/material/Divider';
 
-function MembersList({ tituloGrupo, membros }) {
+function MembersList({ tituloGrupo, membros, width }) {
     const [dense, setDense] = useState(false);
 
     return (
         <>
             <Grid sx={{
                 overflow: 'auto',
-                width: '50%',
+                width: width,
                 height: '100%',
                 '&::-webkit-scrollbar': {
                     width: '5px'

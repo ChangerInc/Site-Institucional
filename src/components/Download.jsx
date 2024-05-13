@@ -8,7 +8,7 @@ import FileDownloadIcon from '@mui/icons-material/FileDownload';
 import 'react-circular-progressbar/dist/styles.css';
 import "../components/styles/historico.css"
 
-const DownloadComponent = ({ loadingState, idCirculo, idArquivo, nome }) => {
+const DownloadComponent = ({ idCirculo, idArquivo, nome }) => {
     const [loading, setLoading] = React.useState(false);
     const [progress, setProgress] = React.useState(0);
     const idUsuario = sessionStorage?.getItem('id');
@@ -60,28 +60,26 @@ const DownloadComponent = ({ loadingState, idCirculo, idArquivo, nome }) => {
 
     return (
         <>
-            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%' }}>
-                {loading ? (
-                    <ProgressBox value={progress} />
-                ) : (
-                    <Tooltip title='Baixar arquivo'>
-                        <IconButton
-                            onClick={handleDownloadFileHistoricOrCircle}
-                            aria-label="Baixar"
-                            sx={{
-                                width: 20,
-                                height: 20,
-                                color: 'black',
-                                ":hover": {
-                                    color: 'blue',
-                                }
-                            }}
-                        >
-                            <FileDownloadIcon />
-                        </IconButton>
-                    </Tooltip>
-                )}
-            </div>
+            {loading ? (
+                <ProgressBox value={progress} />
+            ) : (
+                <Tooltip title='Baixar arquivo'>
+                    <IconButton
+                        onClick={handleDownloadFileHistoricOrCircle}
+                        aria-label="Baixar"
+                        sx={{
+                            width: 20,
+                            height: 20,
+                            color: 'black',
+                            ":hover": {
+                                color: 'blue',
+                            }
+                        }}
+                    >
+                        <FileDownloadIcon />
+                    </IconButton>
+                </Tooltip>
+            )}
         </>
     );
 };

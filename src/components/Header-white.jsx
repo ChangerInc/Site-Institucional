@@ -84,7 +84,7 @@ const Header = () => {
               </li>
               <li>
                 <Link className="linkNav-white" to="/grupo">
-                  Circulos
+                  Círculos
                 </Link>
               </li>
               <li>

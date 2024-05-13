@@ -83,7 +83,7 @@ const Header = () => {
               </li>
               <li>
                 <Link className="linkNav" to="/grupo">
-                  Circulos
+                  Círculos
                 </Link>
               </li>
               <li>

@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import { circulo } from "../api";
 import MembersList from './MembersList';
-import Divider from '@mui/material/Divider';
 import AddMember from './AddMember';
 import Box from '@mui/material/Box';
+import { set } from 'date-fns';
 
-const AddNewMembers = ({ idCirculo, dono, tituloGrupo, membros, limparCirculo, closeModal }) => {
+const AddNewMembers = ({ idCirculo, dono, tituloGrupo, membros, limparCirculo }) => {
     const [newMemberEmail, setNewMemberEmail] = useState('');
+    const [msgError, setMsgError] = useState('');
+    const [success, setSuccess] = useState(false);
     const id = sessionStorage?.getItem('id');
 
     const handleUserEmail = (event) => {
@@ -20,16 +22,32 @@ const AddNewMembers = ({ idCirculo, dono, tituloGrupo, membros, limparCirculo, c
         formData.append("emailDoConvidado", newMemberEmail);
 
         if (newMemberEmail == sessionStorage.getItem("email")) {
-            alert("impossivel se convidar")
+            setMsgError("Impossível se convidar!")
         } else {
             circulo
                 .post(`/convidar/${idCirculo}`, formData)
                 .then((response) => {
-
-                    closeModal();
+                    if (response.status === 200) {
+                        setSuccess(true);
+                    }
                 })
                 .catch((error) => {
+                    if (error.response.status === 400) {
+                        setMsgError('O usuário já está no círculo!');
+                    }
+                    if (error.response.status === 401) {
+                        setMsgError('Só o dono pode enviar convites!');
+                    }
+                    if (error.response.status === 404) {
+                        setMsgError('Nenhum usuário com esse e-mail!');
+                    }
                     console.error(error);
+                })
+                .finally(() => {
+                    setNewMemberEmail('');
+                    setTimeout(() => {
+                        setSuccess(false);
+                    }, 5000);
                 });
         }
     }
@@ -63,6 +81,8 @@ const AddNewMembers = ({ idCirculo, dono, tituloGrupo, membros, limparCirculo, c
                 addUserInCircle={addUserInCircle}
                 sairDoCirculo={sairDoCirculo}
                 dono={dono}
+                msgError={msgError}
+                success={success}
             />
         </Box>
     );

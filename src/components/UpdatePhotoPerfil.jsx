@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { usuario } from "../api";
+import ChangeCircle from '@mui/icons-material/ChangeCircle';
 import Backdrop from '@mui/material/Backdrop';
 import CircularProgress from '@mui/material/CircularProgress';
+import { IconButton, Tooltip } from '@mui/material';
 
 const UpdatePhotoPerfil = () => {
     const [file, setFile] = useState(null);
@@ -16,6 +18,12 @@ const UpdatePhotoPerfil = () => {
             setTextoImagem("Arquivo selecionado não é uma imagem!")
         }
     };
+
+    const changeFile = () => {
+        setFile(null);
+        setFileName('');
+        setTextoImagem('Nenhum foto selecionada...');
+    }
 
     const handleFileUpload = () => {
         if (file) {
@@ -55,7 +63,7 @@ const UpdatePhotoPerfil = () => {
             >
                 <CircularProgress color="inherit" />
             </Backdrop>
-            <div className='modal-alterar-imagem'>
+            <div style={{ minHeight: '500px' }} className='modal-alterar-imagem'>
                 <div className="topo">
                     <h2>Mudar foto</h2>
                 </div>
@@ -70,7 +78,14 @@ const UpdatePhotoPerfil = () => {
                             {(file.type.startsWith("image/")) ? (
                                 <>
                                     <img src={URL.createObjectURL(file)} alt="" />
-                                    <span>{fileName} - <span onClick={handleFileChange}>Alterar</span></span>
+                                    <div style={{ marginTop: '10px', display: 'flex', alignItems: 'center' }}>
+                                        <span style={{ color: 'black', fontWeight: '900' }}>{fileName} - </span>
+                                        <Tooltip title="Alterar foto">
+                                            <IconButton sx={{ color: 'black', padding: '0', width: '30px', height: '30px' }} onClick={changeFile}>
+                                                <ChangeCircle />
+                                            </IconButton>
+                                        </Tooltip>
+                                    </div>
                                 </>
                             ) : (
                                 <>

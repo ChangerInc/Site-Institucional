@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
-import InputText from "./InputText.jsx";
 import { circulo, arquivo } from "../api.js";
+import InputText from "./InputText";
+import CreateCircle from "./CreateCircle";
 import CardCirculo from "./CardCirculo";
+import GenericModal from "./GenericModal.jsx";
 import './styles/painel.css'
 
 const Painel = () => {
@@ -145,27 +147,18 @@ const Painel = () => {
                         </div>
                     </>
                 )}
-                {modalCreateCircle && (
-                    <div className="modalCreateCircle">
-                        <div onClick={closeModalCreateCircle} className='imageCloseModal'></div>
-                        <h2>Novo circulo</h2>
-                        <form onSubmit={createCircle} className='formulario'>
-                            <InputText
-                                key={2}
-                                htmlFor={'nome_circulo'}
-                                label={'Nome do círculo'}
-                                type={'text'}
-                                id={'nome_circulo'}
-                                name={'nome_circulo'}
-                                value={nameCircle}
-                                onChange={(e) => {
-                                    setNameCircle(e.target.value);
-                                }}
-                            />
-                            <button type="submit">Criar</button>
-                        </form>
-                    </div>
-                )}
+                <GenericModal
+                    Component={() => (
+                        <CreateCircle
+                            nameCircle={nameCircle}
+                            setNameCircle={setNameCircle}
+                            createCircle={createCircle}
+                        />
+                    )}
+                    width={'350px'}
+                    open={modalCreateCircle}
+                    handleClose={closeModalCreateCircle}
+                />
             </div>
         </>
     )

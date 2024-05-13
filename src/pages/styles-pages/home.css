@@ -171,12 +171,11 @@ p {
 }
 
 .box {
+  width: 65%;
   height: 75%;
-  width: 60%;
   display: flex;
-  align-items: center;
-  justify-content: space-between;
   flex-wrap: wrap;
+  column-gap: 30px;
 }
 
 .boxCard {
@@ -186,7 +185,7 @@ p {
   width: 48%;
   height: 35%;
   text-align: justify;
-  gap: 10px;
+  gap: 10
 }
 
 .boxCard img {

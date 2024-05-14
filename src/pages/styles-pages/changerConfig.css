@@ -1,0 +1,50 @@
+.containerBotoes{
+    display: flex;
+    width: 100%;
+    height: 50vh;
+    justify-content: space-around;
+    align-items: center;
+}
+.botoes {
+    background-color: rgb(216, 216, 216);
+    width: 40%;
+    height: 90%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    border-radius: 20px;
+}
+button {
+    width: 300px;
+    height: 40px;
+    background-color: var(--azul-principal);
+}
+button:active{
+    background-color: rgb(104, 122, 170);
+    transform: scale(1.05);
+}
+.botaoDeletar{
+    background-color: rgb(192, 24, 24);
+}
+.botaoDeletar:hover{
+    background-color: rgb(243, 77, 77);
+}
+.containerPrompt{
+    display: flex;
+    width: 100%;
+    height: 50vh;
+    justify-content: space-around;
+    align-items: center;
+}
+.prompt{
+    width: 90%;
+    height: 90%;
+    display: flex;
+    background-color: black;
+    overflow-y: auto;
+    flex-direction: column-reverse;
+}
+.prompt p {
+    color: white;
+}

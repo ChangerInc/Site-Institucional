@@ -17,6 +17,7 @@ import Converter from "./pages/Converter";
 import Pagamento from "./pages/Pagamento";
 import UserInterface from "./pages/UserInterface";
 import Grupos from "./pages/Grupos";
+import ChangerConfig from "./pages/ChangerConfig";
 
 import { createBrowserRouter, RouterProvider, Route } from "react-router-dom";
 import Notificacoes from './pages/Notificacoes.jsx';
@@ -56,6 +57,10 @@ const router = createBrowserRouter([
       {
         path: "/notificacoes",
         element: <Notificacoes />
+      },
+      {
+        path: "/adm",
+        element: <ChangerConfig />
       }
     ]
   }

@@ -1,28 +1,26 @@
-# Use Node.js base image
-FROM node:latest
+FROM node:21 AS builder
 
-# Create and set working directory
-WORKDIR .
+RUN apt-get update && apt-get install -y maven
 
-# Copy package.json and package-lock.json (if available)
-COPY
-
-# Install dependencies
+COPY package*.json /home/ubuntu/site-institucional
+WORKDIR /home/ubuntu/site-institucional
 RUN npm install
 
-RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
+COPY . .
 
-RUN nvm install 21
+RUN npm run build
 
-RUN nvm use 21
+FROM nginx:alpine
 
-RUN nvm alias default 21
+COPY --from=builder /home/ubuntu/site-institucional/dist /var/www/html
 
-RUN node --version
+COPY nginx.conf /etc/nginx/sites-available/default
 
+# Expose port 80
+EXPOSE 80
 
-# Expose the port your app runs on
-EXPOSE 3000
+# Reload Nginx
+RUN nginx -s reload
 
-# Command to run your app
-CMD ["node", "dist/server.js"]
+# Start nginx
+CMD ["nginx", "-g", "daemon off;"]

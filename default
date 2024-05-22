@@ -6,7 +6,7 @@ upstream api-backend {
 server {
     listen 80;
     server_name chaanger.servehttp.com;
-    return 301 http://3.218.90.124$request_uri;
+    return 301 http://44.217.150.7$request_uri;
 }
 
 server {
@@ -14,7 +14,7 @@ server {
     listen [::]:80 default_server;
     root /var/www/html;
     index index.html index.htm index.nginx-debian.html;
-    server_name 3.218.90.124;
+    server_name 44.217.150.7;
 
     location ^~ /api/ {
         proxy_pass http://api-backend;

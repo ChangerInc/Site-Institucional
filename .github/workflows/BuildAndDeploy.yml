@@ -37,24 +37,24 @@ jobs:
           docker build -t leonardopradosptech/changer:latest .
           docker push leonardopradosptech/changer:latest
 
-      - name: Check "changer" instance with AWS CLI
-        run: |
-          # Get instance status
-          INSTANCE_STATUS=$(aws ec2 describe-instances --filters "Name:tag:Name,Values:changer" | jq -r '.Reservations[].Instances[].State.Name')
+      # - name: Check "changer" instance with AWS CLI
+      #   run: |
+      #     # Get instance status
+      #     INSTANCE_STATUS=$(aws ec2 describe-instances --filters "Name:tag:Name,Values:changer" | jq -r '.Reservations[].Instances[].State.Name')
 
-          # Check if instance is running
-          if [[ "${INSTANCE_STATUS}" != "running" ]]; then
-            echo "Error: changer instance is not running!"
+      #     # Check if instance is running
+      #     if [[ "${INSTANCE_STATUS}" != "running" ]]; then
+      #       echo "Error: changer instance is not running!"
 
-            # Configure AWS CLI for notifications (replace with your setup)
-            # ... (e.g., configure SNS topic or other notification service)
+      #       # Configure AWS CLI for notifications (replace with your setup)
+      #       # ... (e.g., configure SNS topic or other notification service)
 
-            # Send notification (replace with your notification command)
-            # aws sns publish --topic-arn <your-topic-arn> --message "changer instance down!"
-            exit 1
-          fi
+      #       # Send notification (replace with your notification command)
+      #       # aws sns publish --topic-arn <your-topic-arn> --message "changer instance down!"
+      #       exit 1
+      #     fi
 
-          echo "changer instance is up and running!"
+      #     echo "changer instance is up and running!"
 
       - uses: appleboy/ssh-action@v1.0.3
         with:

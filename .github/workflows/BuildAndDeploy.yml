@@ -15,15 +15,14 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Print working directory
-        run: ls
-
       - name: Verify for localhost in ./src/api.js
         run: |
-          grep -r --line-number localhost ./src/api.js
-          if [ $? -eq 0 ]; then
-            echo "ERRO: Encontrado 'localhost' em ./src/api.js. TIRA O LOCALHOST COR NO!"
-            exit 1  # Stop the workflow if localhost is found
+          if grep -rl 'localhost' .; then
+            echo "TIRA O LOCALHOST CORNO"
+            grep -rl 'localhost' .
+            exit 1
+          else
+            echo "No 'localhost' references found in any file."
           fi
 
       - name: Login to Docker Hub (using encrypted credentials)

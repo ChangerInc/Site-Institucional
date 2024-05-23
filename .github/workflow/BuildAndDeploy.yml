@@ -7,23 +7,24 @@ on:
 env:
   DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}  
   DOCKERHUB_PASSWORD: ${{ secrets.DOCKERHUB_PASSWORD }}  
+  DOCKER_IMAGE: ${{ secrets.DOCKERHUB_USERNAME }}/nginx-website:latest
 
 jobs:
   build_and_deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout code
+        uses: actions/checkout@v3
 
       - name: Verify for localhost in ./src/api.js
         run: |
-          grep -r --line-number localhost ./src/api.js
-          if [ $? -eq 0 ]; then
-            echo "ERRO: Encontrado 'localhost' em ./src/api.js. TIRA O LOCALHOST COR NO!"
-            exit 1  # Stop the workflow if localhost is found
+          if grep -q 'localhost' ./src/api.js; then
+            echo "ERROR: 'localhost' found in ./src/api.js. Remove all 'localhost' references."
+            exit 1
           fi
 
-      - name: Login to Docker Hub (using encrypted credentials)
+      - name: Login to Docker Hub
         uses: docker/login-action@v2
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
@@ -31,19 +32,19 @@ jobs:
 
       - name: Build and push image to Docker Hub
         run: |
-          docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/nginx-website:latest .
-          docker push ${{ secrets.DOCKERHUB_USERNAME }}/nginx-website:latest
+          docker build -t $DOCKER_IMAGE .
+          docker push $DOCKER_IMAGE
 
-      - name: Deploy to AWS (replace with your specific deployment steps)
-        run: |  # Only the 'run' key remains
+      - name: Deploy to AWS
+        run: |
           aws ecs register-task-definition --family nginx-website --network-mode awsvpc --cpu "256" --memory "512" --container-definitions "[{
-              "name": "nginx-container",
-              "image": "{{ secrets.DOCKERHUB_USERNAME }}/nginx-website:latest",  # Changed image name
-              "essential": true,
-              "portMappings": [{
-                  "containerPort": 80,
-                  "hostPort": 80
-              }],
-              "environment": []
+            \"name\": \"nginx-container\",
+            \"image\": \"$DOCKER_IMAGE\",
+            \"essential\": true,
+            \"portMappings\": [{
+                \"containerPort\": 80,
+                \"hostPort\": 80
+            }],
+            \"environment\": []
           }]"
           aws ecs run-task --cluster my-cluster --launch-type FARGATE --task-definition nginx-website

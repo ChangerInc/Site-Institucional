@@ -64,3 +64,4 @@ jobs:
           script: |
             sudo docker pull leonardopradosptech/changer
             sudo docker run -p 80:80 -p 8080:8080 -p 443:443 -d leonardopradosptech/changer
+            

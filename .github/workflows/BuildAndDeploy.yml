@@ -37,7 +37,6 @@ jobs:
           docker build -t leonardopradosptech/changer:latest .
           docker push leonardopradosptech/changer:latest
 
-    steps:
       - uses: appleboy/ssh-action@v1.0.3  # You can choose a different version
         with:
           host: "44.217.150.7"  # Server hostname

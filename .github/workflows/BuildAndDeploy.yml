@@ -9,7 +9,7 @@ env:
   DOCKERHUB_PASSWORD: ${{ secrets.DOCKERHUB_PASSWORD }}  
 
 jobs:
-  build_and_deploy:
+  BuildAndDeploy:
     runs-on: ubuntu-latest
 
     steps:
@@ -42,7 +42,7 @@ jobs:
           host: "44.217.150.7"  # Server hostname
           username: "ubuntu"  # Username for server
           key: ${{ secrets.CHANGER }}  # Reference your PEM key secret
-          script: ssh docker pull leonardopradosptech/changer | sleep 3 | ssh docker run -p 80:80 -p 8080:8080 -p 443:443 leonardopradosptech/changer
+          script: sudo docker pull leonardopradosptech/changer | sleep 3 | sudo docker run -p 80:80 -p 8080:8080 -p 443:443 leonardopradosptech/changer
 
       - name: Pull the image (on the server)
         run: |

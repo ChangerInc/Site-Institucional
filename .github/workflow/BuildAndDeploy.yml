@@ -35,6 +35,7 @@ jobs:
           docker push ${{ secrets.DOCKERHUB_USERNAME }}/nginx-website:latest
 
       - name: Deploy to AWS (replace with your specific deployment steps)
+        # Removed 'uses' key as you want to run custom commands here
         run: |
           aws ecs register-task-definition --family nginx-website --network-mode awsvpc --cpu "256" --memory "512" --container-definitions "[{
               "name": "nginx-container",

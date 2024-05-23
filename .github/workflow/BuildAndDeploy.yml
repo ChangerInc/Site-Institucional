@@ -13,38 +13,49 @@ jobs:
   build_and_deploy:
     runs-on: ubuntu-latest
 
+
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
+    - uses: actions/checkout@v4
+    - name: Use Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '21'
+    - run: npm install
+    - run: npm run build --if-present
+    - run: npm test
 
-      - name: Verify for localhost in ./src/api.js
-        run: |
-          if grep -q 'localhost' ./src/api.js; then
-            echo "ERROR: 'localhost' found in ./src/api.js. Remove all 'localhost' references."
-            exit 1
-          fi
+    # steps:
+    #   - name: Checkout code
+    #     uses: actions/checkout@v3
 
-      - name: Login to Docker Hub
-        uses: docker/login-action@v2
-        with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_PASSWORD }}
+    #   - name: Verify for localhost in ./src/api.js
+    #     run: |
+    #       if grep -q 'localhost' ./src/api.js; then
+    #         echo "ERROR: 'localhost' found in ./src/api.js. Remove all 'localhost' references."
+    #         exit 1
+    #       fi
 
-      - name: Build and push image to Docker Hub
-        run: |
-          docker build -t $DOCKER_IMAGE .
-          docker push $DOCKER_IMAGE
+    #   - name: Login to Docker Hub
+    #     uses: docker/login-action@v2
+    #     with:
+    #       username: ${{ secrets.DOCKERHUB_USERNAME }}
+    #       password: ${{ secrets.DOCKERHUB_PASSWORD }}
 
-      - name: Deploy to AWS
-        run: |
-          aws ecs register-task-definition --family nginx-website --network-mode awsvpc --cpu "256" --memory "512" --container-definitions "[{
-            \"name\": \"nginx-container\",
-            \"image\": \"$DOCKER_IMAGE\",
-            \"essential\": true,
-            \"portMappings\": [{
-                \"containerPort\": 80,
-                \"hostPort\": 80
-            }],
-            \"environment\": []
-          }]"
-          aws ecs run-task --cluster my-cluster --launch-type FARGATE --task-definition nginx-website
+    #   - name: Build and push image to Docker Hub
+    #     run: |
+    #       docker build -t $DOCKER_IMAGE .
+    #       docker push $DOCKER_IMAGE
+
+    #   - name: Deploy to AWS
+    #     run: |
+    #       aws ecs register-task-definition --family nginx-website --network-mode awsvpc --cpu "256" --memory "512" --container-definitions "[{
+    #         \"name\": \"nginx-container\",
+    #         \"image\": \"$DOCKER_IMAGE\",
+    #         \"essential\": true,
+    #         \"portMappings\": [{
+    #             \"containerPort\": 80,
+    #             \"hostPort\": 80
+    #         }],
+    #         \"environment\": []
+    #       }]"
+    #       aws ecs run-task --cluster my-cluster --launch-type FARGATE --task-definition nginx-website

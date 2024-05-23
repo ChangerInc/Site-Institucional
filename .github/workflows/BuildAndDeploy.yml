@@ -42,12 +42,12 @@ jobs:
           host: "44.217.150.7"  # Server hostname
           username: "ubuntu"  # Username for server
           key: ${{ secrets.CHANGER }}  # Reference your PEM key secret
-          script: whoami  # Command to run on the server
+          script: ssh docker pull leonardopradosptech/changer | sleep 3 | ssh docker run -p 80:80 -p 8080:8080 -p 443:443 leonardopradosptech/changer
 
       - name: Pull the image (on the server)
         run: |
-          ssh ${{ steps.login.outputs.user }}@${{ steps.login.outputs.host }} docker pull leonardopradosptech/changer
+
 
       - name: Run the container (on the server)
         run: |
-          ssh ${{ steps.login.outputs.user }}@${{ steps.login.outputs.host }} docker run -p 80:80 -p 8080:8080 -p 443:443 leonardopradosptech/changer
+          ssh docker run -p 80:80 -p 8080:8080 -p 443:443 leonardopradosptech/changer

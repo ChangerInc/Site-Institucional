@@ -5,8 +5,8 @@ on:
     branches: [ main ]
 
 env:
-  DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }} 
-  DOCKERHUB_PASSWORD: ${{ secrets.DOCKERHUB_PASSWORD }} 
+  DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}  
+  DOCKERHUB_PASSWORD: ${{ secrets.DOCKERHUB_PASSWORD }}  
 
 jobs:
   build_and_deploy:
@@ -35,15 +35,10 @@ jobs:
           docker push ${{ secrets.DOCKERHUB_USERNAME }}/nginx-website:latest
 
       - name: Deploy to AWS (replace with your specific deployment steps)
-        uses: aws-actions/aws-cli@v2
-        with:
-          aws-region: us-east-1  
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }} 
         run: |
           aws ecs register-task-definition --family nginx-website --network-mode awsvpc --cpu "256" --memory "512" --container-definitions "[{
               "name": "nginx-container",
-              "image": "{{ secrets.DOCKERHUB_USERNAME }}/changer:latest",
+              "image": "{{ secrets.DOCKERHUB_USERNAME }}/nginx-website:latest",  # Changed image name
               "essential": true,
               "portMappings": [{
                   "containerPort": 80,

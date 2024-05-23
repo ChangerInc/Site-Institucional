@@ -56,18 +56,11 @@ jobs:
 
           echo "changer instance is up and running!"
 
-
-      - uses: appleboy/ssh-action@v1.0.3  # You can choose a different version
+      - uses: appleboy/ssh-action@v1.0.3
         with:
-          host: "44.217.150.7"  # Server hostname
-          username: "ubuntu"  # Username for server
-          key: ${{ secrets.CHANGER }}  # Reference your PEM key secret
-          script: sudo docker pull leonardopradosptech/changer | sleep 3 | sudo docker run -p 80:80 -p 8080:8080 -p 443:443 leonardopradosptech/changer
-
-      - name: Pull the image (on the server)
-        run: |
-
-
-      - name: Run the container (on the server)
-        run: |
-          ssh docker run -p 80:80 -p 8080:8080 -p 443:443 leonardopradosptech/changer
+          host: "44.217.150.7"
+          username: "ubuntu"
+          key: ${{ secrets.CHANGER }}
+          script: |
+            sudo docker pull leonardopradosptech/changer
+            sudo docker run -p 80:80 -p 8080:8080 -p 443:443 -d leonardopradosptech/changer

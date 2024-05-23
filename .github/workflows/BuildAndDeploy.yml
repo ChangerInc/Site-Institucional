@@ -15,14 +15,15 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Verify for localhost in ./src/api.js
+
+      - name: Verify for 'localhost' in src directory
         run: |
-          if grep -rl 'localhost' .; then
+          if grep -rl 'localhost' /home/runner/work/Site-Institucional/Site-Institucional/src/; then
             echo "TIRA O LOCALHOST CORNO"
-            grep -rl 'localhost' .
+            grep -rl 'localhost' /home/runner/work/Site-Institucional/Site-Institucional/src/
             exit 1
           else
-            echo "No 'localhost' references found in any file."
+            echo "No 'localhost' references found in /home/runner/work/Site-Institucional/Site-Institucional/src/."
           fi
 
       - name: Login to Docker Hub (using encrypted credentials)

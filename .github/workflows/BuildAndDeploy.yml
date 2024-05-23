@@ -15,6 +15,9 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
+      - name: Print working directory
+        run: pwd
+        
       - name: Verify for localhost in ./src/api.js
         run: |
           grep -r --line-number localhost ./src/api.js

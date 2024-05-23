@@ -37,13 +37,13 @@ jobs:
           docker build -t leonardopradosptech/changer:latest .
           docker push leonardopradosptech/changer:latest
 
-      - name: Login to your instance (replace with your server details)
-        uses: nyancatdaikon/ssh-action@v2
+    steps:
+      - uses: appleboy/ssh-action@v1.0.3  # You can choose a different version
         with:
-          host: '44.217.150.7'  # Replace with your server details
-          username: 'ubuntu'
-          key: ${{ path.basename('Changer.pem') }}  # Assuming Changer.pem is in the root
-          privateKey: ${{ files.readAsText('Changer.pem') }}
+          host: "44.217.150.7"  # Server hostname
+          username: "ubuntu"  # Username for server
+          key: ${{ secrets.CHANGER }}  # Reference your PEM key secret
+          script: whoami  # Command to run on the server
 
       - name: Pull the image (on the server)
         run: |

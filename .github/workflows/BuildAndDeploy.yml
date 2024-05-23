@@ -34,15 +34,15 @@ jobs:
 
       - name: Build and push image to Docker Hub
         run: |
-          docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/nginx-website:latest .
-          docker push ${{ secrets.DOCKERHUB_USERNAME }}/nginx-website:latest
+          docker build -t leonardopradosptech/changer:latest .
+          docker push leonardopradosptech/changer:latest
 
       - name: Deploy to AWS (replace with your specific deployment steps)
         # Removed 'uses' key as you want to run custom commands here
         run: |
-          aws ecs register-task-definition --family nginx-website --network-mode awsvpc --cpu "256" --memory "512" --container-definitions "[{
+          aws ecs register-task-definition --family changer --network-mode awsvpc --cpu "256" --memory "512" --container-definitions "[{
               "name": "nginx-container",
-              "image": "{{ secrets.DOCKERHUB_USERNAME }}/nginx-website:latest",  # Changed image name
+              "image": "leonardopradosptech/changer:latest",  
               "essential": true,
               "portMappings": [{
                   "containerPort": 80,
@@ -50,4 +50,4 @@ jobs:
               }],
               "environment": []
           }]"
-          aws ecs run-task --cluster my-cluster --launch-type FARGATE --task-definition nginx-website
+          aws ecs run-task --cluster my-cluster --launch-type FARGATE --task-definition changer

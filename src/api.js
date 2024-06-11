@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const host = "http://44.217.150.7/api"
+const host = "https://changer.serveftp.com/api"
 
 const usuario = axios.create({
   baseURL: host+"/usuario"

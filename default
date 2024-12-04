@@ -1,31 +1,52 @@
-upstream api-backend {
-  ip_hash;  # Enable IP hash load balancing
-  server 10.0.0.141:8080;
-  server 10.0.0.144:8080;
+upstream api_backend {
+    ip_hash;  # Enable IP hash load balancing
+    server 10.0.0.224:8080;
+    server 10.0.0.231:8080;
 }
 
 server {
-  listen 80;
-  server_name chaanger.servehttp.com;
-  return 301 http://44.217.150.7$request_uri;
+    server_name changer.serveftp.com;
+
+        root /var/www/html;
+        index index.html;
+        try_files $uri $uri/ /index.html;
+    
+
+    location /api {
+        proxy_pass http://api_backend; 
+        proxy_set_header Host $http_host;
+           
+     }
+
+    listen [::]:443 ssl ipv6only=on; 
+    listen 443 ssl;
+    ssl_certificate /etc/letsencrypt/live/changer.serveftp.com/fullchain.pem; # managed by Certbot
+    ssl_certificate_key /etc/letsencrypt/live/changer.serveftp.com/privkey.pem; # managed by Certbot 
+    include /etc/letsencrypt/options-ssl-nginx.conf; 
+    ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem; 
+
+
+
+
 }
 
 server {
-  listen 80 default_server;
-  listen [::]:80 default_server;
-  root /var/www/html;
-  index index.html index.htm index.nginx-debian.html;
-  server_name 44.217.150.7;
+    if ($host = changer.serveftp.com) {
+        return 301 https://$host$request_uri;
+    } # managed by Certbot
 
-  location ^~ /api/ {
-    proxy_pass http://api-backend;
-  }
 
-  location /static/ {
-    root /var/www/html;
-  }
+    if ($host = changer.serveftp.com) {
+        return 301 https://$host$request_uri;
+    } # managed by Certbot
 
-  location / {
-    try_files $uri $uri/ /index.html;
-  }
+
+    listen 80 default_server;
+    listen [::]:80 default_server;
+    server_name changer.serveftp.com;
+    return 404; # managed by Certbot
+
+
+
+
 }
